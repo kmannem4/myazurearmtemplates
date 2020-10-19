@@ -1,0 +1,243 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": {
+      "type": "string"
+    },
+    "networkSecurityGroupName": {
+      "type": "string"
+    },
+    "vnetSettings": {
+      "type": "object"
+    },
+    "resourceid": {
+      "type": "String"
+    },
+    "nsgsettingName": {
+      "type": "String"
+    },
+    "vnetsettingName": {
+      "type": "String"
+    },
+    "delegationsname": {
+      "type": "string"
+    },
+    "tagsArray": {
+      "type": "object"
+    }
+  },
+  "variables": {
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "name": "[parameters('networkSecurityGroupName')]",
+      "apiVersion": "2020-05-01",
+      "location": "[parameters('location')]",
+      "tags": "[parameters('tagsArray')]",
+      "resources": [
+        {
+          "type": "Microsoft.Network/networkSecurityGroups/providers/diagnosticSettings",
+          "apiVersion": "2017-05-01-preview",
+          "name": "[concat(parameters('networkSecurityGroupName'),'/microsoft.insights/', parameters('nsgsettingName'))]",
+          "location": "[parameters('location')]",
+          "dependsOn": [
+            "[resourceId('Microsoft.Network/networkSecurityGroups/', parameters('networkSecurityGroupName'))]"
+          ],
+          "properties": {
+            "name": "[parameters('nsgsettingName')]",
+            "workspaceId": "[parameters('resourceid')]",
+            "logs": [
+              {
+                "category": "NetworkSecurityGroupEvent",
+                "enabled": true
+              },
+              {
+                "category": "NetworkSecurityGroupRuleCounter",
+                "enabled": true
+              }
+            ]
+          }
+        }
+      ],
+      "properties": {
+        "securityRules": [
+          {
+            "name": "Allow_AzureLoadBalancer",
+            "properties": {
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "*",
+              "sourceAddressPrefix": "AzureLoadBalancer",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 110,
+              "direction": "Inbound",
+              "sourcePortRanges": [],
+              "destinationPortRanges": [],
+              "sourceAddressPrefixes": [],
+              "destinationAddressPrefixes": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks",
+      "name": "[parameters('vnetSettings').name]",
+      "apiVersion": "2020-05-01",
+      "location": "[parameters('location')]",
+      "tags": "[parameters('tagsArray')]",
+      "resources": [
+        {
+          "type": "Microsoft.Network/virtualNetworks/providers/diagnosticSettings",
+          "apiVersion": "2017-05-01-preview",
+          "name": "[concat(parameters('vnetSettings').name,'/microsoft.insights/', parameters('vnetsettingName'))]",
+          "location": "[parameters('location')]",
+          "dependsOn": [
+            "[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetSettings').name)]"
+          ],
+          "properties": {
+            "name": "[parameters('vnetsettingName')]",
+            "workspaceId": "[parameters('resourceid')]",
+            "logs": [
+              {
+                "category": "VMProtectionAlerts",
+                "enabled": true
+              }
+            ],
+            "metrics": [
+              {
+                "category": "AllMetrics",
+                "enabled": true
+              }
+            ]
+          }
+        }
+      ],
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "[parameters('vnetSettings').addressSpace]"
+          ]
+        },
+        "dhcpOptions": {
+          "dnsServers": [
+            "10.241.16.101",
+            "10.141.16.101",
+            "10.241.16.102",
+            "172.24.0.101",
+            "172.24.0.102",
+            "168.63.129.16"
+          ]
+        },
+        "enableDdosProtection": false,
+        "enableVmProtection": false
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "name": "[concat(parameters('vnetSettings').name, '/', parameters('vnetSettings').amntmminsightscosmoSubnetName)]",
+      "apiVersion": "2020-05-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetSettings').name)]"
+      ],
+      "properties": {
+        "addressPrefix": "[parameters('vnetSettings').amntmminsightscosmosn]",
+        "networkSecurityGroup": {
+          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+        },
+        "delegations": [],
+        "privateEndpointNetworkPolicies": "Disabled",
+        "privateLinkServiceNetworkPolicies": "Enabled"
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "name": "[concat(parameters('vnetSettings').name, '/', parameters('vnetSettings').appTierSubnetName)]",
+      "apiVersion": "2020-05-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetSettings').name)]",
+        "[resourceId('Microsoft.Network/virtualnetworks/subnets', parameters('vnetSettings').name, parameters('vnetSettings').amntmminsightscosmoSubnetName)]"
+      ],
+      "properties": {
+        "addressPrefix": "[parameters('vnetSettings').appTierSubnetAddessPrefix]",
+        "networkSecurityGroup": {
+          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+        },
+        "serviceEndpoints": [
+          {
+            "service": "Microsoft.Web",
+            "locations": [
+              "*"
+            ]
+          },
+          {
+            "service": "Microsoft.AzureCosmosDB",
+            "locations": [
+              "*"
+            ]
+          },
+          {
+            "service": "Microsoft.Storage",
+            "locations": [
+              "westus2",
+              "westcentralus"
+            ]
+          }
+        ],
+        "delegations": [
+          {
+            "name": "[parameters('delegationsname')]",
+            "properties": {
+              "serviceName": "Microsoft.Web/serverFarms"
+            }
+          }
+        ],
+        "privateEndpointNetworkPolicies": "Disabled",
+        "privateLinkServiceNetworkPolicies": "Enabled"
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "name": "[concat(parameters('vnetSettings').name, '/', parameters('vnetSettings').amntmmfuncSubnetName)]",
+      "apiVersion": "2020-05-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetSettings').name)]",
+        "[resourceId('Microsoft.Network/virtualnetworks/subnets', parameters('vnetSettings').name, parameters('vnetSettings').appTierSubnetName)]"
+      ],
+      "properties": {
+        "addressPrefix": "[parameters('vnetSettings').amntmmfuncsn]",
+        "networkSecurityGroup": {
+          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+        },
+        "serviceEndpoints": [
+          {
+            "service": "Microsoft.Storage",
+            "locations": [
+              "westus2",
+              "westcentralus"
+            ]
+          },
+          {
+            "service": "Microsoft.AzureCosmosDB",
+            "locations": [
+              "*"
+            ]
+          }
+        ],
+        "delegations": [
+          {
+            "name": "delegation",
+            "properties": {
+              "serviceName": "Microsoft.Web/serverFarms"
+            }
+          }
+        ],
+        "privateEndpointNetworkPolicies": "Enabled",
+        "privateLinkServiceNetworkPolicies": "Enabled"
+      }
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "networkSecurityGroupName": {
+      "value": "amn-wus2-ttm-nsg-d01"
+    },
+    "location": {
+      "value": "West US 2"
+    },
+    "functtionsAppName": {
+      "value": "amn-wus2-ttm-func-d01"
+    },
+    "vnetSettings": {
+      "value": {
+        "name": "amn-wus2-ttm-vnet-d01",
+        "addressSpace": "10.98.40.0/21",
+        "appTierSubnetAddessPrefix": "10.98.40.0/26",
+        "appTierSubnetName": "amn-ttm-as-sn",
+        "amntmminsightscosmosn": "10.98.41.0/29",
+        "amntmminsightscosmoSubnetName": "amn-ttm-insights-cosmo-sn",
+        "amntmmfuncsn": "10.98.42.0/27",
+        "amntmmfuncSubnetName": "amn-ttm-func-sn"
+      }
+    },
+    "DenyAllVNetOutBoundToLasVegassettings": {
+      "value": {
+        "LasVegasip_1": "10.244.0.0/16",
+        "LasVegasip_2": "10.241.0.0/16"
+      }
+    },
+    "onpremESPDB": {
+      "value": {
+        "onpremESPDBIP": "10.244.144.124",
+        "port_1": "1433",
+        "port_2": "1434"
+      }
+    },
+    "outbounddestinations": {
+      "value": {
+        "storageregion": "Storage.WestUS2",
+        "sqlregion": "Sql.WestUS2",
+        "cosmosDBregion": "AzureCosmosDB.WestUS2"
+      }
+    },
+    "tagsArray": {
+      "value": {
+        "charge-to": "800-71200-0000-0000",
+        "role": "infrastructure",
+        "environment": "dev"
+      }
+    }
+  }
+}

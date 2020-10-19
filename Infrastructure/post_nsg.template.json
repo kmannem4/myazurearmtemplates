@@ -1,0 +1,223 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": {
+      "type": "string"
+    },
+    "networkSecurityGroupName": {
+      "type": "string"
+    },
+    "functtionsAppName": {
+      "type": "String"
+    },
+    "vnetSettings": {
+      "type": "object"
+    },
+    "onpremESPDB": {
+      "type": "object"
+    },
+    "DenyAllVNetOutBoundToLasVegassettings": {
+      "type": "object"
+    },
+    "outbounddestinations": {
+      "type": "object"
+    },
+    "tagsArray": {
+      "type": "object"
+    }
+  },
+  "variables": {
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "name": "[parameters('networkSecurityGroupName')]",
+      "apiVersion": "2020-05-01",
+      "location": "[parameters('location')]",
+      "tags": "[parameters('tagsArray')]",
+      "properties": {
+        "securityRules": [
+          {
+            "name": "AllowFunctionAppSCMOutBound",
+            "properties": {
+              "protocol": "TCP",
+              "sourcePortRange": "*",
+              "destinationPortRange": "443",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "[reference(resourceId('Microsoft.Web/sites', parameters('functtionsAppName')), '2016-03-01', 'Full').properties.inboundIpAddress]",
+              "access": "Allow",
+              "priority": 260,
+              "direction": "Outbound",
+              "sourcePortRanges": [],
+              "destinationPortRanges": [],
+              "sourceAddressPrefixes": [],
+              "destinationAddressPrefixes": []
+            }
+          },
+          {
+            "name": "Allow_AzureLoadBalancer",
+            "properties": {
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "*",
+              "sourceAddressPrefix": "AzureLoadBalancer",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 110,
+              "direction": "Inbound",
+              "sourcePortRanges": [],
+              "destinationPortRanges": [],
+              "sourceAddressPrefixes": [],
+              "destinationAddressPrefixes": []
+            }
+          },
+          {
+            "name": "AllowAppSvcSubnetToOnPremESPDatabase",
+            "properties": {
+              "description": "Allow API app service subnet to connect to database server pv-dv-vs1033.sw.local 10.244.144.124 on-prem.",
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "sourceAddressPrefix": "[parameters('vnetSettings').appTierSubnetAddessPrefix]",
+              "destinationAddressPrefix": "[parameters('onpremESPDB').onpremESPDBIP]",
+              "access": "Allow",
+              "priority": 200,
+              "direction": "Outbound",
+              "sourcePortRanges": [],
+              "destinationPortRanges": [
+                "[parameters('onpremESPDB').port_1]",
+                "[parameters('onpremESPDB').port_2]"
+              ],
+              "sourceAddressPrefixes": [],
+              "destinationAddressPrefixes": []
+            }
+          },
+          {
+            "name": "DenyAllVNetOutBoundToLasVegas",
+            "properties": {
+              "description": "Deny all traffic from VNet to on-prem Las Vegas datacenter",
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "*",
+              "sourceAddressPrefix": "VirtualNetwork",
+              "access": "Deny",
+              "priority": 4086,
+              "direction": "Outbound",
+              "sourcePortRanges": [],
+              "destinationPortRanges": [],
+              "sourceAddressPrefixes": [],
+              "destinationAddressPrefixes": [
+                "[parameters('DenyAllVNetOutBoundToLasVegassettings').LasVegasip_1]",
+                "[parameters('DenyAllVNetOutBoundToLasVegassettings').LasVegasip_2]"
+              ]
+            }
+          },
+          {
+            "name": "AllowFunctionAppSubnetToOnPremESPDatabase",
+            "properties": {
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "sourceAddressPrefix": "[parameters('vnetSettings').amntmmfuncsn]",
+              "destinationAddressPrefix": "[parameters('onpremESPDB').onpremESPDBIP]",
+              "access": "Allow",
+              "priority": 210,
+              "direction": "Outbound",
+              "sourcePortRanges": [],
+              "destinationPortRanges": [
+                "[parameters('onpremESPDB').port_1]",
+                "[parameters('onpremESPDB').port_2]"
+              ],
+              "sourceAddressPrefixes": [],
+              "destinationAddressPrefixes": []
+            }
+          },
+          {
+            "name": "DenyAllInternetOutBound",
+            "properties": {
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "*",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "Internet",
+              "access": "Deny",
+              "priority": 4096,
+              "direction": "Outbound",
+              "sourcePortRanges": [],
+              "destinationPortRanges": [],
+              "sourceAddressPrefixes": [],
+              "destinationAddressPrefixes": []
+            }
+          },
+          {
+            "name": "AllowAllAzureStorageOutBound",
+            "properties": {
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "*",
+              "sourceAddressPrefix": "VirtualNetwork",
+              "destinationAddressPrefix": "[parameters('outbounddestinations').storageregion]",
+              "access": "Allow",
+              "priority": 220,
+              "direction": "Outbound",
+              "sourcePortRanges": [],
+              "destinationPortRanges": [],
+              "sourceAddressPrefixes": [],
+              "destinationAddressPrefixes": []
+            }
+          },
+          {
+            "name": "AllowAzureSqlWest2OutBound",
+            "properties": {
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "*",
+              "sourceAddressPrefix": "VirtualNetwork",
+              "destinationAddressPrefix": "[parameters('outbounddestinations').sqlregion]",
+              "access": "Allow",
+              "priority": 230,
+              "direction": "Outbound",
+              "sourcePortRanges": [],
+              "destinationPortRanges": [],
+              "sourceAddressPrefixes": [],
+              "destinationAddressPrefixes": []
+            }
+          },
+          {
+            "name": "AllowCosmosDBWest2OutBound",
+            "properties": {
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "*",
+              "sourceAddressPrefix": "VirtualNetwork",
+              "destinationAddressPrefix": "[parameters('outbounddestinations').cosmosDBregion]",
+              "access": "Allow",
+              "priority": 240,
+              "direction": "Outbound",
+              "sourcePortRanges": [],
+              "destinationPortRanges": [],
+              "sourceAddressPrefixes": [],
+              "destinationAddressPrefixes": []
+            }
+          },
+          {
+            "name": "AllowAzureResourceManagerOutBound",
+            "properties": {
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "*",
+              "sourceAddressPrefix": "VirtualNetwork",
+              "destinationAddressPrefix": "AzureResourceManager",
+              "access": "Allow",
+              "priority": 250,
+              "direction": "Outbound",
+              "sourcePortRanges": [],
+              "destinationPortRanges": [],
+              "sourceAddressPrefixes": [],
+              "destinationAddressPrefixes": []
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

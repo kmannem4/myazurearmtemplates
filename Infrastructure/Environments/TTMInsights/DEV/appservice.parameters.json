@@ -1,0 +1,46 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "appservicename": {
+      "value": "amn-wus2-ttminsights-as-d01"
+    },
+    "subscriptionId": {
+      "value": "95181a59-30e2-4faf-b8c7-993d85a7e640"
+    },
+    "location": {
+      "value": "West US 2"
+    },
+    "hostingPlanName": {
+      "value": "amn-wus2-ttm-aspl-d01"
+    },
+    "stagingsitename": {
+      "value": "amn-wus2-ttminsights-as-d01(staging)"
+    },
+    "subnetname": {
+      "value": "amn-ttm-as-sn"
+    },
+    "publishingUsername": {
+      "value": "$amn-wus2-ttminsights-as-d01"
+    },
+    "publishingUsername_staging": {
+      "value": "$amn-wus2-ttminsights-as-d01__staging"
+    },
+    "serverFarmResourceGroup": {
+      "value": "amn-wus2-ttm-rg-d01"
+    },
+    "virtualNetworkName": {
+      "value": "amn-wus2-ttm-vnet-d01"
+    },
+    "identityName": {
+      "value": "amn-wus2-ttm-as-mgid-d01"
+    },
+    "tagsArray": {
+      "value": {
+        "charge-to": "800-71200-0000-0000",
+        "role": "app",
+        "environment": "dev"
+      }
+    }
+  }
+}

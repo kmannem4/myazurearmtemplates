@@ -1,0 +1,41 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "westus2"
+        },
+        "privateEndpointName": {
+            "value": "amn-wus2-ttm-cosmo-plink"
+        },
+        "privatelinkName": {
+            "value": "privatelink-documents-azure-com"
+        },
+        "privateDnsZonename": {
+            "value": "privatelink.documents.azure.com"
+        },
+        "privateLinkResource": {
+            "value": "amn-wus2-ttm-cosmo-q01"
+        },
+        "targetSubResource": {
+            "value": [
+                "Sql"
+            ]
+        },
+        "subnet": {
+            "value": "amn-ttm-insights-cosmo-sn"
+        },
+        "virtualNetworkId": {
+            "value": "amn-wus2-ttm-vnet-d01"
+        },
+        "virtualNetworkResourceGroup": {
+            "value": "amn-wus2-ttm-rg-d01"
+        },
+        "tagsArray": {
+            "value": {
+              "charge-to": "800-71200-0000-0000",
+              "environment": "dev"
+            }
+        }
+    }
+}

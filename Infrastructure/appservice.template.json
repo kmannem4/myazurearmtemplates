@@ -1,0 +1,247 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "appservicename": {
+      "type": "String"
+    },
+    "hostingPlanName": {
+      "type": "String"
+    },
+    "stagingsitename": {
+      "type": "String"
+    },
+    "subscriptionId": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "subnetname": {
+      "type": "String"
+    },
+    "publishingUsername": {
+      "type": "String"
+    },
+    "publishingUsername_staging": {
+      "type": "String"
+    },
+    "serverFarmResourceGroup": {
+      "type": "string"
+    },
+    "virtualNetworkName": {
+      "type": "String"
+    },
+    "identityName": {
+      "type": "string"
+    },
+    "alwaysOn": {
+      "type": "string"
+    },
+    "use32BitWorkerProcess": {
+      "type": "string"
+    },
+    "tagsArray": {
+      "type": "object"
+    }
+  },
+  "variables": {},
+  "resources": [
+    {
+      "type": "Microsoft.Web/sites",
+      "apiVersion": "2018-11-01",
+      "name": "[parameters('appservicename')]",
+      "location": "[parameters('location')]",
+      "tags": "[parameters('tagsArray')]",
+      "kind": "app",
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "properties": {
+        "enabled": true,
+        "hostNameSslStates": [
+          {
+            "name": "[concat(parameters('appservicename'), '.azurewebsites.net')]",
+            "sslState": "Disabled",
+            "hostType": "Standard"
+          },
+          {
+            "name": "[concat(parameters('appservicename'), '.scm.azurewebsites.net')]",
+            "sslState": "Disabled",
+            "hostType": "Repository"
+          }
+        ],
+        "serverFarmId": "[concat('/subscriptions/', parameters('subscriptionId'),'/resourcegroups/', parameters('serverFarmResourceGroup'), '/providers/Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]",
+        "reserved": false,
+        "isXenon": false,
+        "hyperV": false,
+        "scmSiteAlsoStopped": false,
+        "clientAffinityEnabled": false,
+        "clientCertEnabled": false,
+        "hostNamesDisabled": false,
+        "containerSize": 0,
+        "dailyMemoryTimeQuota": 0,
+        "httpsOnly": false,
+        "redundancyMode": "None"
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/config",
+      "apiVersion": "2018-11-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites', parameters('appservicename'))]"
+      ],
+      "location": "[parameters('location')]",
+      "name": "[concat(parameters('appservicename'), '/web')]",
+      "properties": {
+        "numberOfWorkers": 1,
+        "defaultDocuments": [
+          "hostingstart.html"
+        ],
+        "phpVersion": "5.6",
+        "requestTracingEnabled": false,
+        "remoteDebuggingEnabled": false,
+        "remoteDebuggingVersion": "VS2019",
+        "httpLoggingEnabled": false,
+        "logsDirectorySizeLimit": 35,
+        "detailedErrorLoggingEnabled": false,
+        "publishingUsername": "[parameters('publishingUsername')]",
+        "scmType": "None",
+        "use32BitWorkerProcess": "[parameters('use32BitWorkerProcess')]",
+        "webSocketsEnabled": false,
+        "alwaysOn": "[parameters('alwaysOn')]",
+        "managedPipelineMode": "Integrated",
+        "virtualApplications": [
+          {
+            "virtualPath": "/",
+            "physicalPath": "site\\wwwroot",
+            "preloadEnabled": false
+          }
+        ],
+        "loadBalancing": "LeastRequests",
+        "autoHealEnabled": false,
+        "vnetName": "[concat(parameters('virtualNetworkName'), '/subnets/', parameters('subnetname'))]",
+        "localMySqlEnabled": false,
+        "managedServiceIdentityId": "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', parameters('identityName'))]",
+        "ipSecurityRestrictions": [],
+        "scmIpSecurityRestrictionsUseMain": false,
+        "http20Enabled": true,
+        "minTlsVersion": "1.2",
+        "ftpsState": "Disabled",
+        "reservedInstanceCount": 0
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/hostNameBindings",
+      "apiVersion": "2018-11-01",
+      "name": "[concat(parameters('appservicename'), '/', parameters('appservicename'), '.azurewebsites.net')]",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites', parameters('appservicename'))]"
+      ],
+      "properties": {
+        "siteName": "[parameters('appservicename')]",
+        "hostNameType": "Verified"
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/slots",
+      "apiVersion": "2018-11-01",
+      "name": "[concat(parameters('appservicename'), '/staging')]",
+      "location": "[parameters('location')]",
+      "tags": "[parameters('tagsArray')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites', parameters('appservicename'))]"
+      ],
+      "kind": "app",
+      "properties": {
+        "enabled": true,
+        "hostNameSslStates": [
+          {
+            "name": "[concat(parameters('appservicename'), '/staging/', parameters('appservicename'), '-staging.azurewebsites.net')]",
+            "sslState": "Disabled",
+            "hostType": "Standard"
+          },
+          {
+            "name": "[concat(parameters('appservicename'), '/staging/', parameters('appservicename'), '-staging.azurewebsites.net')]",
+            "sslState": "Disabled",
+            "hostType": "Repository"
+          }
+        ],
+        "serverFarmId": "[concat('/subscriptions/', parameters('subscriptionId'),'/resourcegroups/', parameters('serverFarmResourceGroup'), '/providers/Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]",
+        "reserved": false,
+        "isXenon": false,
+        "hyperV": false,
+        "scmSiteAlsoStopped": false,
+        "clientAffinityEnabled": false,
+        "clientCertEnabled": false,
+        "hostNamesDisabled": false,
+        "containerSize": 0,
+        "dailyMemoryTimeQuota": 0,
+        "httpsOnly": false,
+        "redundancyMode": "None"
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/slots/config",
+      "apiVersion": "2018-11-01",
+      "name": "[concat(parameters('appservicename'), '/staging/web')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites/slots', parameters('appservicename'), 'staging')]",
+        "[resourceId('Microsoft.Web/sites', parameters('appservicename'))]"
+      ],
+      "location": "[parameters('location')]",
+      "tags": "[parameters('tagsArray')]",
+      "properties": {
+        "numberOfWorkers": 1,
+        "defaultDocuments": [
+          "hostingstart.html"
+        ],
+        "phpVersion": "5.6",
+        "requestTracingEnabled": false,
+        "remoteDebuggingEnabled": false,
+        "remoteDebuggingVersion": "VS2019",
+        "httpLoggingEnabled": false,
+        "logsDirectorySizeLimit": 35,
+        "detailedErrorLoggingEnabled": false,
+        "publishingUsername": "[parameters('publishingUsername_staging')]",
+        "scmType": "None",
+        "use32BitWorkerProcess": "[parameters('use32BitWorkerProcess')]",
+        "webSocketsEnabled": false,
+        "alwaysOn": false,
+        "managedPipelineMode": "Integrated",
+        "virtualApplications": [
+          {
+            "virtualPath": "/",
+            "physicalPath": "site\\wwwroot",
+            "preloadEnabled": false
+          }
+        ],
+        "loadBalancing": "LeastRequests",
+        "autoHealEnabled": false,
+        "vnetName": "[concat(parameters('virtualNetworkName'), '/subnets/', parameters('subnetname'))]",
+        "localMySqlEnabled": false,
+        "ipSecurityRestrictions": [],
+        "scmIpSecurityRestrictionsUseMain": false,
+        "http20Enabled": true,
+        "minTlsVersion": "1.2",
+        "ftpsState": "Disabled",
+        "reservedInstanceCount": 0
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/slots/hostNameBindings",
+      "apiVersion": "2018-11-01",
+      "name": "[concat(parameters('appservicename'), '/staging/', parameters('appservicename'), '-staging.azurewebsites.net')]",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites/slots', parameters('appservicename'), 'staging')]",
+        "[resourceId('Microsoft.Web/sites', parameters('appservicename'))]"
+      ],
+      "properties": {
+        "siteName": "[parameters('stagingsitename')]",
+        "hostNameType": "Verified"
+      }
+    }
+  ]
+}

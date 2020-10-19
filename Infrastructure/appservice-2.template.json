@@ -1,0 +1,263 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "appservicename": {
+      "type": "string"
+    },
+    "resourceid": {
+      "type": "String"
+    },
+    "settingName": {
+      "type": "String"
+    },
+    "appinsightsname": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "tagsArray": {
+      "type": "object"
+    },
+    "hostingEnvironment": {
+      "type": "string"
+    },
+    "virtualNetworkName": {
+      "type": "string"
+    },
+    "subnetname": {
+      "type": "String"
+    },
+    "alwaysOn": {
+      "type": "bool"
+    },
+    "currentStack": {
+      "type": "string"
+    },
+    "identityName": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "apiVersion": "2018-11-01",
+      "name": "[parameters('appservicename')]",
+      "type": "Microsoft.Web/sites",
+      "location": "[parameters('location')]",
+      "identity": {
+        "type": "SystemAssigned, UserAssigned",
+        "userAssignedIdentities": {
+          "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities/', parameters('identityName'))]": {}
+        }
+      },
+      "tags": "[parameters('tagsArray')]",
+      "resources": [
+        {
+          "type": "config",
+          "apiVersion": "2018-11-01",
+          "name": "virtualNetwork",
+          "location": "[parameters('location')]",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('appservicename'))]"
+          ],
+          "properties": {
+            "subnetResourceId": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('subnetname'))]",
+            "swiftSupported": true
+          }
+        },
+        {
+          "type": "Microsoft.Web/sites/providers/diagnosticSettings",
+          "apiVersion": "2017-05-01-preview",
+          "name": "[concat(parameters('appservicename'),'/microsoft.insights/', parameters('settingName'))]",
+          "location": "[parameters('location')]",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites/', parameters('appservicename'))]"
+          ],
+          "properties": {
+            "name": "[parameters('settingName')]",
+            "workspaceId": "[parameters('resourceid')]",
+            "logs": [
+              {
+                "category": "AppServiceHTTPLogs",
+                "enabled": true
+              },
+              {
+                "category": "AppServiceConsoleLogs",
+                "enabled": true
+              },
+              {
+                "category": "AppServiceAppLogs",
+                "enabled": true
+              },
+              {
+                "category": "AppServiceFileAuditLogs",
+                "enabled": false
+              },
+              {
+                "category": "AppServiceAuditLogs",
+                "enabled": true
+              }
+            ],
+            "metrics": [
+              {
+                "category": "AllMetrics",
+                "enabled": true
+              }
+            ]
+          }
+        }
+      ],
+      "properties": {
+        "name": "[parameters('appservicename')]",
+        "siteConfig": {
+          "appSettings": [
+            {
+              "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
+              "value": "[reference(resourceId('Microsoft.Insights/components', parameters('appinsightsname')), '2014-04-01').InstrumentationKey]"
+            },
+            {
+              "name": "ApplicationInsightsAgent_EXTENSION_VERSION",
+              "value": "~2"
+            },
+            {
+              "name": "MSDEPLOY_RENAME_LOCKED_FILES",
+              "value": "1"
+            },
+            {
+              "name": "XDT_MicrosoftApplicationInsights_Mode",
+              "value": "recommended"
+            },
+            {
+              "name": "DiagnosticServices_EXTENSION_VERSION",
+              "value": "~3"
+            },
+            {
+              "name": "APPINSIGHTS_PROFILERFEATURE_VERSION",
+              "value": "1.0.0"
+            },
+            {
+              "name": "APPINSIGHTS_SNAPSHOTFEATURE_VERSION",
+              "value": "disabled"
+            },
+            {
+              "name": "InstrumentationEngine_EXTENSION_VERSION",
+              "value": "~1"
+            },
+            {
+              "name": "SnapshotDebugger_EXTENSION_VERSION",
+              "value": "disabled"
+            },
+            {
+              "name": "XDT_MicrosoftApplicationInsights_BaseExtensions",
+              "value": "~1"
+            },
+            {
+              "name": "XDT_MicrosoftApplicationInsights_PreemptSdk",
+              "value": "~1"
+            },
+            {
+              "name": "WEBSITE_LOAD_USER_PROFILE",
+              "value": "1"
+            }
+          ],
+          "metadata": [
+            {
+              "name": "CURRENT_STACK",
+              "value": "[parameters('currentStack')]"
+            }
+          ],
+          "alwaysOn": "[parameters('alwaysOn')]"
+        },
+        "hostingEnvironment": "[parameters('hostingEnvironment')]",
+        "clientAffinityEnabled": false,
+        "httpsOnly": true
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/slots",
+      "apiVersion": "2018-11-01",
+      "name": "[concat(parameters('appservicename'), '/staging')]",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites', parameters('appservicename'))]"
+      ],
+      "resources": [
+        {
+          "type": "config",
+          "apiVersion": "2018-11-01",
+          "name": "virtualNetwork",
+          "location": "[parameters('location')]",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites/', parameters('appservicename'), '/slots/staging')]"
+          ],
+          "properties": {
+            "subnetResourceId": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('subnetname'))]",
+            "swiftSupported": true
+          }
+        }        
+      ],      
+      "properties": {
+        "siteConfig": {
+          "appSettings": [
+            {
+              "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
+              "value": "[reference(resourceId('Microsoft.Insights/components', parameters('appinsightsname')), '2014-04-01').InstrumentationKey]"
+            },
+            {
+              "name": "ApplicationInsightsAgent_EXTENSION_VERSION",
+              "value": "~2"
+            },
+            {
+              "name": "MSDEPLOY_RENAME_LOCKED_FILES",
+              "value": "1"
+            },
+            {
+              "name": "XDT_MicrosoftApplicationInsights_Mode",
+              "value": "recommended"
+            },
+            {
+              "name": "DiagnosticServices_EXTENSION_VERSION",
+              "value": "~3"
+            },
+            {
+              "name": "APPINSIGHTS_PROFILERFEATURE_VERSION",
+              "value": "1.0.0"
+            },
+            {
+              "name": "APPINSIGHTS_SNAPSHOTFEATURE_VERSION",
+              "value": "disabled"
+            },
+            {
+              "name": "InstrumentationEngine_EXTENSION_VERSION",
+              "value": "~1"
+            },
+            {
+              "name": "SnapshotDebugger_EXTENSION_VERSION",
+              "value": "disabled"
+            },
+            {
+              "name": "XDT_MicrosoftApplicationInsights_BaseExtensions",
+              "value": "~1"
+            },
+            {
+              "name": "XDT_MicrosoftApplicationInsights_PreemptSdk",
+              "value": "~1"
+            },
+            {
+              "name": "WEBSITE_LOAD_USER_PROFILE",
+              "value": "1"
+            }
+          ],
+          "metadata": [
+            {
+              "name": "CURRENT_STACK",
+              "value": "[parameters('currentStack')]"
+            }
+          ],
+          "alwaysOn": "[parameters('alwaysOn')]"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,255 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "cosmodbname": {
+      "type": "string"
+    },
+    "databasename": {
+      "type": "string"
+    },
+    "containername": {
+      "type": "string"
+    },
+    "throughputvalue": {
+      "type": "string"
+    },
+    "kind": {
+      "type": "string"
+    },
+    "databaseAccountOfferType": {
+      "type": "string"
+    },
+    "backupPolicytype": {
+      "type": "string"
+    },
+    "backupIntervalInMinutes": {
+      "type": "string"
+    },
+    "backupRetentionIntervalInHours": {
+      "type": "string"
+    },
+    "appservicesubnetName": {
+      "type": "string"
+    },
+    "functionssubnetName": {
+      "type": "string"
+    },
+    "virtualnetworkname": {
+      "type": "String"
+    },
+    "isVirtualNetworkFilterEnabled": {
+      "type": "String"
+    },
+    "ipAddressOrRange_1": {
+      "type": "String"
+    },
+    "ipAddressOrRange_2": {
+      "type": "String"
+    },
+    "location": {
+      "type": "string"
+    },
+    "locationName": {
+      "type": "string"
+    },
+    "resourceid": {
+      "type": "String"
+    },
+    "settingName": {
+      "type": "String"
+    },
+    "defaultExperience": {
+      "type": "string"
+    },
+    "enableMultipleWriteLocations": {
+      "type": "string"
+    },
+    "CosmosAccountType": {
+      "type": "string"
+    },
+    "isZoneRedundant": {
+      "type": "string"
+    }
+  },
+  "variables": {},
+  "resources": [
+    {
+      "type": "Microsoft.DocumentDb/databaseAccounts",
+      "name": "[parameters('cosmodbname')]",
+      "apiVersion": "2020-04-01",
+      "kind": "[parameters('kind')]",
+      "location": "[parameters('location')]",
+      "resources": [
+        {
+          "type": "Microsoft.DocumentDb/databaseAccounts/providers/diagnosticSettings",
+          "apiVersion": "2017-05-01-preview",
+          "name": "[concat(parameters('cosmodbname'),'/microsoft.insights/', parameters('settingName'))]",
+          "location": "[parameters('location')]",
+          "dependsOn": [
+            "[resourceId('Microsoft.DocumentDb/databaseAccounts/', parameters('cosmodbname'))]"
+          ],
+          "properties": {
+            "name": "[parameters('settingName')]",
+            "workspaceId": "[parameters('resourceid')]",
+            "logs": [
+              {
+                "category": "DataPlaneRequests",
+                "enabled": true
+              },
+              {
+                "category": "MongoRequests",
+                "enabled": true
+              },
+              {
+                "category": "QueryRuntimeStatistics",
+                "enabled": true
+              },
+              {
+                "category": "PartitionKeyStatistics",
+                "enabled": false
+              },
+              {
+                "category": "PartitionKeyRUConsumption",
+                "enabled": true
+              },
+              {
+                "category": "ControlPlaneRequests",
+                "enabled": true
+              },
+              {
+                "category": "CassandraRequests",
+                "enabled": true
+              },
+              {
+                "category": "GremlinRequests",
+                "enabled": true
+              }
+            ],
+            "metrics": [
+              {
+                "category": "Requests",
+                "enabled": true
+              }
+            ]
+          }
+        }
+      ],
+      "properties": {
+        "databaseAccountOfferType": "[parameters('databaseAccountOfferType')]",
+        "locations": [
+          {
+            "id": "[concat(parameters('cosmodbname'), '-', parameters('location'))]",
+            "failoverPriority": 0,
+            "locationName": "[parameters('locationName')]",
+            "isZoneRedundant": "[parameters('isZoneRedundant')]"
+          }
+        ],
+        "backupPolicy": {
+          "type": "[parameters('backupPolicytype')]",
+          "periodicModeProperties": {
+            "backupIntervalInMinutes": "[parameters('backupIntervalInMinutes')]",
+            "backupRetentionIntervalInHours": "[parameters('backupRetentionIntervalInHours')]"
+          }
+        },
+        "isVirtualNetworkFilterEnabled": "[parameters('isVirtualNetworkFilterEnabled')]",
+        "virtualNetworkRules": [
+          {
+            "id": "[concat(resourceGroup().id, '/providers/Microsoft.Network/virtualNetworks/', parameters('virtualnetworkname'), '/subnets/', parameters('appservicesubnetName'))]"
+          },
+          {
+            "id": "[concat(resourceGroup().id, '/providers/Microsoft.Network/virtualNetworks/', parameters('virtualnetworkname'), '/subnets/', parameters('functionssubnetName'))]"
+          }
+        ],
+        "ipRules": [
+          {
+            "ipAddressOrRange": "104.42.195.92"
+          },
+          {
+            "ipAddressOrRange": "40.76.54.131"
+          },
+          {
+            "ipAddressOrRange": "52.176.6.30"
+          },
+          {
+            "ipAddressOrRange": "52.169.50.45"
+          },
+          {
+            "ipAddressOrRange": "52.187.184.26"
+          },
+          {
+            "ipAddressOrRange": "[parameters('ipAddressOrRange_1')]"
+          },
+          {
+            "ipAddressOrRange": "[parameters('ipAddressOrRange_2')]"
+          }
+        ],
+        "enableMultipleWriteLocations": "[parameters('enableMultipleWriteLocations')]",
+        "capabilities": [],
+        "enableAnalyticalStorage": true,
+        "enableFreeTier": false
+      },
+      "tags": {
+        "defaultExperience": "[parameters('defaultExperience')]",
+        "hidden-cosmos-mmspecial": "",
+        "CosmosAccountType": "[parameters('CosmosAccountType')]"
+      }
+    },
+    {
+      "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases",
+      "apiVersion": "2020-06-01-preview",
+      "name": "[concat(parameters('cosmodbname'), '/', parameters('databasename'))]",
+      "dependsOn": [
+        "[resourceId('Microsoft.DocumentDB/databaseAccounts', parameters('cosmodbname'))]"
+      ],
+      "properties": {
+        "resource": {
+          "id": "[parameters('databasename')]"
+        },
+        "options": {}
+      }
+    },
+    {
+      "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers",
+      "apiVersion": "2020-06-01-preview",
+      "name": "[concat(parameters('cosmodbname'), '/', parameters('databasename'), '/', parameters('containername'))]",
+      "dependsOn": [
+        "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases', parameters('cosmodbname'), parameters('databasename'))]",
+        "[resourceId('Microsoft.DocumentDB/databaseAccounts', parameters('cosmodbname'))]"
+      ],
+      "properties": {
+        "resource": {
+          "id": "[parameters('containername')]",
+          "indexingPolicy": {
+            "indexingMode": "consistent",
+            "automatic": true,
+            "includedPaths": [
+              {
+                "path": "/*"
+              }
+            ],
+            "excludedPaths": [
+              {
+                "path": "/\"_etag\"/?"
+              }
+            ]
+          },
+          "partitionKey": {
+            "paths": [
+              "/partitionKey"
+            ],
+            "kind": "Hash"
+          },
+          "uniqueKeyPolicy": {
+            "uniqueKeys": []
+          },
+          "conflictResolutionPolicy": {
+            "mode": "LastWriterWins",
+            "conflictResolutionPath": "/_ts"
+          }
+        },
+        "options": { "throughput": "[parameters('throughputvalue')]" }
+      }
+    }
+  ]
+}

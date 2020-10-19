@@ -1,0 +1,60 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "func_appserviceplanname": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "tagsArray": {
+      "type": "object"
+    },
+    "kind": {
+      "type": "string"
+    },
+    "skuName": {
+      "type": "string"
+    },
+    "skuTier": {
+      "type": "string"
+    },
+    "skusize": {
+      "type": "string"
+    },
+    "skufamily": {
+      "type": "string"
+    },
+    "skucapacity": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "apiVersion": "2020-06-01",
+      "name": "[parameters('func_appserviceplanname')]",
+      "type": "Microsoft.Web/serverfarms",
+      "location": "[parameters('location')]",
+      "tags": "[parameters('tagsArray')]",
+      "kind": "[parameters('kind')]",
+      "sku": {
+        "Name": "[parameters('skuName')]",
+        "Tier": "[parameters('skuTier')]",
+        "size": "[parameters('skusize')]",
+        "family": "[parameters('skufamily')]",
+        "capacity": "[parameters('skucapacity')]"
+      },
+      "properties": {
+        "perSiteScaling": false,
+        "maximumElasticWorkerCount": 20,
+        "isSpot": false,
+        "reserved": false,
+        "isXenon": false,
+        "hyperV": false,
+        "targetWorkerCount": 0,
+        "targetWorkerSizeId": 0
+      }
+    }
+  ]
+}

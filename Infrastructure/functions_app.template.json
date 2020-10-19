@@ -1,0 +1,192 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "subscriptionId": {
+        "type": "string"
+      },
+      "func_appservicename": {
+        "type": "string"
+      },
+      "workspace_resourceid": {
+        "type": "String"
+      },
+      "settingName": {
+        "type": "String"
+      },
+      "location": {
+        "type": "string"
+      },
+      "appinsightsname": {
+        "type": "string"
+      },
+      "tagsArray": {
+        "type": "object"
+      },
+      "hostingPlanName": {
+        "type": "string"
+      },
+      "serverFarmResourceGroup": {
+        "type": "string"
+      },
+      "kind": {
+        "type": "string"
+      },
+      "functionWorkerRuntime": {
+        "type": "string"
+      },
+      "storageAccountName": {
+        "type": "string"
+      },
+      "use32BitWorkerProcess": {
+        "type": "bool"
+      },
+      "WEBSITE_DNS_SERVER": {
+        "type": "string"
+      },
+      "virtualNetworkName": {
+        "type": "string"
+      },
+      "subnetname": {
+        "type": "String"
+      }
+    },
+    "resources": [
+        {
+          "apiVersion": "2018-11-01",
+          "name": "[parameters('func_appservicename')]",
+          "type": "Microsoft.Web/sites",
+          "kind": "[parameters('kind')]",
+          "location": "[parameters('location')]",
+          "tags": "[parameters('tagsArray')]",
+          "identity": {
+            "type": "SystemAssigned"
+          },
+          "dependsOn": [
+            "[resourceId('Microsoft.Storage/storageAccounts/', parameters('storageAccountName'))]"
+          ],
+          "resources": [
+            {
+              "type": "config",
+              "apiVersion": "2018-11-01",
+              "name": "virtualNetwork",
+              "location": "[parameters('location')]",
+              "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('func_appservicename'))]"
+              ],
+              "properties": {
+                "subnetResourceId": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('subnetname'))]",
+                "swiftSupported": true
+              }
+            },
+            {
+              "type": "Microsoft.Web/sites/providers/diagnosticSettings",
+              "apiVersion": "2017-05-01-preview",
+              "name": "[concat(parameters('func_appservicename'),'/microsoft.insights/', parameters('settingName'))]",
+              "location": "[parameters('location')]",
+              "dependsOn": [
+                "[resourceId('Microsoft.Web/sites/', parameters('func_appservicename'))]"
+              ],
+              "properties": {
+                "name": "[parameters('settingName')]",
+                "workspaceId": "[parameters('workspace_resourceid')]",
+                "logs": [
+                  {
+                    "category": "FunctionAppLogs",
+                    "enabled": true
+                  }
+                ],
+                "metrics": [
+                  {
+                    "category": "AllMetrics",
+                    "enabled": true
+                  }
+                ]
+              }
+            }
+          ],
+          "properties": {
+            "enabled": true,
+            "hostNameSslStates": [
+              {
+                "name": "[concat(parameters('func_appservicename'), '.azurewebsites.net')]",
+                "sslState": "Disabled",
+                "hostType": "Standard"
+              },
+              {
+                "name": "[concat(parameters('func_appservicename'), '.scm.azurewebsites.net')]",
+                "sslState": "Disabled",
+                "hostType": "Repository"
+              }
+            ],
+            "serverFarmId": "[concat('/subscriptions/', parameters('subscriptionId'),'/resourcegroups/', parameters('serverFarmResourceGroup'), '/providers/Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]",
+            "reserved": false,
+            "isXenon": false,
+            "hyperV": false,
+            "siteConfig": {
+              "appSettings": [
+                {
+                  "name": "WEBSITE_VNET_ROUTE_ALL",
+                  "value": "1"
+                },
+                {
+                  "name": "FUNCTIONS_EXTENSION_VERSION",
+                  "value": "~3"
+                },
+                {
+                  "name": "FUNCTIONS_WORKER_RUNTIME",
+                  "value": "[parameters('functionWorkerRuntime')]"
+                },
+                {
+                  "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
+                  "value": "[reference(resourceId('Microsoft.Insights/components', parameters('appinsightsname')), '2014-04-01').InstrumentationKey]"
+                },
+                {
+                  "name": "APPLICATIONINSIGHTS_CONNECTION_STRING",
+                  "value": "[concat('InstrumentationKey=', reference(resourceId('Microsoft.Insights/components', parameters('appinsightsname')), '2018-05-01-preview').instrumentationKey)]"
+                },
+                {
+                  "name": "AzureWebJobsStorage",
+                  "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storageAccountName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2019-06-01').keys[0].value,';EndpointSuffix=','core.windows.net')]"
+                },
+                {
+                  "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
+                  "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storageAccountName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2019-06-01').keys[0].value,';EndpointSuffix=','core.windows.net')]"
+                },
+                {
+                  "name": "WEBSITE_CONTENTSHARE",
+                  "value": "[concat(toLower(parameters('func_appservicename')), 'a3cf')]"
+                },
+                {
+                  "name": "WEBSITE_DNS_SERVER",
+                  "value": "[parameters('WEBSITE_DNS_SERVER')]"
+                }
+              ],
+              "use32BitWorkerProcess": "[parameters('use32BitWorkerProcess')]",
+              "ftpsState": "Disabled"
+            },
+            "scmSiteAlsoStopped": false,
+            "clientCertEnabled": false,
+            "hostNamesDisabled": false,
+            "containerSize": 1536,
+            "dailyMemoryTimeQuota": 0,
+            "httpsOnly": false,
+            "redundancyMode": "None",
+            "clientAffinityEnabled": false
+          }
+        },
+        {
+            "apiVersion": "2019-06-01",
+            "type": "Microsoft.Storage/storageAccounts",
+            "name": "[parameters('storageAccountName')]",
+            "location": "[parameters('location')]",
+            "tags": {},
+            "sku": {
+                "name": "Standard_LRS"
+            },
+            "properties": {
+                "supportsHttpsTrafficOnly": true
+            }
+        }
+    ]
+}
