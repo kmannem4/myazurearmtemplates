@@ -1,0 +1,70 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "frontDoorName": {
+            "value": "amn-wus2-hub-afd-q01"
+        },
+        "wafName": {
+            "value": "AMNHubFrontDoorWAFq01"
+        },
+        "apigatewayaddress": {
+            "value": "apigateway.qa.ttm.amnhealthcare.com"
+        },
+        "ttminsightsapiurl": {
+            "value": "api.qa.ttm.amnhealthcare.com"
+        },
+        "ttminsightsuiurl": {
+            "value": "qa-insights.shiftwise.net"
+        },
+        "ttmapibackendpoolname": {
+            "value": "ttm-insights-api-backend-pool"
+        },
+        "ttminsightsuibackendpoolname": {
+            "value": "ttm-insights-ui-backend-pool"
+        },
+        "ttminsightsapiroutename": {
+            "value": "ttm-insights-api-route"
+        },
+        "ttminsightsuiroutename": {
+            "value": "ttm-insights-ui-route"
+        },
+        "ttminsightsapiFrontendpointname": {
+            "value": "api-qa-ttm-amnhealthcare-com"
+        },
+        "ttminsightsuiFrontendpointname": {
+            "value": "qa-insights-shiftwise-net"
+        },
+        "location": {
+            "value": "global"
+        },
+        "primarystorageAccounturl": {
+            "value": "amnttminsightssaq01.z5.web.core.windows.net"
+        },
+        "secondarystorageAccounturl": {
+            "value": "amnttminsightssaq01-secondary.z5.web.core.windows.net"
+        },
+        "keyVaultName": {
+            "value": "amn-wus2-hub-kv-q01"
+        },
+        "qa_ttm_sslCertName": {
+            "value": "wildcard-qa-ttm-amnhealthcare-com"
+        },
+        "qa_shiftwise_sslCertName": {
+            "value": "shiftwise-wildcard"
+        },
+        "resourceid": {
+            "value": "/subscriptions/43c5a646-c00c-4c59-a332-df854c5dd08c/resourcegroups/co-wus2-enterprisemonitor-rg-s01/providers/microsoft.operationalinsights/workspaces/amn-co-wus2-enterprisemonitor-loga-d01"
+        },
+        "settingName": {
+            "value": "amn-co-wus2-enterprisemonitor-loga-d01-hub-afd-diagset-q01"
+        },
+        "tagsArray": {
+            "value": {
+              "charge-to": "101-71200-5000-9500",
+              "role": "infrastructure",
+              "environment": "qa"
+            }
+        }
+    }
+}

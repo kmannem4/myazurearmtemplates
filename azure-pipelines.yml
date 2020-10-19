@@ -1,0 +1,59 @@
+# Pipeline file structure: https://docs.microsoft.com/en-us/azure/devops/pipelines/yaml-schema
+# Task List: https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks
+
+name: '1.0$(rev:.r)'
+
+pool:
+  name: Default
+
+resources:
+- repo: self
+
+trigger:
+  batch: true
+  branches:
+    include:
+    - /*
+
+variables:
+  BuildConfiguration: 'release'
+  BuildPlatform: 'any cpu'
+  solution: '**\*.sln'
+
+steps:
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your PowerShell commands here.
+      
+      mkdir -p $(Build.ArtifactStagingDirectory)/tests-results/ReportGenerator
+
+- task: RunARMTTKTests@1
+  inputs:
+    templatelocation: '$(System.DefaultWorkingDirectory)\src\ARM\Infrastructure\'
+    resultLocation: '$(Build.ArtifactStagingDirectory)/tests-results/ReportGenerator'
+    skipTests: 'Template Should Not Contain Blanks,IDs Should Be Derived From ResourceIDs'
+
+
+- task: PublishTestResults@2
+  condition: succeededOrFailed()
+  inputs:
+    testResultsFormat: 'NUnit'
+    testResultsFiles: '**/*.xml'
+    searchFolder: '$(Build.ArtifactStagingDirectory)/tests-results/ReportGenerator'
+    mergeTestResults: true
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(System.DefaultWorkingDirectory)'
+    Contents: '**\src\**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    CleanTargetFolder: true
+    OverWrite: true
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Build Artifacts'
+  inputs:
+    pathtoPublish: 
+    artifactName: Artifacts

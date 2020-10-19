@@ -1,0 +1,87 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "resourceName": {
+            "type": "string"
+        },
+        "tagsArray": {
+            "type": "object"
+        },
+        "location": {
+            "type": "string"
+        }
+    },
+    "resources": [
+        {
+            "apiVersion": "2020-04-01",
+            "type": "Microsoft.Network/frontDoorWebApplicationFirewallPolicies",
+            "name": "[parameters('resourceName')]",
+            "location": "[parameters('location')]",
+            "tags": "[parameters('tagsArray')]",
+            "properties": {
+                "policySettings": {
+                    "enabledState": "Enabled",
+                    "mode": "Prevention",
+                    "customBlockResponseStatusCode": 403,
+                    "customBlockResponseBody": "Rm9yYmlkZGVu"
+                },
+                "customRules": {
+                    "rules": []
+                },
+                "managedRules": {
+                    "managedRuleSets": [
+                        {
+                            "ruleSetType": "DefaultRuleSet",
+                            "ruleSetVersion": "1.0",
+                            "ruleGroupOverrides": [
+                                {
+                                    "ruleGroupName": "SQLI",
+                                    "rules": [
+                                        {
+                                            "ruleId": "942440",
+                                            "enabledState": "Enabled",
+                                            "action": "Block",
+                                            "exclusions": [
+                                                {
+                                                    "matchVariable": "QueryStringArgNames",
+                                                    "selectorMatchOperator": "Equals",
+                                                    "selector": "session_state"
+                                                },
+                                                {
+                                                    "matchVariable": "RequestCookieNames",
+                                                    "selectorMatchOperator": "Contains",
+                                                    "selector": "nonce"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "ruleId": "942450",
+                                            "enabledState": "Enabled",
+                                            "action": "Block",
+                                            "exclusions": [
+                                                {
+                                                    "matchVariable": "RequestCookieNames",
+                                                    "selectorMatchOperator": "Contains",
+                                                    "selector": "nonce"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "exclusions": []
+                                }
+                            ],
+                            "exclusions": []
+                        },
+                        {
+                            "ruleSetType": "Microsoft_BotManagerRuleSet",
+                            "ruleSetVersion": "1.0",
+                            "ruleGroupOverrides": [],
+                            "exclusions": []
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

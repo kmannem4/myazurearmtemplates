@@ -1,0 +1,21 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "privateDnsZones_name": {
+            "value": "azure-api.net"
+        },
+        "apimname": {
+            "value": "amn-wus2-hub-apim-q01"
+        },
+        "vnet_link": {
+            "value": "amn-wus2-hub-vnet-q01-link"
+        },
+        "apimprivateIpAddress": {
+            "value": "10.98.8.5"
+        },
+        "virtualnetworkname": {
+            "value": "amn-wus2-hub-vnet-q01"
+        }
+    }
+}

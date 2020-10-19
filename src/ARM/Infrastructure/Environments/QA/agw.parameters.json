@@ -1,0 +1,74 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+      "location": {
+          "value": "westus2"
+      },
+      "applicationGatewayName": {
+          "value": "amn-wus2-hub-agw-q01"
+      },
+      "tier": {
+          "value": "Standard_v2"
+      },
+      "skuSize": {
+          "value": "Standard_v2"
+      },
+      "capacity": {
+          "value": 1
+      },
+      "tagsArray": {
+        "value": {
+          "charge-to": "101-71200-5000-9500",
+          "role": "infrastructure",
+          "environment": "qa"
+        }
+      },
+      "virtualnetworkname": {
+        "value": "amn-wus2-hub-vnet-q01"
+      },
+      "subnetName": {
+          "value": "amn-hub-agw-sn"
+      },
+      "fqdnname": {
+        "value": "amn-wus2-hub-apim-q01.azure-api.net"
+      },
+      "apigatewayhostname": {
+        "value": "apigateway.qa.ttm.amnhealthcare.com"
+      },
+      "requesttimeout": {
+        "value": "300"
+      },
+      "publicIPAddressesName": {
+        "value": "amn-wus2-hub-pip-q01"
+      },
+      "zones": {
+          "value": [
+              "1",
+              "2",
+              "3"
+          ]
+      },
+      "privateIpAddress": {
+          "value": "10.98.8.68"
+      },
+      "managedIdentity": {
+          "value": "/subscriptions/e764d23e-759d-4cd4-8b5f-27e4c703f6a8/resourceGroups/amn-wus2-hub-rg-q01/providers/Microsoft.ManagedIdentity/userAssignedIdentities/amn-wus2-hub-agw-mgid-q01"
+      },
+      "keyVaultName": {
+        "value": "amn-wus2-hub-kv-q01"
+      },
+      "sslCertName": {
+        "value": "wildcard-qa-ttm-amnhealthcare-com"
+      },
+      "resourceid": {
+        "value": "/subscriptions/43c5a646-c00c-4c59-a332-df854c5dd08c/resourcegroups/co-wus2-enterprisemonitor-rg-s01/providers/microsoft.operationalinsights/workspaces/amn-co-wus2-enterprisemonitor-loga-d01"
+      },
+      "settingName": {
+        "value": "amn-co-wus2-enterprisemonitor-loga-d01-hub-agw-diagset-q01"
+      },
+      "autoScaleMaxCapacity": {
+          "value": 10
+      }
+  }
+}

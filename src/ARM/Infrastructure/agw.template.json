@@ -1,0 +1,297 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "type": "string"
+        },
+        "applicationGatewayName": {
+            "type": "string"
+        },
+        "tier": {
+            "type": "string"
+        },
+        "skuSize": {
+            "type": "string"
+        },
+        "tagsArray": {
+            "type": "object"
+        },
+        "capacity": {
+            "type": "int",
+            "defaultValue": 2
+        },
+        "subnetName": {
+            "type": "string"
+        },
+        "fqdnname": {
+            "type": "string"
+        },
+        "apigatewayhostname": {
+            "type": "string"
+        },
+        "requesttimeout": {
+            "type": "string"
+        },
+        "zones": {
+            "type": "array"
+        },
+        "privateIpAddress": {
+            "type": "string"
+        },
+        "managedIdentity": {
+            "type": "string"
+        },
+        "virtualnetworkname": {
+            "type": "string"
+        },
+        "publicIPAddressesName": {
+            "type": "string"
+        },
+        "keyVaultName": {
+            "type": "string"
+        },
+        "sslCertName": {
+            "type": "string"
+        },
+        "resourceid": {
+            "type": "String"
+        },
+        "settingName": {
+            "type": "String"
+        },
+        "autoScaleMaxCapacity": {
+            "type": "int"
+        }
+    },
+    "variables": {
+        "vnetId": "[concat(resourceGroup().id, '/providers/Microsoft.Network/virtualNetworks/', parameters('virtualnetworkname'))]",
+        "publicIPRef": "[concat(resourceGroup().id, '/providers/Microsoft.Network/publicIPAddresses/', parameters('publicIPAddressesName'))]",
+        "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]",
+        "applicationGatewayId": "[resourceId('Microsoft.Network/applicationGateways', parameters('applicationGatewayName'))]"
+    },
+    "resources": [
+        {
+            "name": "[parameters('applicationGatewayName')]",
+            "type": "Microsoft.Network/applicationGateways",
+            "apiVersion": "2019-09-01",
+            "location": "[parameters('location')]",
+            "resources": [
+                {
+                    "type": "Microsoft.Network/applicationGateways/providers/diagnosticSettings",
+                    "apiVersion": "2017-05-01-preview",
+                    "name": "[concat(parameters('applicationGatewayName'),'/microsoft.insights/', parameters('settingName'))]",
+                    "location": "[parameters('location')]",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Network/applicationGateways/', parameters('applicationGatewayName'))]"
+                    ],
+                    "properties": {
+                        "name": "[parameters('settingName')]",
+                        "workspaceId": "[parameters('resourceid')]",
+                        "logs": [
+                            {
+                                "category": "ApplicationGatewayAccessLog",
+                                "enabled": true
+                            },
+                            {
+                                "category": "ApplicationGatewayPerformanceLog",
+                                "enabled": true
+                            },
+                            {
+                                "category": "ApplicationGatewayFirewallLog",
+                                "enabled": true
+                            }
+                        ],
+                        "metrics": [
+                            {
+                                "category": "AllMetrics",
+                                "enabled": true
+                            }
+                        ]
+                    }
+                }
+            ],
+            "zones": "[parameters('zones')]",
+            "dependsOn": [],
+            "tags": "[parameters('tagsArray')]",
+            "properties": {
+                "sku": {
+                    "name": "[parameters('skuSize')]",
+                    "tier": "[parameters('tier')]"
+                },
+                "gatewayIPConfigurations": [
+                    {
+                        "name": "appGatewayIpConfig",
+                        "properties": {
+                            "subnet": {
+                                "id": "[variables('subnetRef')]"
+                            }
+                        }
+                    }
+                ],
+                "sslCertificates": [
+                    {
+                        "name": "public-https-listener",
+                        "properties": {
+                            "keyVaultSecretId": "[reference(resourceId('Microsoft.KeyVault/vaults/secrets', parameters('keyVaultName'), parameters('sslCertName')), '2018-02-14').secretUriWithVersion]"
+                        }
+                    }
+                ],
+                "frontendIPConfigurations": [
+                    {
+                        "name": "appGwPublicFrontendIp",
+                        "properties": {
+                            "PublicIPAddress": {
+                                "id": "[variables('publicIPRef')]"
+                            }
+                        }
+                    },
+                    {
+                        "name": "appGwPrivateFrontendIp",
+                        "properties": {
+                            "subnet": {
+                                "id": "[variables('subnetRef')]"
+                            },
+                            "privateIPAddress": "[parameters('privateIpAddress')]",
+                            "privateIPAllocationMethod": "Static"
+                        }
+                    }
+                ],
+                "frontendPorts": [
+                    {
+                        "name": "port_80",
+                        "properties": {
+                            "port": 80
+                        }
+                    },
+                    {
+                        "name": "port_443",
+                        "properties": {
+                            "port": 443
+                        }
+                    }
+                ],
+                "backendAddressPools": [
+                    {
+                        "name": "apim-pool",
+                        "properties": {
+                            "backendAddresses": [
+                                {
+                                    "fqdn": "[parameters('fqdnname')]"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "backendHttpSettingsCollection": [
+                    {
+                        "name": "apim-port-443-http-setting",
+                        "properties": {
+                            "Port": 443,
+                            "Protocol": "Https",
+                            "cookieBasedAffinity": "Disabled",
+                            "requestTimeout": "[parameters('requesttimeout')]",
+                            "pickHostNameFromBackendAddress": true,
+                            "probe": {
+                                "id": "[concat(variables('applicationGatewayId'), '/probes/apim-backend-probe')]"
+                            }
+                        }
+                    }
+                ],
+                "httpListeners": [
+                    {
+                        "name": "public-https-listener",
+                        "properties": {
+                            "frontendIPConfiguration": {
+                                "id": "[concat(variables('applicationGatewayId'), '/frontendIPConfigurations/appGwPublicFrontendIp')]"
+                            },
+                            "frontendPort": {
+                                "id": "[concat(variables('applicationGatewayId'), '/frontendPorts/port_443')]"
+                            },
+                            "protocol": "Https",
+                            "sslCertificate": {
+                                "id": "[concat(variables('applicationGatewayId'), '/sslCertificates/public-https-listener')]"
+                            },
+                            "hostName": "[parameters('apigatewayhostname')]",
+                            "requireServerNameIndication": true
+                        }
+                    }
+                ],
+                "requestRoutingRules": [
+                    {
+                        "Name": "ttm-apis-routing-rule",
+                        "properties": {
+                            "ruleType": "PathBasedRouting",
+                            "httpListener": {
+                                "id": "[concat(variables('applicationGatewayId'), '/httpListeners/public-https-listener')]"
+                            },
+                            "urlPathMap": {
+                                "id": "[concat(variables('applicationGatewayId'), '/urlPathMaps/ttm-apis-routing-rule')]"
+                            }
+                        }
+                    }
+                ],
+                "enableHttp2": false,
+                "sslPolicy": {
+                    "policyType": "Predefined",
+                    "policyName": "AppGwSslPolicy20170401S"
+                },
+
+                "probes": [
+                    {
+                        "name": "apim-backend-probe",
+                        "properties": {
+                            "protocol": "Https",
+                            "path": "/status-0123456789abcdef",
+                            "interval": 30,
+                            "timeout": 30,
+                            "unhealthyThreshold": 3,
+                            "pickHostNameFromBackendHttpSettings": true,
+                            "minServers": 0,
+                            "match": {}
+                        }
+                    }
+                ],
+                "autoscaleConfiguration": {
+                    "minCapacity": "[parameters('capacity')]",
+                    "maxCapacity": "[parameters('autoScaleMaxCapacity')]"
+                },
+                "urlPathMaps": [
+                    {
+                        "name": "ttm-apis-routing-rule",
+                        "properties": {
+                            "pathRules": [
+                                {
+                                    "name": "ttm-insights-api-target",
+                                    "properties": {
+                                        "paths": [
+                                            "/insights/*"
+                                        ],
+                                        "backendAddressPool": {
+                                            "id": "[concat(variables('applicationGatewayId'), '/backendAddressPools/apim-pool')]"
+                                        },
+                                        "backendHttpSettings": {
+                                            "id": "[concat(variables('applicationGatewayId'), '/backendHttpSettingsCollection/apim-port-443-http-setting')]"
+                                        }
+                                    }
+                                }
+                            ],
+                            "defaultBackendAddressPool": {
+                                "id": "[concat(variables('applicationGatewayId'), '/backendAddressPools/apim-pool')]"
+                            },
+                            "defaultBackendHttpSettings": {
+                                "id": "[concat(variables('applicationGatewayId'), '/backendHttpSettingsCollection/apim-port-443-http-setting')]"
+                            }
+                        }
+                    }
+                ]
+            },
+            "identity": {
+                "type": "UserAssigned",
+                "userAssignedIdentities": {
+                    "[parameters('managedIdentity')]": {}
+                }
+            }
+        }
+    ]
+}
