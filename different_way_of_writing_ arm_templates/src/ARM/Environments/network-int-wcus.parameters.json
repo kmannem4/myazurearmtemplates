@@ -1,0 +1,47 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "networkSecurityGroupName": {
+        "value": "tm-wcus-otmapp-nsg-i01"
+      },
+      "vnetSettings": {
+        "value": {
+          "name": "tm-wcus-otmapp-vnet-i01",
+          "addressSpace": "10.97.80.0/20",
+          "otmappsisenseSubnetAddessPrefix": "10.97.80.0/24",
+          "otmappsisenseSubnetName": "tm-wcus-otmappsisense-sn-i01",
+          "otmappsqlSubnetAddessPrefix": "10.97.81.0/24",
+          "otmappsqlSubnetName": "tm-wcus-otmappsql-sn-i01",
+          "bastionSubnetAddessPrefix": "10.97.82.0/26",
+          "bastionSubnetName": "AzureBastionSubnet",
+          "otmappservicesd01SubnetAddessPrefix": "10.97.83.0/24",
+          "otmappservicesd01SubnetName": "tm-wcus-otmappservices-sn-i01",
+          "otmappservicesd02AddessPrefix": "10.97.84.0/24",
+          "otmappservicesd02SubnetName": "tm-wcus-otmappservices-sn-i02"
+        }
+      },
+      "location": {
+        "value": "westcentralus"
+      },
+      "resourceid": {
+        "value": "/subscriptions/43c5a646-c00c-4c59-a332-df854c5dd08c/resourcegroups/co-wus2-enterprisemonitor-rg-s01/providers/microsoft.operationalinsights/workspaces/amn-co-wus2-enterprisemonitor-loga-p01"
+      },
+      "nsgsettingName": {
+        "value": "medefis-nsg-wcus-diagset-i01"
+      },
+      "vnetsettingName": {
+        "value": "medefis-vnet-wcus-diagset-i01"
+      },
+      "delegationsname": {
+        "value": "Microsoft.Web/serverFarms"
+      },
+      "tagsArray": {
+        "value": {
+          "charge-to": "101-71200-5000-9500",
+          "role": "infrastructure",
+          "environment": "int"
+        }
+      }
+    }
+  }

@@ -1,0 +1,152 @@
+{
+  "location": "westus2",
+  "tags": {
+    "environment": "dev",
+    "role": "vms",
+    "charge-to": "810-58450-0000-0000",
+    "application": "medefis"
+  },
+  "vnet": {
+    "rgName": "tm-wus2-otmapp-rg-d01",
+    "name": "tm-wus2-otmapp-vnet-d01",
+    "subnet01Name": "tm-wus2-otmappservices-sn-d01",
+    "subnet02Name": "tm-wus2-otmappservices-sn-d02",
+    "subnet03Name": "tm-wus2-otmappsisense-sn-d01"
+  },
+  "appi": {
+    "name": "tm-wus2-otmapp-appinsights-d01",
+    "logAnalytics": {
+      "subId": "43c5a646-c00c-4c59-a332-df854c5dd08c",
+      "rg": "amn-co-wus2-enterprisemonitor-rg-d01",
+      "name": "amn-co-wus2-enterprisemonitor-loga-d01"
+    }
+  },
+  "kv": {
+    "name": "tm-wus2-otmapp-kv-d01",
+    "sku": "Standard",
+    "adminObjectId": "8854cb1e-f3ad-404d-8231-ea6cd5153807",
+    "adminObjectId2": "def7b55d-b857-4eee-a807-2e372ddbec5f"
+  },
+  "plan01": {
+    "name": "tm-wus2-otmapp-aspl-d01",
+    "sku": {
+      "name": "PremiumV2",
+      "code": "P1v2"
+    },
+    "worker": {
+      "size": "3",
+      "sizeId": "3",
+      "number": "4"
+    }
+  },
+  "plan02": {
+    "name": "tm-wus2-otmapp-aspl-d02",
+    "sku": {
+      "name": "PremiumV2",
+      "code": "P1v2"
+    },
+    "worker": {
+      "size": "3",
+      "sizeId": "3",
+      "number": "1"
+    }
+  },
+  "app01": {
+    "name": "tm-wus2-otmappvmsapi-as-d01",
+    "currentStack": "dotnet",
+    "netFrameworkVersion": "v4.0",
+    "tags": {
+      "service-name": "medefis-api"
+    }
+  },
+  "app02": {
+    "name": "tm-wus2-otmappweb-as-d01",
+    "currentStack": "dotnet",
+    "netFrameworkVersion": "v4.0",
+    "tags": {
+      "service-name": "medefis-web"
+    }
+  },
+  "app03": {
+    "name": "tm-wus2-otmappidentity-as-d01",
+    "currentStack": "dotnet",
+    "netFrameworkVersion": "v4.0",
+    "corsSupportCredentials": true,
+    "tags": {
+      "service-name": "medefis-identity"
+    }
+  },
+  "app04": {
+    "name": "tm-wus2-otmappagencyapi-as-d01",
+    "currentStack": "dotnet",
+    "netFrameworkVersion": "v4.0",
+    "tags": {
+      "service-name": "medefis-external-api"
+    }
+  },
+  "app05": {
+    "name": "tm-wus2-otmappvmsui-as-d01",
+    "currentStack": "node",
+    "nodeVersion": "12.13.0",
+    "tags": {
+      "service-name": "medefis-react-web"
+    }
+  },
+  "storage": {
+    "name": "tmwus2otmappsad01",
+    "skuName": "Standard_LRS",
+    "containerName": "demo1aaa",
+    "secrets": {
+      "keyName": "sec-storage-key",
+      "endpointName": "sec-storage-endpoint"
+    }
+  },
+  "storage-static": {
+    "name": "tmwus2otmappvmsuisad01",
+    "skuName": "Standard_RAGRS",
+    "containerName": "$web",
+    "secrets": {
+      "keyName": "sec-storage-static-key",
+      "endpointName": "sec-storage-static-endpoint"
+    }
+  },
+  "sql": {
+    "name": "tm-wus2-otmapp-sql-d01",
+    "firewallRulesName": "AllowAllWindowsAzureIps",
+    "adminUsername": "amnadmin",
+    "vnetRuleName": "tm-wus2-otmapp-vnr-d01",
+    "db": {
+      "name": "tm-wus2-otmapp-db-d01",
+      "tier": "Standard",
+      "sku": "S3"
+    }
+  },
+  "vm01": {
+    "name": "tmwus2winsvcd01",
+    "nicName": "tm-wus2-winsvc-nic-d01",
+    "nsg": {
+      "name": "tm-wus2-winsvc-nsg-d01"
+    },
+    "pip": {
+      "name": "tm-wus2-winsvc-pip-d01",
+      "addressType": "Dynamic",
+      "sku": "Basic"
+    },
+    "osDiskType": "Premium_LRS",
+    "size": "Standard_D4s_v3",
+    "adminUserName": "amnadmin",
+    "patchMode": "AutomaticByOS",
+    "autoShutdown": {
+      "status": "Enabled",
+      "time": "19:00",
+      "timeZone": "Pacific Standard Time",
+      "notification": {
+        "status": "Enabled",
+        "locale": "en",
+        "email": "Andrew.Stephens@amnhealthcare.com"
+      }
+    },
+    "kvSecretName": "sec-winsvc-vm-password",
+    "kvCertName": "Medefis-Dev-Wildcard-Cert-2028"
+  }
+}

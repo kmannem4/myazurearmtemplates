@@ -1,0 +1,29 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "name": {
+      "value": "__appi.name__"
+    },
+    "logAnalyticsSubId": {
+      "value":"__appi.logAnalytics.subId__"
+    },
+    "logAnalyticsRg": {
+      "value":"__appi.logAnalytics.rg__"
+    },
+    "logAnalyticsName": {
+      "value":"__appi.logAnalytics.name__"
+    },
+    "tags": {
+      "value": {
+        "environment": "__tags.environment__",
+        "role": "__tags.role__",
+        "charge-to": "__tags.charge-to__",
+        "application": "__tags.application__"
+      }
+    },
+    "kvName": {
+      "value": "__kv.name__"
+    }
+  }
+}

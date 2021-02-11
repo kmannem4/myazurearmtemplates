@@ -1,0 +1,251 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "location": {
+        "type": "string"
+      },
+      "networkSecurityGroupName": {
+        "type": "string"
+      },
+      "vnetSettings": {
+        "type": "object"
+      },
+      "resourceid": {
+        "type": "String"
+      },
+      "nsgsettingName": {
+        "type": "String"
+      },
+      "vnetsettingName": {
+        "type": "String"
+      },
+      "delegationsname": {
+        "type": "string"
+      },
+      "tagsArray": {
+        "type": "object"
+      }
+    },
+    "variables": {
+    },
+    "resources": [
+      {
+        "type": "Microsoft.Network/networkSecurityGroups",
+        "name": "[parameters('networkSecurityGroupName')]",
+        "apiVersion": "2020-05-01",
+        "location": "[parameters('location')]",
+        "tags": "[parameters('tagsArray')]",
+        "resources": [
+          {
+            "type": "Microsoft.Network/networkSecurityGroups/providers/diagnosticSettings",
+            "apiVersion": "2017-05-01-preview",
+            "name": "[concat(parameters('networkSecurityGroupName'),'/microsoft.insights/', parameters('nsgsettingName'))]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+              "[resourceId('Microsoft.Network/networkSecurityGroups/', parameters('networkSecurityGroupName'))]"
+            ],
+            "properties": {
+              "name": "[parameters('nsgsettingName')]",
+              "workspaceId": "[parameters('resourceid')]",
+              "logs": [
+                {
+                  "category": "NetworkSecurityGroupEvent",
+                  "enabled": true
+                },
+                {
+                  "category": "NetworkSecurityGroupRuleCounter",
+                  "enabled": true
+                }
+              ]
+            }
+          }
+        ],
+        "properties": {
+          "securityRules": []
+        }
+      },
+      {
+        "type": "Microsoft.Network/virtualNetworks",
+        "name": "[parameters('vnetSettings').name]",
+        "apiVersion": "2020-05-01",
+        "location": "[parameters('location')]",
+        "tags": "[parameters('tagsArray')]",
+        "resources": [
+          {
+            "type": "Microsoft.Network/virtualNetworks/providers/diagnosticSettings",
+            "apiVersion": "2017-05-01-preview",
+            "name": "[concat(parameters('vnetSettings').name,'/microsoft.insights/', parameters('vnetsettingName'))]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+              "[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetSettings').name)]"
+            ],
+            "properties": {
+              "name": "[parameters('vnetsettingName')]",
+              "workspaceId": "[parameters('resourceid')]",
+              "logs": [
+                {
+                  "category": "VMProtectionAlerts",
+                  "enabled": true
+                }
+              ],
+              "metrics": [
+                {
+                  "category": "AllMetrics",
+                  "enabled": true
+                }
+              ]
+            }
+          }
+        ],
+        "properties": {
+          "addressSpace": {
+            "addressPrefixes": [
+              "[parameters('vnetSettings').addressSpace]"
+            ]
+          },
+          "dhcpOptions": {
+            "dnsServers": [
+            ]
+          },
+          "subnets": [
+            {
+              "type": "Microsoft.Network/virtualNetworks/subnets",
+              "name": "[parameters('vnetSettings').otmappsisenseSubnetName]",
+              "properties": {
+                "addressPrefix": "[parameters('vnetSettings').otmappsisenseSubnetAddessPrefix]",
+                "networkSecurityGroup": {
+                  "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+                },
+                "serviceEndpoints": [],
+                "delegations": [],
+                "privateEndpointNetworkPolicies": "Disabled",
+                "privateLinkServiceNetworkPolicies": "Enabled"
+              }
+            },
+            {
+              "type": "Microsoft.Network/virtualNetworks/subnets",
+              "name": "[parameters('vnetSettings').otmappsqlSubnetName]",
+              "properties": {
+                "addressPrefix": "[parameters('vnetSettings').otmappsqlSubnetAddessPrefix]",
+                "networkSecurityGroup": {
+                  "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+                },
+                "serviceEndpoints": [],
+                "delegations": [],
+                "privateEndpointNetworkPolicies": "Disabled",
+                "privateLinkServiceNetworkPolicies": "Enabled"
+              }
+            },
+            {
+              "type": "Microsoft.Network/virtualNetworks/subnets",
+              "name": "[parameters('vnetSettings').bastionSubnetName]",
+              "properties": {
+                "addressPrefix": "[parameters('vnetSettings').bastionSubnetAddessPrefix]",
+                "serviceEndpoints": [],
+                "delegations": [],
+                "privateEndpointNetworkPolicies": "Disabled",
+                "privateLinkServiceNetworkPolicies": "Enabled"
+              }
+            },
+            {
+              "type": "Microsoft.Network/virtualNetworks/subnets",
+              "name": "[parameters('vnetSettings').otmappservicesd01SubnetName]",
+              "properties": {
+                "addressPrefix": "[parameters('vnetSettings').otmappservicesd01SubnetAddessPrefix]",
+                "networkSecurityGroup": {
+                  "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+                },
+                "serviceEndpoints": [
+                  {
+                    "service": "Microsoft.Web",
+                    "locations": [
+                      "*"
+                    ]
+                  },
+                  {
+                    "service": "Microsoft.KeyVault",
+                    "locations": [
+                      "*"
+                    ]
+                  },
+                  {
+                    "service": "Microsoft.Sql",
+                    "locations": [
+                      "*"
+                    ]
+                  },
+                  {
+                    "service": "Microsoft.Storage",
+                    "locations": [
+                      "westus2",
+                      "westcentralus"
+                    ]
+                  }
+                ],
+                "delegations": [
+                  {
+                    "name": "[parameters('delegationsname')]",
+                    "properties": {
+                      "serviceName": "Microsoft.Web/serverFarms"
+                    }
+                  }
+                ],
+                "privateEndpointNetworkPolicies": "Disabled",
+                "privateLinkServiceNetworkPolicies": "Enabled"
+              }
+            },
+            {
+              "type": "Microsoft.Network/virtualNetworks/subnets",
+              "name": "[parameters('vnetSettings').otmappservicesd02SubnetName]",
+              "properties": {
+                "addressPrefix": "[parameters('vnetSettings').otmappservicesd02AddessPrefix]",
+                "networkSecurityGroup": {
+                  "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+                },
+                "serviceEndpoints": [
+                  {
+                    "service": "Microsoft.Web",
+                    "locations": [
+                      "*"
+                    ]
+                  },
+                  {
+                    "service": "Microsoft.KeyVault",
+                    "locations": [
+                      "*"
+                    ]
+                  },
+                  {
+                    "service": "Microsoft.Sql",
+                    "locations": [
+                      "*"
+                    ]
+                  },
+                  {
+                    "service": "Microsoft.Storage",
+                    "locations": [
+                      "westus2",
+                      "westcentralus"
+                    ]
+                  }
+                ],
+                "delegations": [
+                  {
+                    "name": "[parameters('delegationsname')]",
+                    "properties": {
+                      "serviceName": "Microsoft.Web/serverFarms"
+                    }
+                  }
+                ],
+                "privateEndpointNetworkPolicies": "Disabled",
+                "privateLinkServiceNetworkPolicies": "Enabled"
+              }
+            }
+          ],
+          "enableDdosProtection": false,
+          "enableVmProtection": false
+        }
+      }
+    ]
+  }

@@ -1,0 +1,158 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "name": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the App Service"
+      }
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Location for all resources"
+      }
+    },
+    "tags": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "Specifies tags, if any, for this resource."
+      }
+    },
+    "alwaysOn": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Whether the service is always on."
+      }
+    },
+    "corsAllowedOrigins": {
+      "type": "array",
+      "defaultValue": [ "*" ]
+    },
+    "corsSupportCredentials": {
+      "type": "bool",
+      "defaultValue": false
+    },
+    "planName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the App Service Plan."
+      }
+    },
+    "appiName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the App Insights instance."
+      }
+    },
+    "currentStack": {
+      "type": "string",
+      "metadata": {
+        "description": "Runtime Stack for the service"
+      }
+    },
+    "netFrameworkVersion": {
+      "type": "string",
+      "defaultValue": "v4.0",
+      "metadata": {
+        "description": "dotNet Framework Version if stack is .Net"
+      }
+    },
+    "nodeVersion": {
+      "type": "string",
+      "defaultValue": "12.13.0",
+      "metadata": {
+        "description": "Node Version if stack is Node"
+      }
+    },
+    "vnetRgName": {
+      "type": "string",
+      "metadata": {
+        "description": "Resource Group Name for the Vnet"
+      }
+    },
+    "vnetName": {
+      "type": "string",
+      "metadata": {
+        "description": "Virtual Network Name"
+      }
+    },
+    "subnetName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the subnet."
+      }
+    }
+  },
+  "variables": {
+    "subnetRef": "[resourceID(parameters('vnetRGName'), 'Microsoft.Network/virtualNetWorks/subnets', parameters('vnetName'), parameters('subnetName'))]"
+  },
+  "resources": [
+    {
+      "apiVersion": "2020-06-01",
+      "name": "[parameters('name')]",
+      "type": "Microsoft.Web/sites",
+      "location": "[parameters('location')]",
+      "tags": "[if(empty(parameters('tags')), json('null'), parameters('tags'))]",
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "properties": {
+        "name": "[parameters('name')]",
+        "siteConfig": {
+          "appSettings": [
+            {
+              "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
+              "value": "[reference(resourceId('microsoft.insights/components', parameters('appiName')), '2020-02-02-preview').InstrumentationKey]"
+            },
+            {
+              "name": "APPLICATIONINSIGHTS_CONNECTION_STRING",
+              "value": "[reference(resourceId('microsoft.insights/components', parameters('appiName')), '2020-02-02-preview').ConnectionString]"
+            },
+            {
+              "name": "ApplicationInsightsAgent_EXTENSION_VERSION",
+              "value": "~2"
+            },
+            {
+              "name": "XDT_MicrosoftApplicationInsights_Mode",
+              "value": "default"
+            }
+          ],
+          "metadata": [
+            {
+              "name": "CURRENT_STACK",
+              "value": "[parameters('currentStack')]"
+            }
+          ],
+          "netFrameworkVersion": "[parameters('netFrameworkVersion')]",
+          "nodeVersion": "[parameters('nodeVersion')]",
+          "alwaysOn": "[parameters('alwaysOn')]",
+          "cors": {
+            "allowedOrigins": "[parameters('corsAllowedOrigins')]",
+            "supportCredentials": "[parameters('corsSupportCredentials')]"
+          }
+        },
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('planName'))]",
+        "clientAffinityEnabled": true
+      },
+      "resources": [
+        {
+          "type": "networkConfig",
+          "apiVersion": "2020-06-01",
+          "name": "virtualNetwork",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('name'))]"
+          ],
+          "properties": {
+            "subnetResourceId": "[variables('subnetRef')]",
+            "isSwift": true
+          }
+        }
+      ]
+    }
+  ]
+}

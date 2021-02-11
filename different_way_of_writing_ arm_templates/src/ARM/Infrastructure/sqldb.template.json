@@ -1,0 +1,196 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "name": {
+      "type": "string",
+      "metadata": {
+        "description": "Name for the SQL Server instance"
+      }
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Location for all resources"
+      }
+    },
+    "tags": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "Specifies tags, if any, for this resource."
+      }
+    },
+    "firewallRulesName": {
+      "defaultValue": "AllowAllWindowsAzureIps",
+      "type": "string",
+      "metadata": {
+        "description": "Name for the firewall rules."
+      }
+    },
+    "sqlAdminUsername": {
+      "type": "string",
+      "metadata": {
+        "description": "User name for the SQL admin."
+      }
+    },
+    "sqlAdminPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "Password for the SQL admin."
+      }
+    },
+    "dbName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the database"
+      }
+    },
+    "dbTier": {
+      "type": "string",
+      "metadata": {
+        "description": "Database Tier"
+      }
+    },
+    "dbSku": {
+      "type": "string",
+      "metadata": {
+        "description": "Database SKU"
+      }
+    },
+    "kvName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the KeyVault"
+      }
+    },
+    "vnetRuleName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the Vnet Rule."
+      }
+    },
+    "vnetRgName": {
+      "type": "string",
+      "metadata": {
+        "description": "Resource Group Name for the Vnet"
+      }
+    },
+    "vnetName": {
+      "type": "string",
+      "metadata": {
+        "description": "Virtual Network Name"
+      }
+    },
+    "subnetName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the subnet."
+      }
+    }
+  },
+  "variables": {
+    "collation": "SQL_Latin1_General_CP1_CI_AS",
+    "subnetRef": "[resourceID(parameters('vnetRGName'), 'Microsoft.Network/virtualNetWorks/subnets', parameters('vnetName'), parameters('subnetName'))]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Sql/servers",
+      "apiVersion": "2020-02-02-preview",
+      "name": "[parameters('name')]",
+      "location": "[parameters('location')]",
+      "tags": "[if(empty(parameters('tags')), json('null'), parameters('tags'))]",
+      "kind": "v12.0",
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "properties": {
+        "administratorLogin": "[parameters('sqlAdminUsername')]",
+        "administratorLoginPassword": "[parameters('sqlAdminPassword')]",
+        "version": "12.0"
+      },
+      "resources": [
+        {
+          "type": "firewallRules",
+          "apiVersion": "2020-02-02-preview",
+          "dependsOn": [
+            "[parameters('name')]"
+          ],
+          "location": "[parameters('location')]",
+          "name": "[parameters('firewallRulesName')]",
+          "properties": {
+            "endIpAddress": "0.0.0.0",
+            "startIpAddress": "0.0.0.0"
+          }
+        },
+        {
+          "type": "Microsoft.Sql/servers/virtualNetworkRules",
+          "apiVersion": "2015-05-01-preview",
+          "name": "[concat(parameters('name'), '/', parameters('vnetRuleName'))]",
+          "dependsOn": [
+            "[resourceId('Microsoft.Sql/servers', parameters('name'))]"
+          ],
+          "properties": {
+            "virtualNetworkSubnetId": "[variables('subnetRef')]",
+            "ignoreMissingVnetServiceEndpoint": false
+          }
+        }
+      ]
+    },
+    {
+      "type": "Microsoft.Sql/servers/databases",
+      "kind": "v12.0,user",
+      "apiVersion": "2020-08-01-preview",
+      "name": "[concat(parameters('name'), '/', parameters('dbname'))]",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[parameters('name')]"
+      ],
+      "sku": {
+        "name": "[parameters('dbSku')]",
+        "tier": "[parameters('dbTier')]"
+      },
+      "properties": {
+        "maxSizeBytes": 268435456000,
+        "collation": "[variables('collation')]"
+      }
+    },
+    {
+      "type": "Microsoft.KeyVault/vaults/secrets",
+      "name": "[concat(parameters('kvName'),'/', 'sec-', parameters('dbName'), '-connection-string')]",
+      "apiVersion": "2019-09-01",
+      "dependsOn": [
+        "[parameters('dbName')]"
+      ],
+      "properties": {
+        "value": "[concat('Server=tcp:',reference(parameters('name')).fullyQualifiedDomainName,',1433;Initial Catalog=',parameters('dbName'),';Persist Security Info=False;User ID=',reference(parameters('name')).administratorLogin,';Password=',parameters('sqlAdminPassword'),';MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;')]"
+      }
+    },
+    {
+      "type": "Microsoft.KeyVault/vaults/secrets",
+      "name": "[concat(parameters('kvName'),'/', 'sec-sql-password')]",
+      "apiVersion": "2019-09-01",
+      "dependsOn": [
+        "[parameters('dbName')]"
+      ],
+      "properties": {
+        "value": "[parameters('sqlAdminPassword')]"
+      }
+    }
+  ],
+  "outputs": {
+    "sqlServerName": {
+      "type": "string",
+      "value": "[parameters('name')]"
+    },
+    "sqlServerUrl": {
+      "type": "string",
+      "value": "[reference(parameters('name')).fullyQualifiedDomainName]"
+    },
+    "sqlDBName": {
+      "type": "string",
+      "value": "[parameters('dbName')]"
+    }
+  }
+}

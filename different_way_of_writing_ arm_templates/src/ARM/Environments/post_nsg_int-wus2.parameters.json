@@ -1,0 +1,27 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "networkSecurityGroupName": {
+        "value": "tm-wus2-otmapp-nsg-i01"
+      },
+      "location": {
+        "value": "West US 2"
+      },
+      "outbounddestinations": {
+        "value": {
+          "storageregion": "Storage.WestUS2",
+          "sqlregion": "Sql.WestUS2",
+          "cosmosDBregion": "AzureCosmosDB.WestUS2",
+          "keyvaultregion": "AzureKeyVault.WestUS2"
+        }
+      },
+      "tagsArray": {
+        "value": {
+          "charge-to": "101-71200-5000-9500",
+          "role": "infrastructure",
+          "environment": "int"
+        }
+      }
+    }
+  }

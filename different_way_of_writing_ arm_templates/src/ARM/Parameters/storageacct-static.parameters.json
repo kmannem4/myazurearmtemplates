@@ -1,0 +1,35 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "name": {
+      "value": "__storage-static.name__"
+    },
+    "location": {
+      "value": "__location__"
+    },
+    "tags": {
+      "value": {
+        "environment": "__tags.environment__",
+        "role": "__tags.role__",
+        "charge-to": "__tags.charge-to__",
+        "application": "__tags.application__"
+      }
+    },
+    "skuName": {
+      "value": "__storage-static.skuName__"
+    },
+    "containerNameList": {
+      "value": ["__storage-static.containerName__"]
+    },
+    "kvName": {
+      "value": "__kv.name__"
+    },
+    "keySecretName": {
+      "value": "__storage-static.secrets.keyName__"
+    },
+    "endpointSecretName": {
+      "value": "__storage-static.secrets.endpointName__"
+    }
+  }
+}

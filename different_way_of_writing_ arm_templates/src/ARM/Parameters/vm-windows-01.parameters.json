@@ -1,0 +1,103 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "name": {
+      "value": "__vm01.name__"
+    },
+    "location": {
+      "value": "__location__"
+    },
+    "tags": {
+      "value": {
+        "environment": "__tags.environment__",
+        "role": "__tags.role__",
+        "charge-to": "__tags.charge-to__",
+        "application": "__tags.application__"
+      }
+    },
+    "nicName": {
+      "value": "__vm01.nicName__"
+    },
+    "nsgName": {
+      "value": "__vm01.nsg.name__"
+    },
+    "nsgRules": {
+      "value": [
+        {
+          "name": "RDP",
+          "properties": {
+            "priority": 300,
+            "protocol": "TCP",
+            "access": "Allow",
+            "direction": "Inbound",
+            "sourceAddressPrefix": "*",
+            "sourcePortRange": "*",
+            "destinationAddressPrefix": "*",
+            "destinationPortRange": "3389"
+          }
+        }
+      ]
+    },
+    "pipName": {
+      "value": "__vm01.pip.name__"
+    },
+    "pipAddressType": {
+      "value": "__vm01.pip.addressType__"
+    },
+    "pipSku": {
+      "value": "__vm01.pip.sku__"
+    },
+    "osDiskType": {
+      "value": "__vm01.osDiskType__"
+    },
+    "vmSize": {
+      "value": "__vm01.size__"
+    },
+    "adminUsername": {
+      "value": "__vm01.adminUserName__"
+    },
+    "adminPassword": {
+      "value": "__vm01.adminPassword__"
+    },
+    "patchMode": {
+      "value": "__vm01.patchMode__"
+    },
+    "autoShutdownStatus": {
+      "value": "__vm01.autoShutdown.status__"
+    },
+    "autoShutdownTime": {
+      "value": "__vm01.autoShutdown.time__"
+    },
+    "autoShutdownTimeZone": {
+      "value": "__vm01.autoShutdown.timeZone__"
+    },
+    "autoShutdownNotificationStatus": {
+      "value": "__vm01.autoShutdown.notification.status__"
+    },
+    "autoShutdownNotificationLocale": {
+      "value": "__vm01.autoShutdown.notification.locale__"
+    },
+    "autoShutdownNotificationEmail": {
+      "value": "__vm01.autoShutdown.notification.email__"
+    },
+    "vnetRgName": {
+      "value": "__vnet.rgName__"
+    },
+    "vnetName": {
+      "value": "__vnet.name__"
+    },
+    "subnetName": {
+      "value": "__vnet.subnet03Name__"
+    },
+    "kvName": {
+      "value": "__kv.name__"
+    },
+    "kvSecretName": {
+      "value": "__vm01.kvSecretName__"
+    },
+    "kvCertName": {
+      "value": "__vm01.kvCertName__"
+    }
+  }
+}

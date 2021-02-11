@@ -1,0 +1,206 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "name": {
+            "type": "string",
+            "metadata": {
+                "description": "Abbreviated Company Name"
+            }
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]",
+            "metadata": {
+                "description": "Location for all resources"
+            }
+        },
+        "tags": {
+            "type": "object",
+            "defaultValue": {},
+            "metadata": {
+                "description": "Specifies tags, if any, for this resource."
+            }
+        },
+        "sku": {
+            "type": "string",
+            "defaultValue": "Standard",
+            "allowedValues": [
+                "Standard",
+                "standard",
+                "Premium",
+                "premium"
+            ],
+            "metadata": {
+                "description": "SKU for the vault"
+            }
+        },
+        "objectId": {
+            "type": "string",
+            "metadata": {
+                "description": "Specifies the object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies. Get it by using Get-AzADUser or Get-AzADServicePrincipal cmdlets."
+            }
+        },
+        "keysPermissions": {
+            "type": "array",
+            "defaultValue": [
+                "Get",
+                "List",
+                "Update",
+                "Create",
+                "Import",
+                "Delete",
+                "Recover",
+                "Backup",
+                "Restore"
+            ],
+            "metadata": {
+                "description": "Specifies the permissions to keys in the vault. Valid values are: all, encrypt, decrypt, wrapKey, unwrapKey, sign, verify, get, list, create, update, import, delete, backup, restore, recover, and purge."
+            }
+        },
+        "secretsPermissions": {
+            "type": "array",
+            "defaultValue": [
+                "Get",
+                "List",
+                "Set",
+                "Delete",
+                "Recover",
+                "Backup",
+                "Restore"
+            ],
+            "metadata": {
+                "description": "Specifies the permissions to secrets in the vault. Valid values are: all, get, list, set, delete, backup, restore, recover, and purge."
+            }
+        },
+        "certPermissions": {
+            "type": "array",
+            "defaultValue": [
+                "Get",
+                "List",
+                "Update",
+                "Create",
+                "Import",
+                "Delete",
+                "Recover",
+                "Backup",
+                "Restore",
+                "ManageContacts",
+                "ManageIssuers",
+                "GetIssuers",
+                "ListIssuers",
+                "SetIssuers",
+                "DeleteIssuers"
+            ],
+            "metadata": {
+                "description": "Specifies the permissions to secrets in the vault. Valid values are: all, get, list, set, delete, backup, restore, recover, and purge."
+            }
+        },
+        "enabledForDeployment": {
+            "type": "bool",
+            "defaultValue": true
+        },
+        "enabledForTemplateDeployment": {
+            "type": "bool",
+            "defaultValue": true
+        },
+        "enabledForDiskEncryption": {
+            "type": "bool",
+            "defaultValue": true
+        },
+        "vnetRgName": {
+            "type": "string",
+            "metadata": {
+                "description": "Resource Group Name for the Vnet"
+            }
+        },
+        "vnetName": {
+            "type": "string",
+            "metadata": {
+                "description": "Virtual Network Name"
+            }
+        },
+        "subnetName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of the subnet."
+            }
+        },
+        "identityLoadCert": {
+            "type": "string",
+            "metadata": {
+                "description": "Value of the Identity Server Load Certificate"
+            }
+        }
+    },
+    "variables": {
+        "identitySecretName": "sec-identity-load-cert",
+        "resourceId": "[resourceId('Microsoft.KeyVault/vaults', parameters('name'))]",
+        "subnetRef": "[resourceID(parameters('vnetRGName'), 'Microsoft.Network/virtualNetWorks/subnets', parameters('vnetName'), parameters('subnetName'))]"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.KeyVault/vaults",
+            "apiVersion": "2019-09-01",
+            "name": "[parameters('name')]",
+            "location": "[parameters('location')]",
+            "tags": "[if(empty(parameters('tags')), json('null'), parameters('tags'))]",
+            "properties": {
+                "enabledForDeployment": "[parameters('enabledForDeployment')]",
+                "enabledForTemplateDeployment": "[parameters('enabledForTemplateDeployment')]",
+                "enabledForDiskEncryption": "[parameters('enabledForDiskEncryption')]",
+                "accessPolicies": [
+                    {
+                        "objectId": "[parameters('objectId')]",
+                        "tenantId": "[subscription().tenantId]",
+                        "permissions": {
+                            "keys": "[parameters('keysPermissions')]",
+                            "secrets": "[parameters('secretsPermissions')]",
+                            "certificates": "[parameters('certPermissions')]"
+                        }
+                    }
+                ],
+                "tenantId": "[subscription().tenantId]",
+                "sku": {
+                    "name": "[parameters('sku')]",
+                    "family": "A"
+                },
+                "networkAcls": {
+                    "defaultAction": "deny",
+                    "bypass": "AzureServices",
+                    "virtualNetworkRules": [
+                        {
+                            "id": "[variables('subnetRef')]",
+                            "ignoreMissingVnetServiceEndpoint": false
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Microsoft.KeyVault/vaults/secrets",
+            "name": "[concat(parameters('name'),'/',variables('identitySecretName'))]",
+            "apiVersion": "2019-09-01",
+            "dependsOn": [
+                "[variables('resourceId')]"
+            ],
+            "properties": {
+                "value": "[parameters('identityLoadCert')]"
+            }
+        }
+    ],
+    "outputs": {
+        "keyVaultName": {
+            "type": "string",
+            "value": "[parameters('name')]"
+        },
+        "keyVaultId": {
+            "type": "string",
+            "value": "[variables('resourceId')]"
+        },
+        "keyVaultUri": {
+            "type": "string",
+            "value": "[reference(variables('resourceId')).vaultUri]"
+        }
+    }
+}
