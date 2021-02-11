@@ -1,0 +1,37 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "appserviceplanname": {
+      "value": "amn-wus2-ttmstaff-aspl-t01"
+    },
+    "hostingEnvironment": {
+      "value": ""
+    },
+    "location": {
+      "value": "West US 2"
+    },
+    "sku": {
+      "value": "PremiumV2"
+    },
+    "skuCode": {
+      "value": "P1V2"
+    },
+    "workerSize": {
+      "value": "0"
+    },
+    "workerSizeId": {
+      "value": "0"
+    },
+    "numberOfWorkers": {
+      "value": "1"
+    },
+    "tagsArray": {
+      "value": {
+        "charge-to": "800-71200-0000-0000",
+        "role": "app",
+        "environment": "test"
+      }
+    }
+  }
+}

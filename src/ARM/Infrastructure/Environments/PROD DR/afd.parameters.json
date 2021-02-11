@@ -1,0 +1,112 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "frontDoorName": {
+            "value": "amn-wus2-hub-afd-p01"
+        },
+        "wafName": {
+            "value": "AMNHubFrontDoorWAFp01"
+        },
+        "apigatewayaddress": {
+            "value": "apigateway.ttm.amnhealthcare.com"
+        },
+        "DR_apigatewayaddress": {
+            "value": "apigateway-wcus.ttm.amnhealthcare.com"
+        },
+        "ttminsightsapiurl": {
+            "value": "api.ttm.amnhealthcare.com"
+        },
+        "ttminsightsuiurl": {
+            "value": "insights.shiftwise.net"
+        },
+        "ttmapibackendpoolname": {
+            "value": "ttm-api-backend-pool"
+        },
+        "ttminsightsuibackendpoolname": {
+            "value": "ttm-insights-ui-backend-pool"
+        },
+        "ttminsightsapiroutename": {
+            "value": "ttm-api-route"
+        },
+        "ttminsightsuiroutename": {
+            "value": "ttm-insights-ui-route"
+        },
+        "ttminsightsapiFrontendpointname": {
+            "value": "api-ttm-amnhealthcare-com"
+        },
+        "ttminsightsuiFrontendpointname": {
+            "value": "insights-shiftwise-net"
+        },
+        "amnoneurl": {
+            "value": "amnone.amnhealthcare.com"
+        },
+        "amnoneFrontendpointname": {
+            "value": "amnone-amnhealthcare-com"
+        },
+        "amnonebackendpoolname": {
+            "value": "amnone-backend-pool"
+        },
+        "amnoneroutename": {
+            "value": "amnone-route"
+        },
+        "amnoneurlappservice": {
+            "value": "cowus2amnonewebhostsap01.z5.web.core.windows.net"
+        },
+        "amnoneapiurl": {
+            "value": "amnone-api.amnhealthcare.com"
+        },
+        "amnoneapiFrontendpointname": {
+            "value": "amnone-api-amnhealthcare-com"
+        },
+        "amnoneapibackendpoolname": {
+            "value": "amnone-api-backend-pool"
+        },
+        "amnoneapiroutename": {
+            "value": "amnone-api-route"
+        },
+        "amnoneapiapigatewayaddress": {
+            "value": "apigateway-amnone.amnhealthcare.com"
+        },
+        "DR_amnoneapiapigatewayaddress": {
+            "value": "apigateway-wcus-amnone.amnhealthcare.com"
+        },
+        "location": {
+            "value": "global"
+        },
+        "primarystorageAccounturl": {
+            "value": "amnttminsightssap01.z5.web.core.windows.net"
+        },
+        "secondarystorageAccounturl": {
+            "value": "amnttminsightssap01-secondary.z5.web.core.windows.net"
+        },
+        "vaultResourceGroupName": {
+            "value": "amn-wus2-hub-rg-p01"
+        },
+        "keyVaultName": {
+            "value": "amn-wus2-hub-kv-p01"
+        },
+        "ttm_sslCertName": {
+            "value": "wildcard-ttm-amnhealthcare-com"
+        },
+        "amnone_sslCertName": {
+            "value": "wildcard-amnhealthcare-com"
+        },
+        "shiftwise_sslCertName": {
+            "value": "shiftwise-wildcard"
+        },
+        "resourceid": {
+            "value": "/subscriptions/43c5a646-c00c-4c59-a332-df854c5dd08c/resourcegroups/co-wus2-enterprisemonitor-rg-s01/providers/microsoft.operationalinsights/workspaces/amn-co-wus2-enterprisemonitor-loga-p01"
+        },
+        "settingName": {
+            "value": "amn-co-wus2-enterprisemonitor-loga-p01-hub-afd-diagset-p01"
+        },
+        "tagsArray": {
+            "value": {
+              "charge-to": "101-71200-5000-9500",
+              "role": "infrastructure",
+              "environment": "prod"
+            }
+        }
+    }
+}

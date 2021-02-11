@@ -8,6 +8,18 @@
     "subscriptionId": {
       "value": "95181a59-30e2-4faf-b8c7-993d85a7e640"
     },
+    "AMN_HUB_subscriptionId": {
+      "value": "e764d23e-759d-4cd4-8b5f-27e4c703f6a8"
+    },
+    "AMN_HUB_serverFarmResourceGroup": {
+      "value": "amn-wus2-hub-rg-q01"
+    },
+    "AMN_HUB_virtualNetworkName": {
+      "value": "amn-wus2-hub-vnet-q01"
+    },
+    "AMN_HUB_subnetname": {
+      "value": "amn-hub-apim-sn"
+    },
     "location": {
       "value": "West US 2"
     },
@@ -32,7 +44,13 @@
     "virtualNetworkName": {
       "value": "amn-wus2-ttm-vnet-q01"
     },
-    "identityName": {
+    "AMN_TTM_managedid_subscriptionId": {
+      "value": "95181a59-30e2-4faf-b8c7-993d85a7e640"
+    },
+    "AMN_TTM_managedid_serverFarmResourceGroup": {
+      "value": "amn-wus2-ttm-rg-q01"
+    },
+    "AMN_TTM_managedidentityName": {
       "value": "amn-wus2-ttm-as-mgid-q01"
     },
     "use32BitWorkerProcess": {

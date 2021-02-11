@@ -1,0 +1,34 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "appserviceplanname": {
+      "value": "amn-wus2-ttmsitemap-aspl-p01"
+    },
+    "appserviceplanautoscalename": {
+      "value": "amn-wus2-ttmsitemap-aspl-p01-autoscale"
+    },
+    "subscriptionId": {
+      "value": "8782ae00-c614-4937-9d81-7abbebb86482"
+    },
+    "serverFarmResourceGroup": {
+      "value": "amn-wus2-ttm-rg-p01"
+    },
+    "location": {
+      "value": "westus2"
+    },
+    "minCapacity": {
+      "value": "1"
+    },
+    "maxCapacity": {
+      "value": "3"
+    },
+    "tagsArray": {
+      "value": {
+        "charge-to": "800-71200-0000-0000",
+        "role": "app",
+        "environment": "prod"
+      }
+    }
+  }
+}

@@ -54,7 +54,7 @@
                 "publisherName": "[parameters('orgName')]",
                 "virtualNetworkType": "Internal",
                 "virtualNetworkConfiguration": {
-                "subnetResourceId": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('subnetname'))]",
+                    "subnetResourceId": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('subnetname'))]"
                 }
             },
             "resources": [
@@ -63,7 +63,7 @@
                     "type": "loggers",
                     "name": "[parameters('loggerName')]",
                     "dependsOn": [
-                        "[concat('Microsoft.ApiManagement/service/', parameters('apimname'))]"
+                        "[resourceId('Microsoft.ApiManagement/service/', parameters('apimname'))]"
                     ],
                     "properties": {
                         "loggerType": "applicationInsights",
@@ -78,11 +78,11 @@
                     "type": "diagnostics",
                     "name": "applicationinsights",
                     "dependsOn": [
-                        "[concat('Microsoft.ApiManagement/service/', parameters('apimname'))]",
-                        "[concat('Microsoft.ApiManagement/service/', parameters('apimname'), '/loggers/', parameters('loggerName'))]"
+                        "[resourceId('Microsoft.ApiManagement/service/', parameters('apimname'))]",
+                        "[resourceId('Microsoft.ApiManagement/service/loggers/', parameters('apimname'), parameters('loggerName'))]"
                     ],
                     "properties": {
-                        "loggerId": "[concat('/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/', parameters('apimname'), '/loggers/', parameters('loggerName'))]",
+                        "loggerId": "[resourceId('Microsoft.ApiManagement/service/loggers/', parameters('apimname'), parameters('loggerName'))]",
                         "alwaysLog": "allErrors",
                         "sampling": {
                             "percentage": 100,

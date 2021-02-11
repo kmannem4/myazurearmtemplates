@@ -1,0 +1,98 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": {
+      "value": "westus2"
+    },
+    "applicationGatewayName": {
+      "value": "amn-wus2-hub-agw-p01"
+    },
+    "tier": {
+      "value": "Standard_v2"
+    },
+    "skuSize": {
+      "value": "Standard_v2"
+    },
+    "capacity": {
+      "value": 1
+    },
+    "tagsArray": {
+      "value": {
+        "charge-to": "101-71200-5000-9500",
+        "role": "infrastructure",
+        "environment": "prod"
+      }
+    },
+    "virtualnetworkname": {
+      "value": "amn-wus2-hub-vnet-p01"
+    },
+    "subnetName": {
+      "value": "amn-hub-agw-sn"
+    },
+    "fqdnname": {
+      "value": "amn-wus2-hub-apim-p01.azure-api.net"
+    },
+    "apigatewayhostname": {
+      "value": "apigateway.ttm.amnhealthcare.com"
+    },
+    "apigatewayhostname-io": {
+      "value": "apigateway-ttm.amnhealthcare.io"
+    },
+    "amnoneapigatewayhostname": {
+      "value": "apigateway-amnone.amnhealthcare.com"
+    },
+    "amnoneapigatewayhostnameio": {
+      "value": "apigateway-amnone.amnhealthcare.io"
+    },
+    "matchapigatewayhostname": {
+      "value": "apigateway-match.amnhealthcare.io"
+    },
+    "amnone-ats-apigatewayhostname": {
+      "value": "apigateway-ats.amnhealthcare.io"
+    },
+    "requesttimeout": {
+      "value": "300"
+    },
+    "publicIPAddressesName": {
+      "value": "amn-wus2-hub-pip-p01"
+    },
+    "zones": {
+      "value": [
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    "privateIpAddress": {
+      "value": "10.96.16.68"
+    },
+    "managedIdentity": {
+      "value": "amn-wus2-hub-agw-mgid-p01"
+    },
+    "vaultResourceGroupName": {
+      "value": "amn-wus2-hub-rg-p01"
+    },
+    "keyVaultName": {
+      "value": "amn-wus2-hub-kv-p01"
+    },
+    "ttm_sslCertName": {
+      "value": "wildcard-ttm-amnhealthcare-com"
+    },
+    "amnonesslCertName": {
+      "value": "wildcard-amnhealthcare-com"
+    },
+    "amnonesslCertNameio": {
+      "value": "wildcard-amnhealthcare-io"
+    },
+    "resourceid": {
+      "value": "/subscriptions/43c5a646-c00c-4c59-a332-df854c5dd08c/resourcegroups/co-wus2-enterprisemonitor-rg-s01/providers/microsoft.operationalinsights/workspaces/amn-co-wus2-enterprisemonitor-loga-p01"
+    },
+    "settingName": {
+      "value": "amn-co-wus2-enterprisemonitor-loga-p01-hub-agw-diagset-p01"
+    },
+    "autoScaleMaxCapacity": {
+      "value": 10
+    }
+  }
+}

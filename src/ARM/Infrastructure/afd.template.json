@@ -1,68 +1,352 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
-    "parameters": {
-        "frontDoorName": {
-            "type": "string"
-        },
-        "wafName": {
-            "type": "string"
-        },
-        "apigatewayaddress": {
-            "type": "string"
-        },
-        "ttminsightsapiurl": {
-            "type": "string"
-        },
-        "ttminsightsuiurl": {
-            "type": "string"
-        },
-        "ttmapibackendpoolname": {
-            "type": "string"
-        },
-        "ttminsightsuibackendpoolname": {
-            "type": "string"
-        },
-        "ttminsightsapiroutename": {
-            "type": "string"
-        },
-        "ttminsightsuiroutename": {
-            "type": "string"
-        },
-        "ttminsightsapiFrontendpointname": {
-            "type": "string"
-        },
-        "ttminsightsuiFrontendpointname": {
-            "type": "string"
-        },
-        "location": {
-            "type": "string"
-        },
-        "primarystorageAccounturl": {
-            "type": "string"
-        },
-        "secondarystorageAccounturl": {
-            "type": "string"
-        },
-        "keyVaultName": {
-            "type": "string"
-        },
-        "qa_ttm_sslCertName": {
-            "type": "string"
-        },
-        "qa_shiftwise_sslCertName": {
-            "type": "string"
-        },
-        "resourceid": {
-            "type": "String"
-        },
-        "settingName": {
-            "type": "String"
-        },
-        "tagsArray": {
-            "type": "object"
-        }
+  "parameters": {
+    "frontDoorName": {
+      "type": "string"
     },
+    "wafName": {
+      "type": "string"
+    },
+    "apigatewayaddress": {
+      "type": "string"
+    },
+    "apigatewayaddressio": {
+      "type": "string"
+    },
+    "ttminsightsuiurl": {
+      "type": "string"
+    },
+    "ttminsightsuibackendpoolname": {
+      "type": "string"
+    },
+    "ttminsightsuiroutename": {
+      "type": "string"
+    },
+    "ttminsightsuiFrontendpointname": {
+      "type": "string"
+    },
+    "primarystorageAccounturl": {
+      "type": "string"
+    },
+    "secondarystorageAccounturl": {
+      "type": "string"
+    },
+    "ttmordersuiurl": {
+      "type": "string"
+    },
+    "ttmordersuibackendpoolname": {
+      "type": "string"
+    },
+    "ttmordersuiroutename": {
+      "type": "string"
+    },
+    "ttmordersuiFrontendpointname": {
+      "type": "string"
+    },
+    "ttmordersUI_primarystorageAccounturl": {
+      "type": "string"
+    },
+    "ttmordersUI_secondarystorageAccounturl": {
+      "type": "string"
+    },
+    "ttmsmuiurl": {
+      "type": "string"
+    },
+    "ttmsmuibackendpoolname": {
+      "type": "string"
+    },
+    "ttmsmuiroutename": {
+      "type": "string"
+    },
+    "ttmsmuiFrontendpointname": {
+      "type": "string"
+    },
+    "ttmsmUI_primarystorageAccounturl": {
+      "type": "string"
+    },
+    "ttmsmUI_secondarystorageAccounturl": {
+      "type": "string"
+    },
+    "ttminsightsapiurl": {
+      "type": "string"
+    },
+    "ttminsightsapiurlio": {
+      "type": "string"
+    },
+    "amnoneurl": {
+      "type": "string"
+    },
+    "amnoneFrontendpointname": {
+      "type": "string"
+    },
+    "amnonebackendpoolname": {
+      "type": "string"
+    },
+    "amnoneroutename": {
+      "type": "string"
+    },
+    "amnoneurlappservice": {
+      "type": "string"
+    },
+    "amnoneurlio": {
+      "type": "string"
+    },
+    "amnoneFrontendpointnameio": {
+      "type": "string"
+    },
+    "amnonebackendpoolnameio": {
+      "type": "string"
+    },
+    "amnoneroutenameio": {
+      "type": "string"
+    },
+    "amnonerdurl": {
+      "type": "string"
+    },
+    "amnonerdFrontendpointname": {
+      "type": "string"
+    },
+    "amnonerdbackendpoolname": {
+      "type": "string"
+    },
+    "amnonerdroutename": {
+      "type": "string"
+    },
+    "amnonerdurlappservice": {
+      "type": "string"
+    },
+    "amnoneapiurl": {
+      "type": "string"
+    },
+    "amnoneapiFrontendpointname": {
+      "type": "string"
+    },
+    "amnoneapibackendpoolname": {
+      "type": "string"
+    },
+    "amnoneapiroutename": {
+      "type": "string"
+    },
+    "amnoneapiapigatewayaddress": {
+      "type": "string"
+    },
+    "amnoneapiurlio": {
+      "type": "string"
+    },
+    "amnoneapiFrontendpointnameio": {
+      "type": "string"
+    },
+    "amnoneapibackendpoolnameio": {
+      "type": "string"
+    },
+    "amnoneapiroutenameio": {
+      "type": "string"
+    },
+    "amnoneapiapigatewayaddressio": {
+      "type": "string"
+    },
+    "amnonerdapiurl": {
+      "type": "string"
+    },
+    "amnonerdapiFrontendpointname": {
+      "type": "string"
+    },
+    "amnonerdapibackendpoolname": {
+      "type": "string"
+    },
+    "amnonerdapiroutename": {
+      "type": "string"
+    },
+    "amnonerdapiapigatewayaddress": {
+      "type": "string"
+    },
+    "matchUIurl": {
+      "type": "string"
+    },
+    "matchUIFrontendpointname": {
+      "type": "string"
+    },
+    "matchUIroutename": {
+      "type": "string"
+    },
+    "matchapiurl": {
+      "type": "string"
+    },
+    "matchapiFrontendpointname": {
+      "type": "string"
+    },
+    "matchapibackendpoolname": {
+      "type": "string"
+    },
+    "matchapiroutename": {
+      "type": "string"
+    },
+    "matchapiapigatewayaddress": {
+      "type": "string"
+    },
+    "amnone_ats_UI_url": {
+      "type": "string"
+    },
+    "amnone_ats_UI_Frontendpointname": {
+      "type": "string"
+    },
+    "amnone_ats_match_UI_backendpoolname": {
+      "type": "string"
+    },
+    "amnone_ats_match_UI_routename": {
+      "type": "string"
+    },
+    "amnone_ats_match_UI_url": {
+      "type": "string"
+    },
+    "amnone_ats_API_url": {
+      "type": "string"
+    },
+    "amnone_ats_API_Frontendpointname": {
+      "type": "string"
+    },
+    "amnone_ats_match_API_backendpoolname": {
+      "type": "string"
+    },
+    "amnone_ats_match_API_routename": {
+      "type": "string"
+    },
+    "amnone_ats_API_apigatewayaddress": {
+      "type": "string"
+    },
+    "medefis_vms_UI_url": {
+      "type": "string"
+    },
+    "medefis_vms_UI_Frontendpointname": {
+      "type": "string"
+    },
+    "medefis_vms_UI_backendpoolname": {
+      "type": "string"
+    },
+    "medefis_vms_UI_routename": {
+      "type": "string"
+    },
+    "medefis_vms_UI_url_storage": {
+      "type": "string"
+    },
+    "medefis_mvc3_UI_url": {
+      "type": "string"
+    },
+    "medefis_mvc3_UI_Frontendpointname": {
+      "type": "string"
+    },
+    "medefis_mvc3_UI_backendpoolname": {
+      "type": "string"
+    },
+    "medefis_mvc3_UI_routename": {
+      "type": "string"
+    },
+    "medefis_mvc3_UI_url_storage": {
+      "type": "string"
+    },
+    "medefis_identity_url": {
+      "type": "string"
+    },
+    "medefis_identity_Frontendpointname": {
+      "type": "string"
+    },
+    "medefis_identity_backendpoolname": {
+      "type": "string"
+    },
+    "medefis_identity_routename": {
+      "type": "string"
+    },
+    "medefis_identity_url_storage": {
+      "type": "string"
+    },
+    "medefis_vms_API_url": {
+      "type": "string"
+    },
+    "medefis_vms_API_Frontendpointname": {
+      "type": "string"
+    },
+    "medefis_vms_API_backendpoolname": {
+      "type": "string"
+    },
+    "medefis_vms_API_routename": {
+      "type": "string"
+    },
+    "medefis_agency_API_url": {
+      "type": "string"
+    },
+    "medefis_agency_API_Frontendpointname": {
+      "type": "string"
+    },
+    "medefis_agency_API_backendpoolname": {
+      "type": "string"
+    },
+    "medefis_agency_API_routename": {
+      "type": "string"
+    },
+    "medefis_API_apigatewayaddress": {
+      "type": "string"
+    },
+    "ttmapibackendpoolname": {
+      "type": "string"
+    },
+    "ttmapibackendpoolnameio": {
+      "type": "string"
+    },
+    "ttminsightsapiroutename": {
+      "type": "string"
+    },
+    "ttminsightsapiroutenameio": {
+      "type": "string"
+    },
+    "ttminsightsapiFrontendpointname": {
+      "type": "string"
+    },
+    "ttminsightsapiFrontendpointnameio": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "vaultResourceGroupName": {
+      "type": "string"
+    },
+    "keyVaultName": {
+      "type": "string"
+    },
+    "ttm_sslCertName": {
+      "type": "string"
+    },
+    "amnone_sslCertName": {
+      "type": "string"
+    },
+    "amnone_sslCertName_io": {
+      "type": "string"
+    },
+    "medefis_sslCertName_io": {
+      "type": "string"
+    },
+    "shiftwise_sslCertName": {
+      "type": "string"
+    },
+    "resourceid": {
+      "type": "String"
+    },
+    "settingName": {
+      "type": "String"
+    },
+    "tagsArray": {
+      "type": "object"
+    }
+  },
+  "variables": {
+    "amnone_sslCertName": "[resourceId(subscription().subscriptionId, parameters('vaultResourceGroupName'), 'Microsoft.KeyVault/vaults/secrets', parameters('keyVaultName'), parameters('amnone_sslCertName'))]",
+    "amnone_sslCertName_io": "[resourceId(subscription().subscriptionId, parameters('vaultResourceGroupName'), 'Microsoft.KeyVault/vaults/secrets', parameters('keyVaultName'), parameters('amnone_sslCertName_io'))]",
+    "medefis_sslCertName_io": "[resourceId(subscription().subscriptionId, parameters('vaultResourceGroupName'), 'Microsoft.KeyVault/vaults/secrets', parameters('keyVaultName'), parameters('medefis_sslCertName_io'))]",
+    "ttm_sslCertName": "[resourceId(subscription().subscriptionId, parameters('vaultResourceGroupName'), 'Microsoft.KeyVault/vaults/secrets', parameters('keyVaultName'), parameters('ttm_sslCertName'))]",
+    "shiftwise_sslCertName": "[resourceId(subscription().subscriptionId, parameters('vaultResourceGroupName'), 'Microsoft.KeyVault/vaults/secrets', parameters('keyVaultName'), parameters('shiftwise_sslCertName'))]",
+    "keyvault": "[resourceId(subscription().subscriptionId, parameters('vaultResourceGroupName'), 'Microsoft.KeyVault/vaults/', parameters('keyVaultName'))]"
+  },
     "resources": [
         {
             "apiVersion": "2020-05-01",
@@ -105,225 +389,2077 @@
                 "friendlyName": "[parameters('frontDoorName')]",
                 "resourceState": "Enabled",
                 "enabledState": "Enabled",
-                "healthProbeSettings": [
-                    {
-                        "name": "healthProbeSettings1",
-                        "properties": {
-                            "path": "/",
-                            "protocol": "Https",
-                            "intervalInSeconds": 30,
-                            "healthProbeMethod": "Head",
-                            "resourceState": "Enabled",
-                            "enabledState": "Enabled"
-                        },
-                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettings1')]"
-                    }
-                ],
-                "loadBalancingSettings": [
-                    {
-                        "name": "loadBalancingSettings1",
-                        "properties": {
-                            "sampleSize": 4,
-                            "successfulSamplesRequired": 2,
-                            "resourceState": "Enabled",
-                            "additionalLatencyMilliseconds": 0
-                        },
-                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettings1')]"
-                    }
-                ],
-                "frontendEndpoints": [
-                    {
-                        "name": "[concat(parameters('frontDoorName'), '-azurefd-net')]",
-                        "properties": {
-                            "hostName": "[concat(parameters('frontDoorName'), '.azurefd.net')]",
-                            "sessionAffinityEnabledState": "Disabled",
-                            "sessionAffinityTtlSeconds": 0,
-                            "resourceState": "Enabled",
-                            "webApplicationFirewallPolicyLink": {
-                                "id": "[concat(resourceId('Microsoft.Network/FrontDoorWebApplicationFirewallPolicies', parameters('wafName')))]"
-                            },
-                            "customHttpsConfiguration": null
-                        },
-                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('frontDoorName'), '-azurefd-net'))]"
+              "healthProbeSettings": [
+                {
+                  "name": "healthProbeSettingsttm",
+                  "properties": {
+                    "path": "/",
+                    "protocol": "Https",
+                    "intervalInSeconds": 30,
+                    "healthProbeMethod": "Head",
+                    "resourceState": "Enabled",
+                    "enabledState": "Enabled"
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsttm')]"
+                },
+                {
+                  "name": "healthProbeSettingsttmapi",
+                  "properties": {
+                    "path": "/status-0123456789abcdef",
+                    "protocol": "Https",
+                    "intervalInSeconds": 30,
+                    "healthProbeMethod": "GET",
+                    "resourceState": "Enabled",
+                    "enabledState": "Enabled"
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsttmapi')]"
+                },
+                {
+                  "name": "healthProbeSettingsttmorders",
+                  "properties": {
+                    "path": "/",
+                    "protocol": "Https",
+                    "intervalInSeconds": 30,
+                    "healthProbeMethod": "Head",
+                    "resourceState": "Enabled",
+                    "enabledState": "Enabled"
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsttmorders')]"
+                },
+                {
+                  "name": "healthProbeSettingsttmsm",
+                  "properties": {
+                    "path": "/",
+                    "protocol": "Https",
+                    "intervalInSeconds": 30,
+                    "healthProbeMethod": "Head",
+                    "resourceState": "Enabled",
+                    "enabledState": "Enabled"
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsttmsm')]"
+                },
+                {
+                  "name": "healthProbeSettingsttmapiio",
+                  "properties": {
+                    "path": "/status-0123456789abcdef",
+                    "protocol": "Https",
+                    "intervalInSeconds": 30,
+                    "healthProbeMethod": "GET",
+                    "resourceState": "Enabled",
+                    "enabledState": "Enabled"
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsttmapiio')]"
+                },
+                {
+                  "name": "healthProbeSettingsamnone",
+                  "properties": {
+                    "path": "/",
+                    "protocol": "Https",
+                    "intervalInSeconds": 30,
+                    "healthProbeMethod": "Head",
+                    "resourceState": "Enabled",
+                    "enabledState": "Enabled"
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsamnone')]"
+                },
+                {
+                  "name": "healthProbeSettingsamnoneio",
+                  "properties": {
+                    "path": "/",
+                    "protocol": "Https",
+                    "intervalInSeconds": 30,
+                    "healthProbeMethod": "Head",
+                    "resourceState": "Enabled",
+                    "enabledState": "Enabled"
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsamnoneio')]"
+                },
+                {
+                  "name": "healthProbeSettingsamnoneapi",
+                  "properties": {
+                    "path": "/status-0123456789abcdef",
+                    "protocol": "Https",
+                    "intervalInSeconds": 30,
+                    "healthProbeMethod": "GET",
+                    "resourceState": "Enabled",
+                    "enabledState": "Enabled"
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsamnoneapi')]"
+                },
+                {
+                  "name": "healthProbeSettingsamnoneapiio",
+                  "properties": {
+                    "path": "/status-0123456789abcdef",
+                    "protocol": "Https",
+                    "intervalInSeconds": 30,
+                    "healthProbeMethod": "GET",
+                    "resourceState": "Enabled",
+                    "enabledState": "Enabled"
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsamnoneapiio')]"
+                },
+                {
+                  "name": "healthProbeSettingsamnonerd",
+                  "properties": {
+                    "path": "/",
+                    "protocol": "Https",
+                    "intervalInSeconds": 30,
+                    "healthProbeMethod": "Head",
+                    "resourceState": "Enabled",
+                    "enabledState": "Enabled"
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsamnonerd')]"
+                },
+                {
+                  "name": "healthProbeSettingsamnonerdapi",
+                  "properties": {
+                    "path": "/status-0123456789abcdef",
+                    "protocol": "Https",
+                    "intervalInSeconds": 30,
+                    "healthProbeMethod": "GET",
+                    "resourceState": "Enabled",
+                    "enabledState": "Enabled"
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsamnonerdapi')]"
+                },
+                {
+                  "name": "healthProbeSettingsmatchapi",
+                  "properties": {
+                    "path": "/status-0123456789abcdef",
+                    "protocol": "Https",
+                    "intervalInSeconds": 30,
+                    "healthProbeMethod": "GET",
+                    "resourceState": "Enabled",
+                    "enabledState": "Enabled"
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsmatchapi')]"
+                },
+                {
+                  "name": "healthProbeSettingsamnoneatsmatchUI",
+                  "properties": {
+                    "path": "/",
+                    "protocol": "Https",
+                    "intervalInSeconds": 30,
+                    "healthProbeMethod": "Head",
+                    "resourceState": "Enabled",
+                    "enabledState": "Enabled"
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsamnoneatsmatchUI')]"
+                },
+                {
+                  "name": "healthProbeSettingsamnoneatsmatchAPI",
+                  "properties": {
+                    "path": "/status-0123456789abcdef",
+                    "protocol": "Https",
+                    "intervalInSeconds": 30,
+                    "healthProbeMethod": "GET",
+                    "resourceState": "Enabled",
+                    "enabledState": "Enabled"
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsamnoneatsmatchAPI')]"
+                },
+                {
+                  "name": "healthProbeSettingsmedefisvmsUI",
+                  "properties": {
+                    "path": "/",
+                    "protocol": "Https",
+                    "intervalInSeconds": 30,
+                    "healthProbeMethod": "Head",
+                    "resourceState": "Enabled",
+                    "enabledState": "Enabled"
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsmedefisvmsUI')]"
+                },
+                {
+                  "name": "healthProbeSettingsmedefismvc3",
+                  "properties": {
+                    "path": "/",
+                    "protocol": "Https",
+                    "intervalInSeconds": 30,
+                    "healthProbeMethod": "Head",
+                    "resourceState": "Enabled",
+                    "enabledState": "Enabled"
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsmedefismvc3')]"
+                },
+                {
+                  "name": "healthProbeSettingsmedefisvmsAPI",
+                  "properties": {
+                    "path": "/status-0123456789abcdef",
+                    "protocol": "Https",
+                    "intervalInSeconds": 30,
+                    "healthProbeMethod": "GET",
+                    "resourceState": "Enabled",
+                    "enabledState": "Enabled"
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsmedefisvmsAPI')]"
+                },
+                {
+                  "name": "healthProbeSettingsmedefisagencyAPI",
+                  "properties": {
+                    "path": "/status-0123456789abcdef",
+                    "protocol": "Https",
+                    "intervalInSeconds": 30,
+                    "healthProbeMethod": "GET",
+                    "resourceState": "Enabled",
+                    "enabledState": "Enabled"
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsmedefisagencyAPI')]"
+                },
+                {
+                  "name": "healthProbeSettingsmedefisidentity",
+                  "properties": {
+                    "path": "/",
+                    "protocol": "Https",
+                    "intervalInSeconds": 30,
+                    "healthProbeMethod": "Head",
+                    "resourceState": "Enabled",
+                    "enabledState": "Enabled"
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsmedefisidentity')]"
+                }
+              ],
+              "loadBalancingSettings": [
+                {
+                  "name": "loadBalancingSettingsttm",
+                  "properties": {
+                    "sampleSize": 4,
+                    "successfulSamplesRequired": 2,
+                    "resourceState": "Enabled",
+                    "additionalLatencyMilliseconds": 0
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsttm')]"
+                },
+                {
+                  "name": "loadBalancingSettingsttmorders",
+                  "properties": {
+                    "sampleSize": 4,
+                    "successfulSamplesRequired": 2,
+                    "resourceState": "Enabled",
+                    "additionalLatencyMilliseconds": 0
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsttmorders')]"
+                },
+                {
+                  "name": "loadBalancingSettingsttmsm",
+                  "properties": {
+                    "sampleSize": 4,
+                    "successfulSamplesRequired": 2,
+                    "resourceState": "Enabled",
+                    "additionalLatencyMilliseconds": 0
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsttmsm')]"
+                },
+                {
+                  "name": "loadBalancingSettingsttmapi",
+                  "properties": {
+                    "sampleSize": 4,
+                    "successfulSamplesRequired": 2,
+                    "resourceState": "Enabled",
+                    "additionalLatencyMilliseconds": 0
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsttmapi')]"
+                },
+                {
+                  "name": "loadBalancingSettingsttmapiio",
+                  "properties": {
+                    "sampleSize": 4,
+                    "successfulSamplesRequired": 2,
+                    "resourceState": "Enabled",
+                    "additionalLatencyMilliseconds": 0
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsttmapiio')]"
+                },
+                {
+                  "name": "loadBalancingSettingsamnone",
+                  "properties": {
+                    "sampleSize": 4,
+                    "successfulSamplesRequired": 2,
+                    "resourceState": "Enabled",
+                    "additionalLatencyMilliseconds": 0
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsamnone')]"
+                },
+                {
+                  "name": "loadBalancingSettingsamnoneio",
+                  "properties": {
+                    "sampleSize": 4,
+                    "successfulSamplesRequired": 2,
+                    "resourceState": "Enabled",
+                    "additionalLatencyMilliseconds": 0
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsamnoneio')]"
+                },
+                {
+                  "name": "loadBalancingSettingsamnoneapi",
+                  "properties": {
+                    "sampleSize": 4,
+                    "successfulSamplesRequired": 2,
+                    "resourceState": "Enabled",
+                    "additionalLatencyMilliseconds": 0
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsamnoneapi')]"
+                },
+                {
+                  "name": "loadBalancingSettingsamnoneapiio",
+                  "properties": {
+                    "sampleSize": 4,
+                    "successfulSamplesRequired": 2,
+                    "resourceState": "Enabled",
+                    "additionalLatencyMilliseconds": 0
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsamnoneapi')]"
+                },
+                {
+                  "name": "loadBalancingSettingsamnonerd",
+                  "properties": {
+                    "sampleSize": 4,
+                    "successfulSamplesRequired": 2,
+                    "resourceState": "Enabled",
+                    "additionalLatencyMilliseconds": 0
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsamnonerd')]"
+                },
+                {
+                  "name": "loadBalancingSettingsamnonerdapi",
+                  "properties": {
+                    "sampleSize": 4,
+                    "successfulSamplesRequired": 2,
+                    "resourceState": "Enabled",
+                    "additionalLatencyMilliseconds": 0
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsamnonerdapi')]"
+                },
+                {
+                  "name": "loadBalancingSettingsmatchapi",
+                  "properties": {
+                    "sampleSize": 4,
+                    "successfulSamplesRequired": 2,
+                    "resourceState": "Enabled",
+                    "additionalLatencyMilliseconds": 0
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsmatchapi')]"
+                },
+                {
+                  "name": "loadBalancingSettingsamnoneatsmatchUI",
+                  "properties": {
+                    "sampleSize": 4,
+                    "successfulSamplesRequired": 2,
+                    "resourceState": "Enabled",
+                    "additionalLatencyMilliseconds": 0
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsamnoneatsmatchUI')]"
+                },
+                {
+                  "name": "loadBalancingSettingsamnoneatsmatchAPI",
+                  "properties": {
+                    "sampleSize": 4,
+                    "successfulSamplesRequired": 2,
+                    "resourceState": "Enabled",
+                    "additionalLatencyMilliseconds": 0
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsamnoneatsmatchAPI')]"
+                },
+                {
+                  "name": "loadBalancingSettingsmedefisvmsUI",
+                  "properties": {
+                    "sampleSize": 4,
+                    "successfulSamplesRequired": 2,
+                    "resourceState": "Enabled",
+                    "additionalLatencyMilliseconds": 0
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsmedefisvmsUI')]"
+                },
+                {
+                  "name": "loadBalancingSettingsmedefismvc3",
+                  "properties": {
+                    "sampleSize": 4,
+                    "successfulSamplesRequired": 2,
+                    "resourceState": "Enabled",
+                    "additionalLatencyMilliseconds": 0
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsmedefismvc3')]"
+                },
+                {
+                  "name": "loadBalancingSettingsmedefisvmsAPI",
+                  "properties": {
+                    "sampleSize": 4,
+                    "successfulSamplesRequired": 2,
+                    "resourceState": "Enabled",
+                    "additionalLatencyMilliseconds": 0
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsmedefisvmsAPI')]"
+                },
+                {
+                  "name": "loadBalancingSettingsmedefisagencyAPI",
+                  "properties": {
+                    "sampleSize": 4,
+                    "successfulSamplesRequired": 2,
+                    "resourceState": "Enabled",
+                    "additionalLatencyMilliseconds": 0
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsmedefisagencyAPI')]"
+                },
+                {
+                  "name": "loadBalancingSettingsmedefisidentity",
+                  "properties": {
+                    "sampleSize": 4,
+                    "successfulSamplesRequired": 2,
+                    "resourceState": "Enabled",
+                    "additionalLatencyMilliseconds": 0
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsmedefisidentity')]"
+                }
+              ],
+              "frontendEndpoints": [
+                {
+                  "name": "[concat(parameters('frontDoorName'), '-azurefd-net')]",
+                  "properties": {
+                    "hostName": "[concat(parameters('frontDoorName'), '.azurefd.net')]",
+                    "sessionAffinityEnabledState": "Disabled",
+                    "sessionAffinityTtlSeconds": 0,
+                    "resourceState": "Enabled",
+                    "webApplicationFirewallPolicyLink": {
+                      "id": "[concat(resourceId('Microsoft.Network/FrontDoorWebApplicationFirewallPolicies', parameters('wafName')))]"
                     },
-                    {
-                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('ttminsightsapiurl')))]",
-                        "name": "[parameters('ttminsightsapiFrontendpointname')]",
-                        "properties": {
-                            "hostName": "[parameters('ttminsightsapiurl')]",
-                            "sessionAffinityEnabledState": "Disabled",
-                            "sessionAffinityTtlSeconds": 0,
-                            "webApplicationFirewallPolicyLink": {
-                                "id": "[concat(resourceId('Microsoft.Network/FrontDoorWebApplicationFirewallPolicies', parameters('wafName')))]"
-                            },
-                            "resourceState": "Enabled",
-                            "customHttpsProvisioningState": "Enabled",
-                            "customHttpsConfiguration": {
-                                "certificateSource": "AzureKeyVault",
-                                "minimumTlsVersion": "1.2",
-                                "protocolType": "ServerNameIndication",
-                                "keyVaultCertificateSourceParameters": {
-                                    "vault": {
-                                        "id": "[concat(resourceId('Microsoft.KeyVault/vaults', parameters('keyVaultName')))]"
-                                    },
-                                    "secretName": "[parameters('qa_ttm_sslCertName')]",
-                                    "secretVersion": "[reference(resourceId('Microsoft.KeyVault/vaults/secrets', parameters('keyVaultName'), parameters('qa_ttm_sslCertName')), '2019-09-01').secretUriWithVersion]"
-                                }
-                            }
+                    "customHttpsConfiguration": null
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('frontDoorName'), '-azurefd-net'))]"
+                },
+                {
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('ttminsightsapiurl')))]",
+                  "name": "[parameters('ttminsightsapiFrontendpointname')]",
+                  "properties": {
+                    "hostName": "[parameters('ttminsightsapiurl')]",
+                    "sessionAffinityEnabledState": "Disabled",
+                    "sessionAffinityTtlSeconds": 0,
+                    "webApplicationFirewallPolicyLink": {
+                      "id": "[concat(resourceId('Microsoft.Network/FrontDoorWebApplicationFirewallPolicies', parameters('wafName')))]"
+                    },
+                    "resourceState": "Enabled",
+                    "customHttpsProvisioningState": "Enabled",
+                    "customHttpsConfiguration": {
+                      "certificateSource": "AzureKeyVault",
+                      "minimumTlsVersion": "1.2",
+                      "protocolType": "ServerNameIndication",
+                      "keyVaultCertificateSourceParameters": {
+                        "vault": {
+                          "id": "[concat(variables('keyvault'))]"
+                        },
+                        "secretName": "[parameters('ttm_sslCertName')]",
+                        "secretVersion": "[concat(reference(variables('ttm_sslCertName'), '2018-02-14').secretUriWithVersion)]"
+                      }
+                    }
 
-                        }
+                  }
+                },
+                {
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('ttminsightsapiurlio')))]",
+                  "name": "[parameters('ttminsightsapiFrontendpointnameio')]",
+                  "properties": {
+                    "hostName": "[parameters('ttminsightsapiurlio')]",
+                    "sessionAffinityEnabledState": "Disabled",
+                    "sessionAffinityTtlSeconds": 0,
+                    "webApplicationFirewallPolicyLink": {
+                      "id": "[concat(resourceId('Microsoft.Network/FrontDoorWebApplicationFirewallPolicies', parameters('wafName')))]"
                     },
-                    {
-                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('ttminsightsuiurl')))]",
-                        "name": "[parameters('ttminsightsuiFrontendpointname')]",
-                        "properties": {
-                            "hostName": "[parameters('ttminsightsuiurl')]",
-                            "sessionAffinityEnabledState": "Disabled",
-                            "sessionAffinityTtlSeconds": 0,
-                            "webApplicationFirewallPolicyLink": {
-                                "id": "[concat(resourceId('Microsoft.Network/FrontDoorWebApplicationFirewallPolicies', parameters('wafName')))]"
-                            },
-                            "resourceState": "Enabled",
-                            "customHttpsProvisioningState": "Enabled",
-                            "customHttpsConfiguration": {
-                                "certificateSource": "AzureKeyVault",
-                                "minimumTlsVersion": "1.2",
-                                "protocolType": "ServerNameIndication",
-                                "keyVaultCertificateSourceParameters": {
-                                    "vault": {
-                                        "id": "[concat(resourceId('Microsoft.KeyVault/vaults', parameters('keyVaultName')))]"
-                                    },
-                                    "secretName": "[parameters('qa_shiftwise_sslCertName')]",
-                                    "secretVersion": "[reference(resourceId('Microsoft.KeyVault/vaults/secrets', parameters('keyVaultName'), parameters('qa_shiftwise_sslCertName')), '2019-09-01').secretUriWithVersion]"
-                                }
-                            }
+                    "resourceState": "Enabled",
+                    "customHttpsProvisioningState": "Enabled",
+                    "customHttpsConfiguration": {
+                      "certificateSource": "AzureKeyVault",
+                      "minimumTlsVersion": "1.2",
+                      "protocolType": "ServerNameIndication",
+                      "keyVaultCertificateSourceParameters": {
+                        "vault": {
+                          "id": "[concat(variables('keyvault'))]"
+                        },
+                        "secretName": "[parameters('amnone_sslCertName')]",
+                        "secretVersion": "[concat(reference(variables('amnone_sslCertName'), '2018-02-14').secretUriWithVersion)]"
+                      }
+                    }
 
-                        }
-                    }
-                ],
-                "backendPools": [
-                    {
-                        "name": "[parameters('ttmapibackendpoolname')]",
-                        "properties": {
-                            "backends": [
-                                {
-                                    "address": "[parameters('apigatewayaddress')]",
-                                    "enabledState": "Enabled",
-                                    "httpPort": 80,
-                                    "httpsPort": 443,
-                                    "priority": 1,
-                                    "weight": 50,
-                                    "backendHostHeader": "[parameters('apigatewayaddress')]"
-                                }
-                            ],
-                            "loadBalancingSettings": {
-                                "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettings1')]"
-                            },
-                            "resourceState": "Enabled",
-                            "healthProbeSettings": {
-                                "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettings1')]"
-                            }
-                        },
-                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/BackendPools/', parameters('ttmapibackendpoolname'))]"
+                  }
+                },
+                {
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('ttminsightsuiurl')))]",
+                  "name": "[parameters('ttminsightsuiFrontendpointname')]",
+                  "properties": {
+                    "hostName": "[parameters('ttminsightsuiurl')]",
+                    "sessionAffinityEnabledState": "Disabled",
+                    "sessionAffinityTtlSeconds": 0,
+                    "webApplicationFirewallPolicyLink": {
+                      "id": "[concat(resourceId('Microsoft.Network/FrontDoorWebApplicationFirewallPolicies', parameters('wafName')))]"
                     },
-                    {
-                        "name": "[parameters('ttminsightsuibackendpoolname')]",
-                        "properties": {
-                            "backends": [
-                                {
-                                    "address": "[parameters('primarystorageAccounturl')]",
-                                    "enabledState": "Enabled",
-                                    "httpPort": 80,
-                                    "httpsPort": 443,
-                                    "priority": 1,
-                                    "weight": 50,
-                                    "backendHostHeader": "[parameters('primarystorageAccounturl')]"
-                                },
-                                {
-                                    "address": "[parameters('secondarystorageAccounturl')]",
-                                    "enabledState": "Enabled",
-                                    "httpPort": 80,
-                                    "httpsPort": 443,
-                                    "priority": 1,
-                                    "weight": 50,
-                                    "backendHostHeader": "[parameters('secondarystorageAccounturl')]"
-                                }
-                            ],
-                            "loadBalancingSettings": {
-                                "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettings1')]"
-                            },
-                            "resourceState": "Enabled",
-                            "healthProbeSettings": {
-                                "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettings1')]"
-                            }
+                    "resourceState": "Enabled",
+                    "customHttpsProvisioningState": "Enabled",
+                    "customHttpsConfiguration": {
+                      "certificateSource": "AzureKeyVault",
+                      "minimumTlsVersion": "1.2",
+                      "protocolType": "ServerNameIndication",
+                      "keyVaultCertificateSourceParameters": {
+                        "vault": {
+                          "id": "[concat(variables('keyvault'))]"
                         },
-                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/BackendPools/', parameters('ttminsightsuibackendpoolname'))]"
+                        "secretName": "[parameters('shiftwise_sslCertName')]",
+                        "secretVersion": "[concat(reference(variables('shiftwise_sslCertName'), '2018-02-14').secretUriWithVersion)]"
+                      }
                     }
-                ],
-                "routingRules": [
-                    {
-                        "name": "[parameters('ttminsightsapiroutename')]",
-                        "properties": {
-                            "frontendEndpoints": [
-                                {
-                                    "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('ttminsightsapiFrontendpointname')))]"
-                                }
-                            ],
-                            "acceptedProtocols": [
-                                "Https"
-                            ],
-                            "patternsToMatch": [
-                                "/insights/*"
-                            ],
-                            "enabledState": "Enabled",
-                            "resourceState": "Enabled",
-                            "routeConfiguration": {
-                                "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration",
-                                "customForwardingPath": null,
-                                "forwardingProtocol": "MatchRequest",
-                                "backendPool": {
-                                    "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/backendPools/', parameters('ttmapibackendpoolname'))]"
-                                },
-                                "cacheConfiguration": null
-                            }
-                        },
-                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/RoutingRules/', parameters('ttminsightsapiroutename'))]"
+
+                  }
+                },
+                {
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('ttmordersuiurl')))]",
+                  "name": "[parameters('ttmordersuiFrontendpointname')]",
+                  "properties": {
+                    "hostName": "[parameters('ttmordersuiurl')]",
+                    "sessionAffinityEnabledState": "Disabled",
+                    "sessionAffinityTtlSeconds": 0,
+                    "webApplicationFirewallPolicyLink": {
+                      "id": "[concat(resourceId('Microsoft.Network/FrontDoorWebApplicationFirewallPolicies', parameters('wafName')))]"
                     },
-                    {
-                        "name": "[parameters('ttminsightsuiroutename')]",
-                        "properties": {
-                            "frontendEndpoints": [
-                                {
-                                    "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('ttminsightsuiFrontendpointname')))]"
-                                }
-                            ],
-                            "acceptedProtocols": [
-                                "Https"
-                            ],
-                            "patternsToMatch": [
-                                "/*"
-                            ],
-                            "enabledState": "Enabled",
-                            "resourceState": "Enabled",
-                            "routeConfiguration": {
-                                "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration",
-                                "customForwardingPath": null,
-                                "forwardingProtocol": "MatchRequest",
-                                "backendPool": {
-                                    "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/backendPools/', parameters('ttminsightsuibackendpoolname'))]"
-                                },
-                                "cacheConfiguration": null
-                            }
+                    "resourceState": "Enabled",
+                    "customHttpsProvisioningState": "Enabled",
+                    "customHttpsConfiguration": {
+                      "certificateSource": "AzureKeyVault",
+                      "minimumTlsVersion": "1.2",
+                      "protocolType": "ServerNameIndication",
+                      "keyVaultCertificateSourceParameters": {
+                        "vault": {
+                          "id": "[concat(variables('keyvault'))]"
                         },
-                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/RoutingRules/', parameters('ttminsightsuiroutename'))]"
+                        "secretName": "[parameters('shiftwise_sslCertName')]",
+                        "secretVersion": "[concat(reference(variables('shiftwise_sslCertName'), '2018-02-14').secretUriWithVersion)]"
+                      }
                     }
-                ],
+
+                  }
+                },
+                {
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('ttmsmuiurl')))]",
+                  "name": "[parameters('ttmsmuiFrontendpointname')]",
+                  "properties": {
+                    "hostName": "[parameters('ttmsmuiurl')]",
+                    "sessionAffinityEnabledState": "Disabled",
+                    "sessionAffinityTtlSeconds": 0,
+                    "webApplicationFirewallPolicyLink": {
+                      "id": "[concat(resourceId('Microsoft.Network/FrontDoorWebApplicationFirewallPolicies', parameters('wafName')))]"
+                    },
+                    "resourceState": "Enabled",
+                    "customHttpsProvisioningState": "Enabled",
+                    "customHttpsConfiguration": {
+                      "certificateSource": "AzureKeyVault",
+                      "minimumTlsVersion": "1.2",
+                      "protocolType": "ServerNameIndication",
+                      "keyVaultCertificateSourceParameters": {
+                        "vault": {
+                          "id": "[concat(variables('keyvault'))]"
+                        },
+                        "secretName": "[parameters('shiftwise_sslCertName')]",
+                        "secretVersion": "[concat(reference(variables('shiftwise_sslCertName'), '2018-02-14').secretUriWithVersion)]"
+                      }
+                    }
+
+                  }
+                },
+                {
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('amnoneurl')))]",
+                  "name": "[parameters('amnoneFrontendpointname')]",
+                  "properties": {
+                    "hostName": "[parameters('amnoneurl')]",
+                    "sessionAffinityEnabledState": "Disabled",
+                    "sessionAffinityTtlSeconds": 0,
+                    "webApplicationFirewallPolicyLink": {
+                      "id": "[concat(resourceId('Microsoft.Network/FrontDoorWebApplicationFirewallPolicies', parameters('wafName')))]"
+                    },
+                    "resourceState": "Enabled",
+                    "customHttpsProvisioningState": "Enabled",
+                    "customHttpsConfiguration": {
+                      "certificateSource": "AzureKeyVault",
+                      "minimumTlsVersion": "1.2",
+                      "protocolType": "ServerNameIndication",
+                      "keyVaultCertificateSourceParameters": {
+                        "vault": {
+                          "id": "[concat(variables('keyvault'))]"
+                        },
+                        "secretName": "[parameters('amnone_sslCertName')]",
+                        "secretVersion": "[concat(reference(variables('amnone_sslCertName'), '2018-02-14').secretUriWithVersion)]"
+                      }
+                    }
+
+                  }
+                },
+                {
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('amnoneurlio')))]",
+                  "name": "[parameters('amnoneFrontendpointnameio')]",
+                  "properties": {
+                    "hostName": "[parameters('amnoneurlio')]",
+                    "sessionAffinityEnabledState": "Disabled",
+                    "sessionAffinityTtlSeconds": 0,
+                    "webApplicationFirewallPolicyLink": {
+                      "id": "[concat(resourceId('Microsoft.Network/FrontDoorWebApplicationFirewallPolicies', parameters('wafName')))]"
+                    },
+                    "resourceState": "Enabled",
+                    "customHttpsProvisioningState": "Enabled",
+                    "customHttpsConfiguration": {
+                      "certificateSource": "AzureKeyVault",
+                      "minimumTlsVersion": "1.2",
+                      "protocolType": "ServerNameIndication",
+                      "keyVaultCertificateSourceParameters": {
+                        "vault": {
+                          "id": "[concat(variables('keyvault'))]"
+                        },
+                        "secretName": "[parameters('amnone_sslCertName')]",
+                        "secretVersion": "[concat(reference(variables('amnone_sslCertName_io'), '2018-02-14').secretUriWithVersion)]"
+                      }
+                    }
+
+                  }
+                },
+                {
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('amnoneapiurl')))]",
+                  "name": "[parameters('amnoneapiFrontendpointname')]",
+                  "properties": {
+                    "hostName": "[parameters('amnoneapiurl')]",
+                    "sessionAffinityEnabledState": "Disabled",
+                    "sessionAffinityTtlSeconds": 0,
+                    "webApplicationFirewallPolicyLink": {
+                      "id": "[concat(resourceId('Microsoft.Network/FrontDoorWebApplicationFirewallPolicies', parameters('wafName')))]"
+                    },
+                    "resourceState": "Enabled",
+                    "customHttpsProvisioningState": "Enabled",
+                    "customHttpsConfiguration": {
+                      "certificateSource": "AzureKeyVault",
+                      "minimumTlsVersion": "1.2",
+                      "protocolType": "ServerNameIndication",
+                      "keyVaultCertificateSourceParameters": {
+                        "vault": {
+                          "id": "[concat(variables('keyvault'))]"
+                        },
+                        "secretName": "[parameters('amnone_sslCertName')]",
+                        "secretVersion": "[concat(reference(variables('amnone_sslCertName'), '2018-02-14').secretUriWithVersion)]"
+                      }
+                    }
+
+                  }
+                },
+                {
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('amnoneapiurlio')))]",
+                  "name": "[parameters('amnoneapiFrontendpointnameio')]",
+                  "properties": {
+                    "hostName": "[parameters('amnoneapiurlio')]",
+                    "sessionAffinityEnabledState": "Disabled",
+                    "sessionAffinityTtlSeconds": 0,
+                    "webApplicationFirewallPolicyLink": {
+                      "id": "[concat(resourceId('Microsoft.Network/FrontDoorWebApplicationFirewallPolicies', parameters('wafName')))]"
+                    },
+                    "resourceState": "Enabled",
+                    "customHttpsProvisioningState": "Enabled",
+                    "customHttpsConfiguration": {
+                      "certificateSource": "AzureKeyVault",
+                      "minimumTlsVersion": "1.2",
+                      "protocolType": "ServerNameIndication",
+                      "keyVaultCertificateSourceParameters": {
+                        "vault": {
+                          "id": "[concat(variables('keyvault'))]"
+                        },
+                        "secretName": "[parameters('amnone_sslCertName_io')]",
+                        "secretVersion": "[concat(reference(variables('amnone_sslCertName_io'), '2018-02-14').secretUriWithVersion)]"
+                      }
+                    }
+
+                  }
+                },
+                {
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('amnonerdurl')))]",
+                  "name": "[parameters('amnonerdFrontendpointname')]",
+                  "properties": {
+                    "hostName": "[parameters('amnonerdurl')]",
+                    "sessionAffinityEnabledState": "Disabled",
+                    "sessionAffinityTtlSeconds": 0,
+                    "webApplicationFirewallPolicyLink": {
+                      "id": "[concat(resourceId('Microsoft.Network/FrontDoorWebApplicationFirewallPolicies', parameters('wafName')))]"
+                    },
+                    "resourceState": "Enabled",
+                    "customHttpsProvisioningState": "Enabled",
+                    "customHttpsConfiguration": {
+                      "certificateSource": "AzureKeyVault",
+                      "minimumTlsVersion": "1.2",
+                      "protocolType": "ServerNameIndication",
+                      "keyVaultCertificateSourceParameters": {
+                        "vault": {
+                          "id": "[concat(variables('keyvault'))]"
+                        },
+                        "secretName": "[parameters('amnone_sslCertName')]",
+                        "secretVersion": "[concat(reference(variables('amnone_sslCertName'), '2018-02-14').secretUriWithVersion)]"
+                      }
+                    }
+
+                  }
+                },
+                {
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('amnonerdapiurl')))]",
+                  "name": "[parameters('amnonerdapiFrontendpointname')]",
+                  "properties": {
+                    "hostName": "[parameters('amnonerdapiurl')]",
+                    "sessionAffinityEnabledState": "Disabled",
+                    "sessionAffinityTtlSeconds": 0,
+                    "webApplicationFirewallPolicyLink": {
+                      "id": "[concat(resourceId('Microsoft.Network/FrontDoorWebApplicationFirewallPolicies', parameters('wafName')))]"
+                    },
+                    "resourceState": "Enabled",
+                    "customHttpsProvisioningState": "Enabled",
+                    "customHttpsConfiguration": {
+                      "certificateSource": "AzureKeyVault",
+                      "minimumTlsVersion": "1.2",
+                      "protocolType": "ServerNameIndication",
+                      "keyVaultCertificateSourceParameters": {
+                        "vault": {
+                          "id": "[concat(variables('keyvault'))]"
+                        },
+                        "secretName": "[parameters('amnone_sslCertName')]",
+                        "secretVersion": "[concat(reference(variables('amnone_sslCertName'), '2018-02-14').secretUriWithVersion)]"
+                      }
+                    }
+
+                  }
+                },
+                {
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('matchUIurl')))]",
+                  "name": "[parameters('matchUIFrontendpointname')]",
+                  "properties": {
+                    "hostName": "[parameters('matchUIurl')]",
+                    "sessionAffinityEnabledState": "Disabled",
+                    "sessionAffinityTtlSeconds": 0,
+                    "webApplicationFirewallPolicyLink": {
+                      "id": "[concat(resourceId('Microsoft.Network/FrontDoorWebApplicationFirewallPolicies', parameters('wafName')))]"
+                    },
+                    "resourceState": "Enabled",
+                    "customHttpsProvisioningState": "Enabled",
+                    "customHttpsConfiguration": {
+                      "certificateSource": "AzureKeyVault",
+                      "minimumTlsVersion": "1.2",
+                      "protocolType": "ServerNameIndication",
+                      "keyVaultCertificateSourceParameters": {
+                        "vault": {
+                          "id": "[concat(variables('keyvault'))]"
+                        },
+                        "secretName": "[parameters('amnone_sslCertName')]",
+                        "secretVersion": "[concat(reference(variables('amnone_sslCertName'), '2018-02-14').secretUriWithVersion)]"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('matchapiurl')))]",
+                  "name": "[parameters('matchapiFrontendpointname')]",
+                  "properties": {
+                    "hostName": "[parameters('matchapiurl')]",
+                    "sessionAffinityEnabledState": "Disabled",
+                    "sessionAffinityTtlSeconds": 0,
+                    "webApplicationFirewallPolicyLink": {
+                      "id": "[concat(resourceId('Microsoft.Network/FrontDoorWebApplicationFirewallPolicies', parameters('wafName')))]"
+                    },
+                    "resourceState": "Enabled",
+                    "customHttpsProvisioningState": "Enabled",
+                    "customHttpsConfiguration": {
+                      "certificateSource": "AzureKeyVault",
+                      "minimumTlsVersion": "1.2",
+                      "protocolType": "ServerNameIndication",
+                      "keyVaultCertificateSourceParameters": {
+                        "vault": {
+                          "id": "[concat(variables('keyvault'))]"
+                        },
+                        "secretName": "[parameters('amnone_sslCertName')]",
+                        "secretVersion": "[concat(reference(variables('amnone_sslCertName'), '2018-02-14').secretUriWithVersion)]"
+                      }
+                    }
+
+                  }
+                },
+                {
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('amnone_ats_UI_url')))]",
+                  "name": "[parameters('amnone_ats_UI_Frontendpointname')]",
+                  "properties": {
+                    "hostName": "[parameters('amnone_ats_UI_url')]",
+                    "sessionAffinityEnabledState": "Disabled",
+                    "sessionAffinityTtlSeconds": 0,
+                    "webApplicationFirewallPolicyLink": {
+                      "id": "[concat(resourceId('Microsoft.Network/FrontDoorWebApplicationFirewallPolicies', parameters('wafName')))]"
+                    },
+                    "resourceState": "Enabled",
+                    "customHttpsProvisioningState": "Enabled",
+                    "customHttpsConfiguration": {
+                      "certificateSource": "AzureKeyVault",
+                      "minimumTlsVersion": "1.2",
+                      "protocolType": "ServerNameIndication",
+                      "keyVaultCertificateSourceParameters": {
+                        "vault": {
+                          "id": "[concat(variables('keyvault'))]"
+                        },
+                        "secretName": "[parameters('amnone_sslCertName_io')]",
+                        "secretVersion": "[concat(reference(variables('amnone_sslCertName_io'), '2018-02-14').secretUriWithVersion)]"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('amnone_ats_API_url')))]",
+                  "name": "[parameters('amnone_ats_API_Frontendpointname')]",
+                  "properties": {
+                    "hostName": "[parameters('amnone_ats_API_url')]",
+                    "sessionAffinityEnabledState": "Disabled",
+                    "sessionAffinityTtlSeconds": 0,
+                    "webApplicationFirewallPolicyLink": {
+                      "id": "[concat(resourceId('Microsoft.Network/FrontDoorWebApplicationFirewallPolicies', parameters('wafName')))]"
+                    },
+                    "resourceState": "Enabled",
+                    "customHttpsProvisioningState": "Enabled",
+                    "customHttpsConfiguration": {
+                      "certificateSource": "AzureKeyVault",
+                      "minimumTlsVersion": "1.2",
+                      "protocolType": "ServerNameIndication",
+                      "keyVaultCertificateSourceParameters": {
+                        "vault": {
+                          "id": "[concat(variables('keyvault'))]"
+                        },
+                        "secretName": "[parameters('amnone_sslCertName_io')]",
+                        "secretVersion": "[concat(reference(variables('amnone_sslCertName_io'), '2018-02-14').secretUriWithVersion)]"
+                      }
+                    }
+
+                  }
+                },
+                {
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('medefis_vms_UI_url')))]",
+                  "name": "[parameters('medefis_vms_UI_Frontendpointname')]",
+                  "properties": {
+                    "hostName": "[parameters('medefis_vms_UI_url')]",
+                    "sessionAffinityEnabledState": "Disabled",
+                    "sessionAffinityTtlSeconds": 0,
+                    "webApplicationFirewallPolicyLink": {
+                      "id": "[concat(resourceId('Microsoft.Network/FrontDoorWebApplicationFirewallPolicies', parameters('wafName')))]"
+                    },
+                    "resourceState": "Enabled",
+                    "customHttpsProvisioningState": "Enabled",
+                    "customHttpsConfiguration": {
+                      "certificateSource": "AzureKeyVault",
+                      "minimumTlsVersion": "1.2",
+                      "protocolType": "ServerNameIndication",
+                      "keyVaultCertificateSourceParameters": {
+                        "vault": {
+                          "id": "[concat(variables('keyvault'))]"
+                        },
+                        "secretName": "[parameters('medefis_sslCertName_io')]",
+                        "secretVersion": "[concat(reference(variables('medefis_sslCertName_io'), '2018-02-14').secretUriWithVersion)]"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('medefis_mvc3_UI_url')))]",
+                  "name": "[parameters('medefis_mvc3_UI_Frontendpointname')]",
+                  "properties": {
+                    "hostName": "[parameters('medefis_mvc3_UI_url')]",
+                    "sessionAffinityEnabledState": "Disabled",
+                    "sessionAffinityTtlSeconds": 0,
+                    "webApplicationFirewallPolicyLink": {
+                      "id": "[concat(resourceId('Microsoft.Network/FrontDoorWebApplicationFirewallPolicies', parameters('wafName')))]"
+                    },
+                    "resourceState": "Enabled",
+                    "customHttpsProvisioningState": "Enabled",
+                    "customHttpsConfiguration": {
+                      "certificateSource": "AzureKeyVault",
+                      "minimumTlsVersion": "1.2",
+                      "protocolType": "ServerNameIndication",
+                      "keyVaultCertificateSourceParameters": {
+                        "vault": {
+                          "id": "[concat(variables('keyvault'))]"
+                        },
+                        "secretName": "[parameters('medefis_sslCertName_io')]",
+                        "secretVersion": "[concat(reference(variables('medefis_sslCertName_io'), '2018-02-14').secretUriWithVersion)]"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('medefis_vms_API_url')))]",
+                  "name": "[parameters('medefis_vms_API_Frontendpointname')]",
+                  "properties": {
+                    "hostName": "[parameters('medefis_vms_API_url')]",
+                    "sessionAffinityEnabledState": "Disabled",
+                    "sessionAffinityTtlSeconds": 0,
+                    "webApplicationFirewallPolicyLink": {
+                      "id": "[concat(resourceId('Microsoft.Network/FrontDoorWebApplicationFirewallPolicies', parameters('wafName')))]"
+                    },
+                    "resourceState": "Enabled",
+                    "customHttpsProvisioningState": "Enabled",
+                    "customHttpsConfiguration": {
+                      "certificateSource": "AzureKeyVault",
+                      "minimumTlsVersion": "1.2",
+                      "protocolType": "ServerNameIndication",
+                      "keyVaultCertificateSourceParameters": {
+                        "vault": {
+                          "id": "[concat(variables('keyvault'))]"
+                        },
+                        "secretName": "[parameters('medefis_sslCertName_io')]",
+                        "secretVersion": "[concat(reference(variables('medefis_sslCertName_io'), '2018-02-14').secretUriWithVersion)]"
+                      }
+                    }
+
+                  }
+                },
+                {
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('medefis_agency_API_url')))]",
+                  "name": "[parameters('medefis_agency_API_Frontendpointname')]",
+                  "properties": {
+                    "hostName": "[parameters('medefis_agency_API_url')]",
+                    "sessionAffinityEnabledState": "Disabled",
+                    "sessionAffinityTtlSeconds": 0,
+                    "webApplicationFirewallPolicyLink": {
+                      "id": "[concat(resourceId('Microsoft.Network/FrontDoorWebApplicationFirewallPolicies', parameters('wafName')))]"
+                    },
+                    "resourceState": "Enabled",
+                    "customHttpsProvisioningState": "Enabled",
+                    "customHttpsConfiguration": {
+                      "certificateSource": "AzureKeyVault",
+                      "minimumTlsVersion": "1.2",
+                      "protocolType": "ServerNameIndication",
+                      "keyVaultCertificateSourceParameters": {
+                        "vault": {
+                          "id": "[concat(variables('keyvault'))]"
+                        },
+                        "secretName": "[parameters('medefis_sslCertName_io')]",
+                        "secretVersion": "[concat(reference(variables('medefis_sslCertName_io'), '2018-02-14').secretUriWithVersion)]"
+                      }
+                    }
+
+                  }
+                },
+                {
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('medefis_identity_url')))]",
+                  "name": "[parameters('medefis_identity_Frontendpointname')]",
+                  "properties": {
+                    "hostName": "[parameters('medefis_identity_url')]",
+                    "sessionAffinityEnabledState": "Disabled",
+                    "sessionAffinityTtlSeconds": 0,
+                    "webApplicationFirewallPolicyLink": {
+                      "id": "[concat(resourceId('Microsoft.Network/FrontDoorWebApplicationFirewallPolicies', parameters('wafName')))]"
+                    },
+                    "resourceState": "Enabled",
+                    "customHttpsProvisioningState": "Enabled",
+                    "customHttpsConfiguration": {
+                      "certificateSource": "AzureKeyVault",
+                      "minimumTlsVersion": "1.2",
+                      "protocolType": "ServerNameIndication",
+                      "keyVaultCertificateSourceParameters": {
+                        "vault": {
+                          "id": "[concat(variables('keyvault'))]"
+                        },
+                        "secretName": "[parameters('medefis_sslCertName_io')]",
+                        "secretVersion": "[concat(reference(variables('medefis_sslCertName_io'), '2018-02-14').secretUriWithVersion)]"
+                      }
+                    }
+
+                  }
+                }
+              ],
+              "backendPools": [
+                {
+                  "name": "[parameters('ttmapibackendpoolname')]",
+                  "properties": {
+                    "backends": [
+                      {
+                        "address": "[parameters('apigatewayaddress')]",
+                        "enabledState": "Enabled",
+                        "httpPort": 80,
+                        "httpsPort": 443,
+                        "priority": 1,
+                        "weight": 50,
+                        "backendHostHeader": "[parameters('apigatewayaddress')]"
+                      }
+                    ],
+                    "loadBalancingSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsttmapi')]"
+                    },
+                    "resourceState": "Enabled",
+                    "healthProbeSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsttmapi')]"
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/BackendPools/', parameters('ttmapibackendpoolname'))]"
+                },
+                {
+                  "name": "[parameters('ttmapibackendpoolnameio')]",
+                  "properties": {
+                    "backends": [
+                      {
+                        "address": "[parameters('apigatewayaddressio')]",
+                        "enabledState": "Enabled",
+                        "httpPort": 80,
+                        "httpsPort": 443,
+                        "priority": 1,
+                        "weight": 50,
+                        "backendHostHeader": "[parameters('apigatewayaddressio')]"
+                      }
+                    ],
+                    "loadBalancingSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsttmapiio')]"
+                    },
+                    "resourceState": "Enabled",
+                    "healthProbeSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsttmapiio')]"
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/BackendPools/', parameters('ttmapibackendpoolnameio'))]"
+                },
+                {
+                  "name": "[parameters('ttminsightsuibackendpoolname')]",
+                  "properties": {
+                    "backends": [
+                      {
+                        "address": "[parameters('primarystorageAccounturl')]",
+                        "enabledState": "Enabled",
+                        "httpPort": 80,
+                        "httpsPort": 443,
+                        "priority": 1,
+                        "weight": 50,
+                        "backendHostHeader": "[parameters('primarystorageAccounturl')]"
+                      },
+                      {
+                        "address": "[parameters('secondarystorageAccounturl')]",
+                        "enabledState": "Enabled",
+                        "httpPort": 80,
+                        "httpsPort": 443,
+                        "priority": 1,
+                        "weight": 50,
+                        "backendHostHeader": "[parameters('secondarystorageAccounturl')]"
+                      }
+                    ],
+                    "loadBalancingSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsttm')]"
+                    },
+                    "resourceState": "Enabled",
+                    "healthProbeSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsttm')]"
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/BackendPools/', parameters('ttminsightsuibackendpoolname'))]"
+                },
+                {
+                  "name": "[parameters('ttmordersuibackendpoolname')]",
+                  "properties": {
+                    "backends": [
+                      {
+                        "address": "[parameters('ttmordersUI_primarystorageAccounturl')]",
+                        "enabledState": "Enabled",
+                        "httpPort": 80,
+                        "httpsPort": 443,
+                        "priority": 1,
+                        "weight": 50,
+                        "backendHostHeader": "[parameters('ttmordersUI_primarystorageAccounturl')]"
+                      },
+                      {
+                        "address": "[parameters('ttmordersUI_secondarystorageAccounturl')]",
+                        "enabledState": "Enabled",
+                        "httpPort": 80,
+                        "httpsPort": 443,
+                        "priority": 1,
+                        "weight": 50,
+                        "backendHostHeader": "[parameters('ttmordersUI_secondarystorageAccounturl')]"
+                      }
+                    ],
+                    "loadBalancingSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsttmorders')]"
+                    },
+                    "resourceState": "Enabled",
+                    "healthProbeSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsttmorders')]"
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/BackendPools/', parameters('ttmordersuibackendpoolname'))]"
+                },
+                {
+                  "name": "[parameters('ttmsmuibackendpoolname')]",
+                  "properties": {
+                    "backends": [
+                      {
+                        "address": "[parameters('ttmsmUI_primarystorageAccounturl')]",
+                        "enabledState": "Enabled",
+                        "httpPort": 80,
+                        "httpsPort": 443,
+                        "priority": 1,
+                        "weight": 50,
+                        "backendHostHeader": "[parameters('ttmsmUI_primarystorageAccounturl')]"
+                      },
+                      {
+                        "address": "[parameters('ttmsmUI_secondarystorageAccounturl')]",
+                        "enabledState": "Enabled",
+                        "httpPort": 80,
+                        "httpsPort": 443,
+                        "priority": 1,
+                        "weight": 50,
+                        "backendHostHeader": "[parameters('ttmsmUI_secondarystorageAccounturl')]"
+                      }
+                    ],
+                    "loadBalancingSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsttmsm')]"
+                    },
+                    "resourceState": "Enabled",
+                    "healthProbeSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsttmsm')]"
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/BackendPools/', parameters('ttmsmuibackendpoolname'))]"
+                },
+                {
+                  "name": "[parameters('amnonebackendpoolname')]",
+                  "properties": {
+                    "backends": [
+                      {
+                        "address": "[parameters('amnoneurlappservice')]",
+                        "enabledState": "Enabled",
+                        "httpPort": 80,
+                        "httpsPort": 443,
+                        "priority": 1,
+                        "weight": 50,
+                        "backendHostHeader": "[parameters('amnoneurlappservice')]"
+                      }
+                    ],
+                    "loadBalancingSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsamnone')]"
+                    },
+                    "resourceState": "Enabled",
+                    "healthProbeSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsamnone')]"
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/BackendPools/', parameters('amnonebackendpoolname'))]"
+                },
+                {
+                  "name": "[parameters('amnonebackendpoolnameio')]",
+                  "properties": {
+                    "backends": [
+                      {
+                        "address": "[parameters('amnoneurlappservice')]",
+                        "enabledState": "Enabled",
+                        "httpPort": 80,
+                        "httpsPort": 443,
+                        "priority": 1,
+                        "weight": 50,
+                        "backendHostHeader": "[parameters('amnoneurlappservice')]"
+                      }
+                    ],
+                    "loadBalancingSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsamnoneio')]"
+                    },
+                    "resourceState": "Enabled",
+                    "healthProbeSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsamnoneio')]"
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/BackendPools/', parameters('amnonebackendpoolnameio'))]"
+                },
+                {
+                  "name": "[parameters('amnoneapibackendpoolname')]",
+                  "properties": {
+                    "backends": [
+                      {
+                        "address": "[parameters('amnoneapiapigatewayaddress')]",
+                        "enabledState": "Enabled",
+                        "httpPort": 80,
+                        "httpsPort": 443,
+                        "priority": 1,
+                        "weight": 50,
+                        "backendHostHeader": "[parameters('amnoneapiapigatewayaddress')]"
+                      }
+                    ],
+                    "loadBalancingSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsamnoneapi')]"
+                    },
+                    "resourceState": "Enabled",
+                    "healthProbeSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsamnoneapi')]"
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/BackendPools/', parameters('amnoneapibackendpoolname'))]"
+                },
+                {
+                  "name": "[parameters('amnoneapibackendpoolnameio')]",
+                  "properties": {
+                    "backends": [
+                      {
+                        "address": "[parameters('amnoneapiapigatewayaddressio')]",
+                        "enabledState": "Enabled",
+                        "httpPort": 80,
+                        "httpsPort": 443,
+                        "priority": 1,
+                        "weight": 50,
+                        "backendHostHeader": "[parameters('amnoneapiapigatewayaddressio')]"
+                      }
+                    ],
+                    "loadBalancingSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsamnoneapiio')]"
+                    },
+                    "resourceState": "Enabled",
+                    "healthProbeSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsamnoneapiio')]"
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/BackendPools/', parameters('amnoneapibackendpoolnameio'))]"
+                },
+                {
+                  "name": "[parameters('amnonerdbackendpoolname')]",
+                  "properties": {
+                    "backends": [
+                      {
+                        "address": "[parameters('amnonerdurlappservice')]",
+                        "enabledState": "Enabled",
+                        "httpPort": 80,
+                        "httpsPort": 443,
+                        "priority": 1,
+                        "weight": 50,
+                        "backendHostHeader": "[parameters('amnonerdurlappservice')]"
+                      }
+                    ],
+                    "loadBalancingSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsamnonerd')]"
+                    },
+                    "resourceState": "Enabled",
+                    "healthProbeSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsamnonerd')]"
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/BackendPools/', parameters('amnonerdbackendpoolname'))]"
+                },
+                {
+                  "name": "[parameters('amnonerdapibackendpoolname')]",
+                  "properties": {
+                    "backends": [
+                      {
+                        "address": "[parameters('amnonerdapiapigatewayaddress')]",
+                        "enabledState": "Enabled",
+                        "httpPort": 80,
+                        "httpsPort": 443,
+                        "priority": 1,
+                        "weight": 50,
+                        "backendHostHeader": "[parameters('amnonerdapiapigatewayaddress')]"
+                      }
+                    ],
+                    "loadBalancingSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsamnonerdapi')]"
+                    },
+                    "resourceState": "Enabled",
+                    "healthProbeSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsamnonerdapi')]"
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/BackendPools/', parameters('amnonerdapibackendpoolname'))]"
+                },
+                {
+                  "name": "[parameters('matchapibackendpoolname')]",
+                  "properties": {
+                    "backends": [
+                      {
+                        "address": "[parameters('matchapiapigatewayaddress')]",
+                        "enabledState": "Enabled",
+                        "httpPort": 80,
+                        "httpsPort": 443,
+                        "priority": 1,
+                        "weight": 50,
+                        "backendHostHeader": "[parameters('matchapiapigatewayaddress')]"
+                      }
+                    ],
+                    "loadBalancingSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsmatchapi')]"
+                    },
+                    "resourceState": "Enabled",
+                    "healthProbeSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsmatchapi')]"
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/BackendPools/', parameters('matchapibackendpoolname'))]"
+                },
+                {
+                  "name": "[parameters('amnone_ats_match_UI_backendpoolname')]",
+                  "properties": {
+                    "backends": [
+                      {
+                        "address": "[parameters('amnone_ats_match_UI_url')]",
+                        "enabledState": "Enabled",
+                        "httpPort": 80,
+                        "httpsPort": 443,
+                        "priority": 1,
+                        "weight": 50,
+                        "backendHostHeader": "[parameters('amnone_ats_match_UI_url')]"
+                      }
+                    ],
+                    "loadBalancingSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsamnoneatsmatchUI')]"
+                    },
+                    "resourceState": "Enabled",
+                    "healthProbeSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsamnoneatsmatchUI')]"
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/BackendPools/', parameters('amnone_ats_match_UI_backendpoolname'))]"
+                },
+                {
+                  "name": "[parameters('amnone_ats_match_API_backendpoolname')]",
+                  "properties": {
+                    "backends": [
+                      {
+                        "address": "[parameters('amnone_ats_API_apigatewayaddress')]",
+                        "enabledState": "Enabled",
+                        "httpPort": 80,
+                        "httpsPort": 443,
+                        "priority": 1,
+                        "weight": 50,
+                        "backendHostHeader": "[parameters('amnone_ats_API_apigatewayaddress')]"
+                      }
+                    ],
+                    "loadBalancingSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsamnoneatsmatchAPI')]"
+                    },
+                    "resourceState": "Enabled",
+                    "healthProbeSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsamnoneatsmatchAPI')]"
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/BackendPools/', parameters('amnone_ats_match_API_backendpoolname'))]"
+                },
+                {
+                  "name": "[parameters('medefis_vms_UI_backendpoolname')]",
+                  "properties": {
+                    "backends": [
+                      {
+                        "address": "[parameters('medefis_vms_UI_url_storage')]",
+                        "enabledState": "Enabled",
+                        "httpPort": 80,
+                        "httpsPort": 443,
+                        "priority": 1,
+                        "weight": 50,
+                        "backendHostHeader": "[parameters('medefis_vms_UI_url_storage')]"
+                      }
+                    ],
+                    "loadBalancingSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsmedefisvmsUI')]"
+                    },
+                    "resourceState": "Enabled",
+                    "healthProbeSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsmedefisvmsUI')]"
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/BackendPools/', parameters('medefis_vms_UI_backendpoolname'))]"
+                },
+                {
+                  "name": "[parameters('medefis_mvc3_UI_backendpoolname')]",
+                  "properties": {
+                    "backends": [
+                      {
+                        "address": "[parameters('medefis_mvc3_UI_url_storage')]",
+                        "enabledState": "Enabled",
+                        "httpPort": 80,
+                        "httpsPort": 443,
+                        "priority": 1,
+                        "weight": 50,
+                        "backendHostHeader": "[parameters('medefis_mvc3_UI_url_storage')]"
+                      }
+                    ],
+                    "loadBalancingSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsmedefismvc3')]"
+                    },
+                    "resourceState": "Enabled",
+                    "healthProbeSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsmedefismvc3')]"
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/BackendPools/', parameters('medefis_mvc3_UI_backendpoolname'))]"
+                },
+                {
+                  "name": "[parameters('medefis_vms_API_backendpoolname')]",
+                  "properties": {
+                    "backends": [
+                      {
+                        "address": "[parameters('medefis_API_apigatewayaddress')]",
+                        "enabledState": "Enabled",
+                        "httpPort": 80,
+                        "httpsPort": 443,
+                        "priority": 1,
+                        "weight": 50,
+                        "backendHostHeader": "[parameters('medefis_API_apigatewayaddress')]"
+                      }
+                    ],
+                    "loadBalancingSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsmedefisvmsAPI')]"
+                    },
+                    "resourceState": "Enabled",
+                    "healthProbeSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsmedefisvmsAPI')]"
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/BackendPools/', parameters('medefis_vms_API_backendpoolname'))]"
+                },
+                {
+                  "name": "[parameters('medefis_agency_API_backendpoolname')]",
+                  "properties": {
+                    "backends": [
+                      {
+                        "address": "[parameters('medefis_API_apigatewayaddress')]",
+                        "enabledState": "Enabled",
+                        "httpPort": 80,
+                        "httpsPort": 443,
+                        "priority": 1,
+                        "weight": 50,
+                        "backendHostHeader": "[parameters('medefis_API_apigatewayaddress')]"
+                      }
+                    ],
+                    "loadBalancingSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsmedefisagencyAPI')]"
+                    },
+                    "resourceState": "Enabled",
+                    "healthProbeSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsmedefisagencyAPI')]"
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/BackendPools/', parameters('medefis_agency_API_backendpoolname'))]"
+                },
+                {
+                  "name": "[parameters('medefis_identity_backendpoolname')]",
+                  "properties": {
+                    "backends": [
+                      {
+                        "address": "[parameters('medefis_identity_url_storage')]",
+                        "enabledState": "Enabled",
+                        "httpPort": 80,
+                        "httpsPort": 443,
+                        "priority": 1,
+                        "weight": 50,
+                        "backendHostHeader": "[parameters('medefis_identity_url_storage')]"
+                      }
+                    ],
+                    "loadBalancingSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettingsmedefisidentity')]"
+                    },
+                    "resourceState": "Enabled",
+                    "healthProbeSettings": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettingsmedefisidentity')]"
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/BackendPools/', parameters('medefis_identity_backendpoolname'))]"
+                }
+              ],
+              "routingRules": [
+                {
+                  "name": "[parameters('ttminsightsapiroutename')]",
+                  "properties": {
+                    "frontendEndpoints": [
+                      {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('ttminsightsapiFrontendpointname')))]"
+                      }
+                    ],
+                    "acceptedProtocols": [
+                      "Https"
+                    ],
+                    "patternsToMatch": [
+                      "/*"
+                    ],
+                    "enabledState": "Enabled",
+                    "resourceState": "Enabled",
+                    "routeConfiguration": {
+                      "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration",
+                      "customForwardingPath": null,
+                      "forwardingProtocol": "MatchRequest",
+                      "backendPool": {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/backendPools/', parameters('ttmapibackendpoolname'))]"
+                      },
+                      "cacheConfiguration": null
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/RoutingRules/', parameters('ttminsightsapiroutename'))]"
+                },
+                {
+                  "name": "[parameters('ttminsightsapiroutenameio')]",
+                  "properties": {
+                    "frontendEndpoints": [
+                      {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('ttminsightsapiFrontendpointnameio')))]"
+                      }
+                    ],
+                    "acceptedProtocols": [
+                      "Https"
+                    ],
+                    "patternsToMatch": [
+                      "/*"
+                    ],
+                    "enabledState": "Enabled",
+                    "resourceState": "Enabled",
+                    "routeConfiguration": {
+                      "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration",
+                      "customForwardingPath": null,
+                      "forwardingProtocol": "MatchRequest",
+                      "backendPool": {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/backendPools/', parameters('ttmapibackendpoolnameio'))]"
+                      },
+                      "cacheConfiguration": null
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/RoutingRules/', parameters('ttminsightsapiroutenameio'))]"
+                },
+                {
+                  "name": "[parameters('ttminsightsuiroutename')]",
+                  "properties": {
+                    "frontendEndpoints": [
+                      {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('ttminsightsuiFrontendpointname')))]"
+                      }
+                    ],
+                    "acceptedProtocols": [
+                      "Http",
+                      "Https"
+                    ],
+                    "patternsToMatch": [
+                      "/*"
+                    ],
+                    "enabledState": "Enabled",
+                    "resourceState": "Enabled",
+                    "routeConfiguration": {
+                      "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration",
+                      "customForwardingPath": null,
+                      "forwardingProtocol": "HttpsOnly",
+                      "backendPool": {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/backendPools/', parameters('ttminsightsuibackendpoolname'))]"
+                      },
+                      "cacheConfiguration": null
+                    },
+                    "rulesEngine": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors/rulesengines', parameters('frontDoorName'), 'HTTPSEnforcer'))]"
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/RoutingRules/', parameters('ttminsightsuiroutename'))]"
+                },
+                {
+                  "name": "[parameters('ttmordersuiroutename')]",
+                  "properties": {
+                    "frontendEndpoints": [
+                      {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('ttmordersuiFrontendpointname')))]"
+                      }
+                    ],
+                    "acceptedProtocols": [
+                      "Http",
+                      "Https"
+                    ],
+                    "patternsToMatch": [
+                      "/*"
+                    ],
+                    "enabledState": "Enabled",
+                    "resourceState": "Enabled",
+                    "routeConfiguration": {
+                      "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration",
+                      "customForwardingPath": null,
+                      "forwardingProtocol": "HttpsOnly",
+                      "backendPool": {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/backendPools/', parameters('ttmordersuibackendpoolname'))]"
+                      },
+                      "cacheConfiguration": null
+                    },
+                    "rulesEngine": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors/rulesengines', parameters('frontDoorName'), 'HTTPSEnforcer'))]"
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/RoutingRules/', parameters('ttmordersuiroutename'))]"
+                },
+                {
+                  "name": "[parameters('ttmsmuiroutename')]",
+                  "properties": {
+                    "frontendEndpoints": [
+                      {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('ttmsmuiFrontendpointname')))]"
+                      }
+                    ],
+                    "acceptedProtocols": [
+                      "Http",
+                      "Https"
+                    ],
+                    "patternsToMatch": [
+                      "/*"
+                    ],
+                    "enabledState": "Enabled",
+                    "resourceState": "Enabled",
+                    "routeConfiguration": {
+                      "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration",
+                      "customForwardingPath": null,
+                      "forwardingProtocol": "HttpsOnly",
+                      "backendPool": {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/backendPools/', parameters('ttmsmuibackendpoolname'))]"
+                      },
+                      "cacheConfiguration": null
+                    },
+                    "rulesEngine": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors/rulesengines', parameters('frontDoorName'), 'HTTPSEnforcer'))]"
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/RoutingRules/', parameters('ttmsmuiroutename'))]"
+                },
+                {
+                  "name": "[parameters('amnoneroutename')]",
+                  "properties": {
+                    "frontendEndpoints": [
+                      {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('amnoneFrontendpointname')))]"
+                      }
+                    ],
+                    "acceptedProtocols": [
+                      "Http",
+                      "Https"
+                    ],
+                    "patternsToMatch": [
+                      "/*"
+                    ],
+                    "enabledState": "Enabled",
+                    "resourceState": "Enabled",
+                    "routeConfiguration": {
+                      "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration",
+                      "customForwardingPath": null,
+                      "forwardingProtocol": "HttpsOnly",
+                      "backendPool": {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/backendPools/', parameters('amnonebackendpoolname'))]"
+                      },
+                      "cacheConfiguration": null
+                    },
+                    "rulesEngine": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors/rulesengines', parameters('frontDoorName'), 'HTTPSEnforcer'))]"
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/RoutingRules/', parameters('amnoneroutename'))]"
+                },
+                {
+                  "name": "[parameters('amnoneroutenameio')]",
+                  "properties": {
+                    "frontendEndpoints": [
+                      {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('amnoneFrontendpointnameio')))]"
+                      }
+                    ],
+                    "acceptedProtocols": [
+                      "Http",
+                      "Https"
+                    ],
+                    "patternsToMatch": [
+                      "/*"
+                    ],
+                    "enabledState": "Enabled",
+                    "resourceState": "Enabled",
+                    "routeConfiguration": {
+                      "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration",
+                      "customForwardingPath": null,
+                      "forwardingProtocol": "HttpsOnly",
+                      "backendPool": {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/backendPools/', parameters('amnonebackendpoolnameio'))]"
+                      },
+                      "cacheConfiguration": null
+                    },
+                    "rulesEngine": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors/rulesengines', parameters('frontDoorName'), 'HTTPSEnforcer'))]"
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/RoutingRules/', parameters('amnoneroutenameio'))]"
+                },
+                {
+                  "name": "[parameters('amnoneapiroutename')]",
+                  "properties": {
+                    "frontendEndpoints": [
+                      {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('amnoneapiFrontendpointname')))]"
+                      }
+                    ],
+                    "acceptedProtocols": [
+                      "Https"
+                    ],
+                    "patternsToMatch": [
+                      "/*"
+                    ],
+                    "enabledState": "Enabled",
+                    "resourceState": "Enabled",
+                    "routeConfiguration": {
+                      "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration",
+                      "customForwardingPath": null,
+                      "forwardingProtocol": "HttpsOnly",
+                      "backendPool": {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/backendPools/', parameters('amnoneapibackendpoolname'))]"
+                      },
+                      "cacheConfiguration": null
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/RoutingRules/', parameters('amnoneapiroutename'))]"
+                },
+                {
+                  "name": "[parameters('amnoneapiroutenameio')]",
+                  "properties": {
+                    "frontendEndpoints": [
+                      {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('amnoneapiFrontendpointnameio')))]"
+                      }
+                    ],
+                    "acceptedProtocols": [
+                      "Https"
+                    ],
+                    "patternsToMatch": [
+                      "/*"
+                    ],
+                    "enabledState": "Enabled",
+                    "resourceState": "Enabled",
+                    "routeConfiguration": {
+                      "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration",
+                      "customForwardingPath": null,
+                      "forwardingProtocol": "HttpsOnly",
+                      "backendPool": {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/backendPools/', parameters('amnoneapibackendpoolnameio'))]"
+                      },
+                      "cacheConfiguration": null
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/RoutingRules/', parameters('amnoneapiroutenameio'))]"
+                },
+                {
+                  "name": "[parameters('amnonerdroutename')]",
+                  "properties": {
+                    "frontendEndpoints": [
+                      {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('amnonerdFrontendpointname')))]"
+                      }
+                    ],
+                    "acceptedProtocols": [
+                      "Http",
+                      "Https"
+                    ],
+                    "patternsToMatch": [
+                      "/*"
+                    ],
+                    "enabledState": "Enabled",
+                    "resourceState": "Enabled",
+                    "routeConfiguration": {
+                      "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration",
+                      "customForwardingPath": null,
+                      "forwardingProtocol": "HttpsOnly",
+                      "backendPool": {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/backendPools/', parameters('amnonerdbackendpoolname'))]"
+                      },
+                      "cacheConfiguration": null
+                    },
+                    "rulesEngine": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors/rulesengines', parameters('frontDoorName'), 'HTTPSEnforcer'))]"
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/RoutingRules/', parameters('amnonerdroutename'))]"
+                },
+                {
+                  "name": "[parameters('amnonerdapiroutename')]",
+                  "properties": {
+                    "frontendEndpoints": [
+                      {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('amnonerdapiFrontendpointname')))]"
+                      }
+                    ],
+                    "acceptedProtocols": [
+                      "Https"
+                    ],
+                    "patternsToMatch": [
+                      "/*"
+                    ],
+                    "enabledState": "Enabled",
+                    "resourceState": "Enabled",
+                    "routeConfiguration": {
+                      "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration",
+                      "customForwardingPath": null,
+                      "forwardingProtocol": "HttpsOnly",
+                      "backendPool": {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/backendPools/', parameters('amnonerdapibackendpoolname'))]"
+                      },
+                      "cacheConfiguration": null
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/RoutingRules/', parameters('amnonerdapiroutename'))]"
+                },
+                {
+                  "name": "[parameters('matchUIroutename')]",
+                  "properties": {
+                    "frontendEndpoints": [
+                      {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('matchUIFrontendpointname')))]"
+                      }
+                    ],
+                    "acceptedProtocols": [
+                      "Http",
+                      "Https"
+                    ],
+                    "patternsToMatch": [
+                      "/*"
+                    ],
+                    "enabledState": "Enabled",
+                    "resourceState": "Enabled",
+                    "routeConfiguration": {
+                      "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration",
+                      "customForwardingPath": null,
+                      "forwardingProtocol": "HttpsOnly",
+                      "backendPool": {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/backendPools/', parameters('amnone_ats_match_UI_backendpoolname'))]"
+                      },
+                      "cacheConfiguration": null
+                    },
+                    "rulesEngine": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors/rulesengines', parameters('frontDoorName'), 'HTTPSEnforcer'))]"
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/RoutingRules/', parameters('matchUIroutename'))]"
+                },
+                {
+                  "name": "[parameters('matchapiroutename')]",
+                  "properties": {
+                    "frontendEndpoints": [
+                      {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('matchapiFrontendpointname')))]"
+                      }
+                    ],
+                    "acceptedProtocols": [
+                      "Https"
+                    ],
+                    "patternsToMatch": [
+                      "/*"
+                    ],
+                    "enabledState": "Enabled",
+                    "resourceState": "Enabled",
+                    "routeConfiguration": {
+                      "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration",
+                      "customForwardingPath": null,
+                      "forwardingProtocol": "HttpsOnly",
+                      "backendPool": {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/backendPools/', parameters('matchapibackendpoolname'))]"
+                      },
+                      "cacheConfiguration": null
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/RoutingRules/', parameters('matchapiroutename'))]"
+                },
+                {
+                  "name": "[parameters('amnone_ats_match_UI_routename')]",
+                  "properties": {
+                    "frontendEndpoints": [
+                      {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('amnone_ats_UI_Frontendpointname')))]"
+                      }
+                    ],
+                    "acceptedProtocols": [
+                      "Http",
+                      "Https"
+                    ],
+                    "patternsToMatch": [
+                      "/imatch/*"
+                    ],
+                    "enabledState": "Enabled",
+                    "resourceState": "Enabled",
+                    "routeConfiguration": {
+                      "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration",
+                      "customForwardingPath": null,
+                      "forwardingProtocol": "HttpsOnly",
+                      "backendPool": {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/backendPools/', parameters('amnone_ats_match_UI_backendpoolname'))]"
+                      },
+                      "cacheConfiguration": null
+                    },
+                    "rulesEngine": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors/rulesengines', parameters('frontDoorName'), 'HTTPSEnforcer'))]"
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/RoutingRules/', parameters('amnone_ats_match_UI_routename'))]"
+                },
+                {
+                  "name": "[parameters('amnone_ats_match_API_routename')]",
+                  "properties": {
+                    "frontendEndpoints": [
+                      {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('amnone_ats_API_Frontendpointname')))]"
+                      }
+                    ],
+                    "acceptedProtocols": [
+                      "Https"
+                    ],
+                    "patternsToMatch": [
+                      "/imatch/*",
+                      "/ipreference/*"
+                    ],
+                    "enabledState": "Enabled",
+                    "resourceState": "Enabled",
+                    "routeConfiguration": {
+                      "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration",
+                      "customForwardingPath": null,
+                      "forwardingProtocol": "HttpsOnly",
+                      "backendPool": {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/backendPools/', parameters('amnone_ats_match_API_backendpoolname'))]"
+                      },
+                      "cacheConfiguration": null
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/RoutingRules/', parameters('amnone_ats_match_API_routename'))]"
+                },
+                {
+                  "name": "[parameters('medefis_vms_UI_routename')]",
+                  "properties": {
+                    "frontendEndpoints": [
+                      {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('medefis_vms_UI_Frontendpointname')))]"
+                      }
+                    ],
+                    "acceptedProtocols": [
+                      "Http",
+                      "Https"
+                    ],
+                    "patternsToMatch": [
+                      "/*"
+                    ],
+                    "enabledState": "Enabled",
+                    "resourceState": "Enabled",
+                    "routeConfiguration": {
+                      "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration",
+                      "customForwardingPath": null,
+                      "forwardingProtocol": "HttpsOnly",
+                      "backendPool": {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/backendPools/', parameters('medefis_vms_UI_backendpoolname'))]"
+                      },
+                      "cacheConfiguration": null
+                    },
+                    "rulesEngine": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors/rulesengines', parameters('frontDoorName'), 'HTTPSEnforcer'))]"
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/RoutingRules/', parameters('medefis_vms_UI_routename'))]"
+                },
+                {
+                  "name": "[parameters('medefis_mvc3_UI_routename')]",
+                  "properties": {
+                    "frontendEndpoints": [
+                      {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('medefis_mvc3_UI_Frontendpointname')))]"
+                      }
+                    ],
+                    "acceptedProtocols": [
+                      "Http",
+                      "Https"
+                    ],
+                    "patternsToMatch": [
+                      "/*"
+                    ],
+                    "enabledState": "Enabled",
+                    "resourceState": "Enabled",
+                    "routeConfiguration": {
+                      "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration",
+                      "customForwardingPath": null,
+                      "forwardingProtocol": "HttpsOnly",
+                      "backendPool": {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/backendPools/', parameters('medefis_mvc3_UI_backendpoolname'))]"
+                      },
+                      "cacheConfiguration": null
+                    },
+                    "rulesEngine": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors/rulesengines', parameters('frontDoorName'), 'HTTPSEnforcer'))]"
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/RoutingRules/', parameters('medefis_mvc3_UI_routename'))]"
+                },
+                {
+                  "name": "[parameters('medefis_identity_routename')]",
+                  "properties": {
+                    "frontendEndpoints": [
+                      {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('medefis_identity_Frontendpointname')))]"
+                      }
+                    ],
+                    "acceptedProtocols": [
+                      "Http",
+                      "Https"
+                    ],
+                    "patternsToMatch": [
+                      "/*"
+                    ],
+                    "enabledState": "Enabled",
+                    "resourceState": "Enabled",
+                    "routeConfiguration": {
+                      "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration",
+                      "customForwardingPath": null,
+                      "forwardingProtocol": "HttpsOnly",
+                      "backendPool": {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/backendPools/', parameters('medefis_identity_backendpoolname'))]"
+                      },
+                      "cacheConfiguration": null
+                    },
+                    "rulesEngine": {
+                      "id": "[concat(resourceId('Microsoft.Network/frontdoors/rulesengines', parameters('frontDoorName'), 'HTTPSEnforcer'))]"
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/RoutingRules/', parameters('medefis_identity_routename'))]"
+                },
+                {
+                  "name": "[parameters('medefis_vms_API_routename')]",
+                  "properties": {
+                    "frontendEndpoints": [
+                      {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('medefis_vms_API_Frontendpointname')))]"
+                      }
+                    ],
+                    "acceptedProtocols": [
+                      "Https"
+                    ],
+                    "patternsToMatch": [
+                      "/*"
+                    ],
+                    "enabledState": "Enabled",
+                    "resourceState": "Enabled",
+                    "routeConfiguration": {
+                      "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration",
+                      "customForwardingPath": "/mdf-vms/",
+                      "forwardingProtocol": "HttpsOnly",
+                      "backendPool": {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/backendPools/', parameters('medefis_vms_API_backendpoolname'))]"
+                      },
+                      "cacheConfiguration": null
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/RoutingRules/', parameters('medefis_vms_API_routename'))]"
+                },
+                {
+                  "name": "[parameters('medefis_agency_API_routename')]",
+                  "properties": {
+                    "frontendEndpoints": [
+                      {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), concat('/FrontendEndpoints/', parameters('medefis_agency_API_Frontendpointname')))]"
+                      }
+                    ],
+                    "acceptedProtocols": [
+                      "Https"
+                    ],
+                    "patternsToMatch": [
+                      "/api/*"
+                    ],
+                    "enabledState": "Enabled",
+                    "resourceState": "Enabled",
+                    "routeConfiguration": {
+                      "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration",
+                      "customForwardingPath": "/mdf-agency/",
+                      "forwardingProtocol": "HttpsOnly",
+                      "backendPool": {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/backendPools/', parameters('medefis_agency_API_backendpoolname'))]"
+                      },
+                      "cacheConfiguration": null
+                    }
+                  },
+                  "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/RoutingRules/', parameters('medefis_agency_API_routename'))]"
+                }
+              ],
                 "backendPoolsSettings": {
                     "enforceCertificateNameCheck": "Enabled",
                     "sendRecvTimeoutSeconds": 30
                 }
             }
-        }
-        
+        }       
     ]
 }

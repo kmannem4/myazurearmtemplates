@@ -1,0 +1,252 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "dnszones_amnhealthcare_io_name": {
+      "type": "String"
+    },
+    "publicIPAddresses_amn_wus2_hub_pip_externalid": {
+      "type": "String"
+    },
+    "frontdoors_amn_wus2_hub_afd_externalid": {
+      "type": "String"
+    },
+    "amnone_apigateway_DNS": {
+      "type": "String"
+    },
+    "ttm_apigateway_DNS": {
+      "type": "String"
+    },
+    "match_apigateway_DNS": {
+      "type": "String"
+    },
+    "amnone_ats_apigateway_DNS": {
+      "type": "String"
+    },
+    "amnone_UI_DNS": {
+      "type": "String"
+    },
+    "match_UI_DNS": {
+      "type": "String"
+    },
+    "amnone_ats_UI_DNS": {
+      "type": "String"
+    },
+    "recruiterdashboard_UI_DNS": {
+      "type": "String"
+    },
+    "amnone_api_DNS": {
+      "type": "String"
+    },
+    "ttm_api_DNS": {
+      "type": "String"
+    },
+    "match_api_DNS": {
+      "type": "String"
+    },
+    "amnone_ats_api_DNS": {
+      "type": "String"
+    },
+    "recruiterdashboard_api_DNS": {
+      "type": "String"
+    }
+  },
+  "variables": {},
+  "resources": [
+    {
+      "type": "Microsoft.Network/dnszones",
+      "apiVersion": "2018-05-01",
+      "name": "[parameters('dnszones_amnhealthcare_io_name')]",
+      "location": "global",
+      "tags": {
+        "charge-to": "101-71200-5000-9500",
+        "environment": "prod"
+      },
+      "properties": {
+        "zoneType": "Public"
+      }
+    },
+    {
+      "type": "Microsoft.Network/dnszones/A",
+      "apiVersion": "2018-05-01",
+      "name": "[concat(parameters('dnszones_amnhealthcare_io_name'), '/', parameters('amnone_apigateway_DNS'))]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/dnszones', parameters('dnszones_amnhealthcare_io_name'))]"
+      ],
+      "properties": {
+        "TTL": 3600,
+        "targetResource": {
+          "id": "[parameters('publicIPAddresses_amn_wus2_hub_pip_externalid')]"
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Network/dnszones/A",
+      "apiVersion": "2018-05-01",
+      "name": "[concat(parameters('dnszones_amnhealthcare_io_name'), '/', parameters('ttm_apigateway_DNS'))]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/dnszones', parameters('dnszones_amnhealthcare_io_name'))]"
+      ],
+      "properties": {
+        "TTL": 3600,
+        "targetResource": {
+          "id": "[parameters('publicIPAddresses_amn_wus2_hub_pip_externalid')]"
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Network/dnszones/A",
+      "apiVersion": "2018-05-01",
+      "name": "[concat(parameters('dnszones_amnhealthcare_io_name'), '/', parameters('match_apigateway_DNS'))]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/dnszones', parameters('dnszones_amnhealthcare_io_name'))]"
+      ],
+      "properties": {
+        "TTL": 3600,
+        "targetResource": {
+          "id": "[parameters('publicIPAddresses_amn_wus2_hub_pip_externalid')]"
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Network/dnszones/A",
+      "apiVersion": "2018-05-01",
+      "name": "[concat(parameters('dnszones_amnhealthcare_io_name'), '/', parameters('amnone_ats_apigateway_DNS'))]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/dnszones', parameters('dnszones_amnhealthcare_io_name'))]"
+      ],
+      "properties": {
+        "TTL": 3600,
+        "targetResource": {
+          "id": "[parameters('publicIPAddresses_amn_wus2_hub_pip_externalid')]"
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Network/dnszones/CNAME",
+      "apiVersion": "2018-05-01",
+      "name": "[concat(parameters('dnszones_amnhealthcare_io_name'), '/', parameters('recruiterdashboard_UI_DNS'))]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/dnszones', parameters('dnszones_amnhealthcare_io_name'))]"
+      ],
+      "properties": {
+        "TTL": 60,
+        "targetResource": {
+          "id": "[parameters('frontdoors_amn_wus2_hub_afd_externalid')]"
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Network/dnszones/CNAME",
+      "apiVersion": "2018-05-01",
+      "name": "[concat(parameters('dnszones_amnhealthcare_io_name'), '/', parameters('recruiterdashboard_api_DNS'))]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/dnszones', parameters('dnszones_amnhealthcare_io_name'))]"
+      ],
+      "properties": {
+        "TTL": 60,
+        "targetResource": {
+          "id": "[parameters('frontdoors_amn_wus2_hub_afd_externalid')]"
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Network/dnszones/CNAME",
+      "apiVersion": "2018-05-01",
+      "name": "[concat(parameters('dnszones_amnhealthcare_io_name'), '/', parameters('amnone_UI_DNS'))]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/dnszones', parameters('dnszones_amnhealthcare_io_name'))]"
+      ],
+      "properties": {
+        "TTL": 60,
+        "targetResource": {
+          "id": "[parameters('frontdoors_amn_wus2_hub_afd_externalid')]"
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Network/dnszones/CNAME",
+      "apiVersion": "2018-05-01",
+      "name": "[concat(parameters('dnszones_amnhealthcare_io_name'), '/', parameters('amnone_api_DNS'))]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/dnszones', parameters('dnszones_amnhealthcare_io_name'))]"
+      ],
+      "properties": {
+        "TTL": 60,
+        "targetResource": {
+          "id": "[parameters('frontdoors_amn_wus2_hub_afd_externalid')]"
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Network/dnszones/CNAME",
+      "apiVersion": "2018-05-01",
+      "name": "[concat(parameters('dnszones_amnhealthcare_io_name'), '/', parameters('match_UI_DNS'))]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/dnszones', parameters('dnszones_amnhealthcare_io_name'))]"
+      ],
+      "properties": {
+        "TTL": 60,
+        "targetResource": {
+          "id": "[parameters('frontdoors_amn_wus2_hub_afd_externalid')]"
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Network/dnszones/CNAME",
+      "apiVersion": "2018-05-01",
+      "name": "[concat(parameters('dnszones_amnhealthcare_io_name'), '/', parameters('match_api_DNS'))]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/dnszones', parameters('dnszones_amnhealthcare_io_name'))]"
+      ],
+      "properties": {
+        "TTL": 60,
+        "targetResource": {
+          "id": "[parameters('frontdoors_amn_wus2_hub_afd_externalid')]"
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Network/dnszones/CNAME",
+      "apiVersion": "2018-05-01",
+      "name": "[concat(parameters('dnszones_amnhealthcare_io_name'), '/', parameters('amnone_ats_UI_DNS'))]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/dnszones', parameters('dnszones_amnhealthcare_io_name'))]"
+      ],
+      "properties": {
+        "TTL": 60,
+        "targetResource": {
+          "id": "[parameters('frontdoors_amn_wus2_hub_afd_externalid')]"
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Network/dnszones/CNAME",
+      "apiVersion": "2018-05-01",
+      "name": "[concat(parameters('dnszones_amnhealthcare_io_name'), '/', parameters('amnone_ats_api_DNS'))]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/dnszones', parameters('dnszones_amnhealthcare_io_name'))]"
+      ],
+      "properties": {
+        "TTL": 60,
+        "targetResource": {
+          "id": "[parameters('frontdoors_amn_wus2_hub_afd_externalid')]"
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Network/dnszones/CNAME",
+      "apiVersion": "2018-05-01",
+      "name": "[concat(parameters('dnszones_amnhealthcare_io_name'), '/', parameters('ttm_api_DNS'))]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/dnszones', parameters('dnszones_amnhealthcare_io_name'))]"
+      ],
+      "properties": {
+        "TTL": 60,
+        "targetResource": {
+          "id": "[parameters('frontdoors_amn_wus2_hub_afd_externalid')]"
+        }
+      }
+    }
+  ]
+}

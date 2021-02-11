@@ -5,6 +5,9 @@
         "resourceName": {
             "value": "AMNHubFrontDoorWAFq01"
         },
+        "DenyNonAMNTraffic_enablestate": {
+            "value": "Enabled"
+        },
         "location": {
             "value": "global"
         },

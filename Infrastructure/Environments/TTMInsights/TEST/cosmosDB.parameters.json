@@ -1,0 +1,96 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "cosmodbname": {
+      "value": "amn-wus2-ttm-cosmo-t01"
+    },
+    "databasename": {
+      "value": "insights"
+    },
+    "orders_databasename": {
+      "value": "orders"
+    },
+    "containername": {
+      "value": "items"
+    },
+    "orders_containername": {
+      "value": "items"
+    },
+    "maxthroughputvalue": {
+      "value": "4000"
+    },
+    "kind": {
+      "value": "GlobalDocumentDB"
+    },
+    "databaseAccountOfferType": {
+      "value": "Standard"
+    },
+    "backupPolicytype": {
+      "value": "Periodic"
+    },
+    "backupIntervalInMinutes": {
+      "value": "60"
+    },
+    "backupRetentionIntervalInHours": {
+      "value": "8"
+    },
+    "location": {
+      "value": "westus2"
+    },
+    "resourceid": {
+      "value": "/subscriptions/43c5a646-c00c-4c59-a332-df854c5dd08c/resourcegroups/co-wus2-enterprisemonitor-rg-s01/providers/microsoft.operationalinsights/workspaces/amn-co-wus2-enterprisemonitor-loga-d01"
+    },
+    "settingName": {
+      "value": "amn-co-wus2-enterprisemonitor-loga-d01-ttm-cosmoDB-diagset-t01"
+    },
+    "appservicesubnetName": {
+      "value": "amn-ttm-as-sn"
+    },
+    "functionssubnetName": {
+      "value": "amn-ttm-func-sn"
+    },
+    "virtualnetworkname": {
+      "value": "amn-wus2-ttm-vnet-t01"
+    },
+    "isVirtualNetworkFilterEnabled": {
+      "value": "true"
+    },
+    "ipAddressOrRange_1": {
+      "value": "13.107.42.20"
+    },
+    "ipAddressOrRange_2": {
+      "value": "24.21.97.22"
+    },
+    "ipAddressOrRange_3": {
+      "value": "98.246.12.119"
+    },
+    "ipAddressOrRange_4": {
+      "value": "50.38.74.141"
+    },
+    "ipAddressOrRange_5": {
+      "value": "209.234.199.4"
+    },
+    "ipAddressOrRange_6": {
+      "value": "73.37.47.191"
+    },
+    "ipAddressOrRange_7": {
+      "value": "76.115.203.142"
+    },
+    "locationName": {
+      "value": "West US 2"
+    },
+    "defaultExperience": {
+      "value": "Core (SQL)"
+    },
+    "enableMultipleWriteLocations": {
+      "value": "true"
+    },
+    "CosmosAccountType": {
+      "value": "Non-Production"
+    },
+    "isZoneRedundant": {
+      "value": "true"
+    }
+  }
+}

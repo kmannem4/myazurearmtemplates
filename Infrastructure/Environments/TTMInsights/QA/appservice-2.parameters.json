@@ -39,7 +39,13 @@
     "currentStack": {
       "value": "dotnetcore"
     },
-    "identityName": {
+    "AMN_TTM_managedid_subscriptionId": {
+      "value": "95181a59-30e2-4faf-b8c7-993d85a7e640"
+    },
+    "AMN_TTM_managedid_serverFarmResourceGroup": {
+      "value": "amn-wus2-ttm-rg-q01"
+    },
+    "AMN_TTM_managedidentityName": {
       "value": "amn-wus2-ttm-as-mgid-q01"
     }
   }

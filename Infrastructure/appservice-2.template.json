@@ -35,27 +35,33 @@
     "currentStack": {
       "type": "string"
     },
-    "identityName": {
+    "AMN_TTM_managedid_subscriptionId": {
+      "type": "string"
+    },
+    "AMN_TTM_managedid_serverFarmResourceGroup": {
+      "type": "string"
+    },
+    "AMN_TTM_managedidentityName": {
       "type": "string"
     }
   },
   "resources": [
     {
-      "apiVersion": "2018-11-01",
+      "apiVersion": "2020-06-01",
       "name": "[parameters('appservicename')]",
       "type": "Microsoft.Web/sites",
       "location": "[parameters('location')]",
       "identity": {
         "type": "SystemAssigned, UserAssigned",
         "userAssignedIdentities": {
-          "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities/', parameters('identityName'))]": {}
+          "[concat('/subscriptions/', parameters('AMN_TTM_managedid_subscriptionId'),'/resourcegroups/', parameters('AMN_TTM_managedid_serverFarmResourceGroup'), '/providers/Microsoft.ManagedIdentity/userAssignedIdentities/', parameters('AMN_TTM_managedidentityName'))]": {}
         }
       },
       "tags": "[parameters('tagsArray')]",
       "resources": [
         {
           "type": "config",
-          "apiVersion": "2018-11-01",
+          "apiVersion": "2020-06-01",
           "name": "virtualNetwork",
           "location": "[parameters('location')]",
           "dependsOn": [
@@ -114,7 +120,7 @@
           "appSettings": [
             {
               "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
-              "value": "[reference(resourceId('Microsoft.Insights/components', parameters('appinsightsname')), '2014-04-01').InstrumentationKey]"
+              "value": "[reference(resourceId(parameters('AMN_TTM_managedid_serverFarmResourceGroup'), 'Microsoft.Insights/components', parameters('appinsightsname')), '2014-04-01').InstrumentationKey]"
             },
             {
               "name": "ApplicationInsightsAgent_EXTENSION_VERSION",
@@ -158,6 +164,18 @@
             },
             {
               "name": "WEBSITE_LOAD_USER_PROFILE",
+              "value": "1"
+            },
+            {
+              "name": "WEBSITE_HTTPLOGGING_RETENTION_DAYS",
+              "value": "1"
+            },
+            {
+              "name": "WEBSITE_RUN_FROM_PACKAGE",
+              "value": "1"
+            },
+            {
+              "name": "WEBSITE_VNET_ROUTE_ALL",
               "value": "1"
             }
           ],
@@ -176,20 +194,20 @@
     },
     {
       "type": "Microsoft.Web/sites/slots",
-      "apiVersion": "2018-11-01",
+      "apiVersion": "2020-06-01",
       "name": "[concat(parameters('appservicename'), '/staging')]",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[resourceId('Microsoft.Web/sites', parameters('appservicename'))]"
+        "[resourceId('Microsoft.Web/sites/', parameters('appservicename'))]"
       ],
       "resources": [
         {
           "type": "config",
-          "apiVersion": "2018-11-01",
+          "apiVersion": "2020-06-01",
           "name": "virtualNetwork",
           "location": "[parameters('location')]",
           "dependsOn": [
-            "[resourceId('Microsoft.Web/sites/', parameters('appservicename'), '/slots/staging')]"
+            "[resourceId('Microsoft.Web/sites/slots', parameters('appservicename'), 'staging')]"
           ],
           "properties": {
             "subnetResourceId": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('subnetname'))]",
@@ -202,7 +220,7 @@
           "appSettings": [
             {
               "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
-              "value": "[reference(resourceId('Microsoft.Insights/components', parameters('appinsightsname')), '2014-04-01').InstrumentationKey]"
+              "value": "[reference(resourceId(parameters('AMN_TTM_managedid_serverFarmResourceGroup'), 'Microsoft.Insights/components', parameters('appinsightsname')), '2014-04-01').InstrumentationKey]"
             },
             {
               "name": "ApplicationInsightsAgent_EXTENSION_VERSION",
@@ -246,6 +264,18 @@
             },
             {
               "name": "WEBSITE_LOAD_USER_PROFILE",
+              "value": "1"
+            },
+            {
+              "name": "WEBSITE_HTTPLOGGING_RETENTION_DAYS",
+              "value": "1"
+            },
+            {
+              "name": "WEBSITE_RUN_FROM_PACKAGE",
+              "value": "1"
+            },
+            {
+              "name": "WEBSITE_VNET_ROUTE_ALL",
               "value": "1"
             }
           ],

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "storageAccountName": {
+      "value": "amnttmclientdatasaq01"
+    },
+    "location": {
+      "value": "westus2"
+    },
+    "storageAccountSku": {
+      "value": {
+        "name": "Standard_RAGRS",
+        "tier": "Standard"
+      }
+    },
+    "storageAccountKind": {
+      "value": "StorageV2"
+    },
+    "storageAccountTags": {
+      "value": {
+        "application": "ttm",
+        "charge-to": "800-71200-0000-0000",
+        "role": "app",
+        "environment": "qa"
+      }
+    }
+  }
+}

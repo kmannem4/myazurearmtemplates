@@ -1,0 +1,346 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "frontDoorName": {
+      "value": "amn-wus2-hub-afd-d01"
+    },
+    "wafName": {
+      "value": "AMNHubFrontDoorWAFd01"
+    },
+    "apigatewayaddress": {
+      "value": "apigateway.dev.ttm.amnhealthcare.com"
+    },
+    "apigatewayaddressio": {
+      "value": "apigateway-ttm.dev.amnhealthcare.io"
+    },
+    "ttminsightsapiurl": {
+      "value": "api.dev.ttm.amnhealthcare.com"
+    },
+    "ttminsightsapiurlio": {
+      "value": "ttm-api.dev.amnhealthcare.io"
+    },
+    "ttminsightsuiurl": {
+      "value": "dev-insights.shiftwise.net"
+    },
+    "primarystorageAccounturl": {
+      "value": "amnttminsightssad01.z5.web.core.windows.net"
+    },
+    "secondarystorageAccounturl": {
+      "value": "amnttminsightssad01-secondary.z5.web.core.windows.net"
+    },
+    "ttmordersuiurl": {
+      "value": "dev-orders.shiftwise.net"
+    },
+    "ttmordersuibackendpoolname": {
+      "value": "ttm-orders-ui-backend-pool"
+    },
+    "ttmordersuiroutename": {
+      "value": "ttm-orders-ui-route"
+    },
+    "ttmordersuiFrontendpointname": {
+      "value": "dev-orders-shiftwise-net"
+    },
+    "ttmordersUI_primarystorageAccounturl": {
+      "value": "amnttmordermanagesad01.z5.web.core.windows.net"
+    },
+    "ttmordersUI_secondarystorageAccounturl": {
+      "value": "amnttmordermanagesad01-secondary.z5.web.core.windows.net"
+    },
+    "ttmsmuiurl": {
+      "value": "dev-sm.shiftwise.net"
+    },
+    "ttmsmuibackendpoolname": {
+      "value": "ttm-sm-ui-backend-pool"
+    },
+    "ttmsmuiroutename": {
+      "value": "ttm-sm-ui-route"
+    },
+    "ttmsmuiFrontendpointname": {
+      "value": "dev-sm-shiftwise-net"
+    },
+    "ttmsmUI_primarystorageAccounturl": {
+      "value": "amnttmstaffsad01.z5.web.core.windows.net"
+    },
+    "ttmsmUI_secondarystorageAccounturl": {
+      "value": "amnttmstaffsad01-secondary.z5.web.core.windows.net"
+    },
+    "ttmapibackendpoolname": {
+      "value": "ttm-api-backend-pool"
+    },
+    "ttmapibackendpoolnameio": {
+      "value": "ttm-api-backend-pool-io"
+    },
+    "ttminsightsuibackendpoolname": {
+      "value": "ttm-insights-ui-backend-pool"
+    },
+    "ttminsightsapiroutename": {
+      "value": "ttm-api-route"
+    },
+    "ttminsightsapiroutenameio": {
+      "value": "ttm-api-route-io"
+    },
+    "ttminsightsuiroutename": {
+      "value": "ttm-insights-ui-route"
+    },
+    "ttminsightsapiFrontendpointname": {
+      "value": "api-dev-ttm-amnhealthcare-com"
+    },
+    "ttminsightsapiFrontendpointnameio": {
+      "value": "ttm-api-amnhealthcare-io"
+    },
+    "ttminsightsuiFrontendpointname": {
+      "value": "dev-insights-shiftwise-net"
+    },
+    "amnoneurl": {
+      "value": "dev-amnone.amnhealthcare.com"
+    },
+    "amnoneFrontendpointname": {
+      "value": "dev-amnone-amnhealthcare-com"
+    },
+    "amnonebackendpoolname": {
+      "value": "amnone-backend-pool"
+    },
+    "amnoneroutename": {
+      "value": "amnone-route"
+    },
+    "amnoneurlappservice": {
+      "value": "cowus2amnonewebhostsad01.z5.web.core.windows.net"
+    },
+    "amnoneurlio": {
+      "value": "amnone.dev.amnhealthcare.io"
+    },
+    "amnoneFrontendpointnameio": {
+      "value": "amnone-amnhealthcare-io"
+    },
+    "amnonebackendpoolnameio": {
+      "value": "amnone-backend-pool-io"
+    },
+    "amnoneroutenameio": {
+      "value": "amnone-route-io"
+    },
+    "amnonerdurl": {
+      "value": "rd.dev.amnhealthcare.io"
+    },
+    "amnonerdFrontendpointname": {
+      "value": "rd-amnhealthcare-io"
+    },
+    "amnonerdbackendpoolname": {
+      "value": "amnone-rd-backend-pool"
+    },
+    "amnonerdroutename": {
+      "value": "amnone-rd-route"
+    },
+    "amnonerdurlappservice": {
+      "value": "cowus2rduisad01.z5.web.core.windows.net"
+    },
+    "amnoneapiurl": {
+      "value": "dev-amnone-api.amnhealthcare.com"
+    },
+    "amnoneapiFrontendpointname": {
+      "value": "dev-amnone-api-amnhealthcare-com"
+    },
+    "amnoneapibackendpoolname": {
+      "value": "amnone-api-backend-pool"
+    },
+    "amnoneapiroutename": {
+      "value": "amnone-api-route"
+    },
+    "amnoneapiapigatewayaddress": {
+      "value": "apigateway-dev-amnone.amnhealthcare.com"
+    },
+    "amnoneapiurlio": {
+      "value": "amnone-api.dev.amnhealthcare.io"
+    },
+    "amnoneapiFrontendpointnameio": {
+      "value": "amnone-api-amnhealthcare-io"
+    },
+    "amnoneapibackendpoolnameio": {
+      "value": "amnone-api-backend-pool-io"
+    },
+    "amnoneapiroutenameio": {
+      "value": "amnone-api-route-io"
+    },
+    "amnoneapiapigatewayaddressio": {
+      "value": "apigateway-amnone.dev.amnhealthcare.io"
+    },
+    "amnonerdapiurl": {
+      "value": "rd-api.dev.amnhealthcare.io"
+    },
+    "amnonerdapiFrontendpointname": {
+      "value": "rd-api-amnhealthcare-io"
+    },
+    "amnonerdapibackendpoolname": {
+      "value": "amnone-rd-api-backend-pool"
+    },
+    "amnonerdapiroutename": {
+      "value": "amnone-rd-api-route"
+    },
+    "amnonerdapiapigatewayaddress": {
+      "value": "apigateway-amnone.dev.amnhealthcare.io"
+    },
+    "matchUIurl": {
+      "value": "match.dev.amnhealthcare.io"
+    },
+    "matchUIFrontendpointname": {
+      "value": "match-amnhealthcare-io"
+    },
+    "matchUIroutename": {
+      "value": "amnone-match-route"
+    },
+    "matchapiurl": {
+      "value": "match-api.dev.amnhealthcare.io"
+    },
+    "matchapiFrontendpointname": {
+      "value": "match-api-amnhealthcare-io"
+    },
+    "matchapibackendpoolname": {
+      "value": "amnone-match-api-backend-pool"
+    },
+    "matchapiroutename": {
+      "value": "amnone-match-api-route"
+    },
+    "matchapiapigatewayaddress": {
+      "value": "apigateway-match.dev.amnhealthcare.io"
+    },
+    "amnone_ats_UI_url": {
+      "value": "ats.dev.amnhealthcare.io"
+    },
+    "amnone_ats_UI_Frontendpointname": {
+      "value": "ats-amnhealthcare-io"
+    },
+    "amnone_ats_match_UI_backendpoolname": {
+      "value": "amnone-ats-match-backend-pool"
+    },
+    "amnone_ats_match_UI_routename": {
+      "value": "amnone-ats-match-route"
+    },
+    "amnone_ats_match_UI_url": {
+      "value": "co-wus2-feedbackui-as-d01.azurewebsites.net"
+    },
+    "amnone_ats_API_url": {
+      "value": "ats-api.dev.amnhealthcare.io"
+    },
+    "amnone_ats_API_Frontendpointname": {
+      "value": "ats-api-amnhealthcare-io"
+    },
+    "amnone_ats_match_API_backendpoolname": {
+      "value": "amnone-ats-match-api-backend-pool"
+    },
+    "amnone_ats_match_API_routename": {
+      "value": "amnone-ats-match-api-route"
+    },
+    "amnone_ats_API_apigatewayaddress": {
+      "value": "apigateway-ats.dev.amnhealthcare.io"
+    },
+    "medefis_vms_UI_url": {
+      "value": "vms.dev.medefis5.com"
+    },
+    "medefis_vms_UI_Frontendpointname": {
+      "value": "vms-medefis5-com"
+    },
+    "medefis_vms_UI_backendpoolname": {
+      "value": "medefis-vms-ui-backend-pool"
+    },
+    "medefis_vms_UI_routename": {
+      "value": "medefis-vms-ui-route"
+    },
+    "medefis_vms_UI_url_storage": {
+      "value": "tm-wus2-otmappvmsui-as-d01.azurewebsites.net"
+    },
+    "medefis_mvc3_UI_url": {
+      "value": "www.dev.medefis5.com"
+    },
+    "medefis_mvc3_UI_Frontendpointname": {
+      "value": "www-medefis5-com"
+    },
+    "medefis_mvc3_UI_backendpoolname": {
+      "value": "medefis-mvc3-ui-backend-pool"
+    },
+    "medefis_mvc3_UI_routename": {
+      "value": "medefis-mvc3-ui-route"
+    },
+    "medefis_mvc3_UI_url_storage": {
+      "value": "tm-wus2-otmappweb-as-d01.azurewebsites.net"
+    },
+    "medefis_identity_url": {
+      "value": "identity.dev.medefis5.com"
+    },
+    "medefis_identity_Frontendpointname": {
+      "value": "identity-medefis5-com"
+    },
+    "medefis_identity_backendpoolname": {
+      "value": "medefis-identity-ui-backend-pool"
+    },
+    "medefis_identity_routename": {
+      "value": "medefis-identity-ui-route"
+    },
+    "medefis_identity_url_storage": {
+      "value": "tm-wus2-otmappidentity-as-d01.azurewebsites.net"
+    },
+    "medefis_vms_API_url": {
+      "value": "api.dev.medefis5.com"
+    },
+    "medefis_vms_API_Frontendpointname": {
+      "value": "vms-api-medefis5-com"
+    },
+    "medefis_vms_API_backendpoolname": {
+      "value": "medefis-vms-api-backend-pool"
+    },
+    "medefis_vms_API_routename": {
+      "value": "medefis-vms-api-route"
+    },
+    "medefis_agency_API_url": {
+      "value": "agencyapi.dev.medefis5.com"
+    },
+    "medefis_agency_API_Frontendpointname": {
+      "value": "identity-api-medefis5-com"
+    },
+    "medefis_agency_API_backendpoolname": {
+      "value": "medefis-agency-api-backend-pool"
+    },
+    "medefis_agency_API_routename": {
+      "value": "medefis-agency-api-route"
+    },
+    "medefis_API_apigatewayaddress": {
+      "value": "apigateway.dev.medefis5.com"
+    },
+    "location": {
+      "value": "global"
+    },
+    "vaultResourceGroupName": {
+      "value": "amn-wus2-hub-rg-d01"
+    },
+    "keyVaultName": {
+      "value": "amn-wus2-hub-kv-d01"
+    },
+    "ttm_sslCertName": {
+      "value": "wildcard-dev-ttm-amnhealthcare-com"
+    },
+    "amnone_sslCertName_io": {
+      "value": "wildcard-dev-amnhealthcare-io"
+    },
+    "medefis_sslCertName_io": {
+      "value": "wildcard-dev-medefis5-com"
+    },
+    "amnone_sslCertName": {
+      "value": "wildcard-amnhealthcare-com"
+    },
+    "shiftwise_sslCertName": {
+      "value": "shiftwise-wildcard"
+    },
+    "resourceid": {
+      "value": "/subscriptions/43c5a646-c00c-4c59-a332-df854c5dd08c/resourcegroups/co-wus2-enterprisemonitor-rg-s01/providers/microsoft.operationalinsights/workspaces/amn-co-wus2-enterprisemonitor-loga-d01"
+    },
+    "settingName": {
+      "value": "amn-co-wus2-enterprisemonitor-loga-d01-hub-afd-diagset-d01"
+    },
+    "tagsArray": {
+      "value": {
+        "charge-to": "101-71200-5000-9500",
+        "role": "infrastructure",
+        "environment": "dev"
+      }
+    }
+  }
+}

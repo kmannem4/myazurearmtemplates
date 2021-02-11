@@ -14,7 +14,17 @@
         "amntmminsightscosmosn": "10.98.49.0/29",
         "amntmminsightscosmoSubnetName": "amn-ttm-insights-cosmo-sn",
         "amntmmfuncsn": "10.98.50.0/27",
-        "amntmmfuncSubnetName": "amn-ttm-func-sn"
+        "amntmmfuncSubnetName": "amn-ttm-func-sn",
+        "sitemapAPISubnetAddessPrefix": "10.98.51.0/27",
+        "sitemapAPISubnetName": "amn-ttmsitemap-as-sn",
+        "ordermanagementSubnetAddessPrefix": "10.98.52.0/27",
+        "ordermanagementSubnetName": "amn-ttmordermanagement-as-sn",
+        "clientdataSubnetAddessPrefix": "10.98.53.0/27",
+        "clientdataSubnetName": "amn-ttmclientdata-as-sn",
+        "referencedataSubnetAddessPrefix": "10.98.54.0/27",
+        "referencedataSubnetName": "amn-ttmreferencedata-as-sn",
+        "staffSubnetAddessPrefix": "10.98.55.0/27",
+        "staffSubnetName": "amn-ttmstaff-as-sn"
       }
     },
     "location": {

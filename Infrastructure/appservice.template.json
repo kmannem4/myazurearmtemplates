@@ -14,6 +14,18 @@
     "subscriptionId": {
       "type": "string"
     },
+    "AMN_HUB_subscriptionId": {
+      "type": "string"
+    },
+    "AMN_HUB_serverFarmResourceGroup": {
+      "type": "string"
+    },
+    "AMN_HUB_virtualNetworkName": {
+      "type": "String"
+    },
+    "AMN_HUB_subnetname": {
+      "type": "String"
+    },
     "location": {
       "type": "string"
     },
@@ -32,7 +44,13 @@
     "virtualNetworkName": {
       "type": "String"
     },
-    "identityName": {
+    "AMN_TTM_managedid_subscriptionId": {
+      "type": "string"
+    },
+    "AMN_TTM_managedid_serverFarmResourceGroup": {
+      "type": "string"
+    },
+    "AMN_TTM_managedidentityName": {
       "type": "string"
     },
     "alwaysOn": {
@@ -49,7 +67,7 @@
   "resources": [
     {
       "type": "Microsoft.Web/sites",
-      "apiVersion": "2018-11-01",
+      "apiVersion": "2020-06-01",
       "name": "[parameters('appservicename')]",
       "location": "[parameters('location')]",
       "tags": "[parameters('tagsArray')]",
@@ -87,7 +105,7 @@
     },
     {
       "type": "Microsoft.Web/sites/config",
-      "apiVersion": "2018-11-01",
+      "apiVersion": "2020-06-01",
       "dependsOn": [
         "[resourceId('Microsoft.Web/sites', parameters('appservicename'))]"
       ],
@@ -122,18 +140,33 @@
         "autoHealEnabled": false,
         "vnetName": "[concat(parameters('virtualNetworkName'), '/subnets/', parameters('subnetname'))]",
         "localMySqlEnabled": false,
-        "managedServiceIdentityId": "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', parameters('identityName'))]",
-        "ipSecurityRestrictions": [],
+        "managedServiceIdentityId": "[concat('/subscriptions/', parameters('AMN_TTM_managedid_subscriptionId'),'/resourcegroups/', parameters('AMN_TTM_managedid_serverFarmResourceGroup'), '/providers/Microsoft.ManagedIdentity/userAssignedIdentities', parameters('AMN_TTM_managedidentityName'))]",
+        "ipSecurityRestrictions": [
+          {
+            "vnetSubnetResourceId": "[concat('/subscriptions/', parameters('AMN_HUB_subscriptionId'),'/resourcegroups/', parameters('AMN_HUB_serverFarmResourceGroup'), '/providers/Microsoft.Network/virtualNetworks/', parameters('AMN_HUB_virtualNetworkName'), '/subnets/', parameters('AMN_HUB_SubnetName'))]",
+            "action": "Allow",
+            "tag": "Default",
+            "priority": 100,
+            "name": "allowAPIMSubnet"
+          },
+          {
+            "ipAddress": "Any",
+            "action": "Deny",
+            "priority": 2147483647,
+            "name": "Deny all",
+            "description": "Deny all access"
+          }
+        ],
         "scmIpSecurityRestrictionsUseMain": false,
         "http20Enabled": true,
         "minTlsVersion": "1.2",
         "ftpsState": "Disabled",
-        "reservedInstanceCount": 0
+        "PreWarmedInstanceCount": 0
       }
     },
     {
       "type": "Microsoft.Web/sites/hostNameBindings",
-      "apiVersion": "2018-11-01",
+      "apiVersion": "2020-06-01",
       "name": "[concat(parameters('appservicename'), '/', parameters('appservicename'), '.azurewebsites.net')]",
       "location": "[parameters('location')]",
       "dependsOn": [
@@ -146,7 +179,7 @@
     },
     {
       "type": "Microsoft.Web/sites/slots",
-      "apiVersion": "2018-11-01",
+      "apiVersion": "2020-06-01",
       "name": "[concat(parameters('appservicename'), '/staging')]",
       "location": "[parameters('location')]",
       "tags": "[parameters('tagsArray')]",
@@ -184,7 +217,7 @@
     },
     {
       "type": "Microsoft.Web/sites/slots/config",
-      "apiVersion": "2018-11-01",
+      "apiVersion": "2020-06-01",
       "name": "[concat(parameters('appservicename'), '/staging/web')]",
       "dependsOn": [
         "[resourceId('Microsoft.Web/sites/slots', parameters('appservicename'), 'staging')]",
@@ -221,17 +254,32 @@
         "autoHealEnabled": false,
         "vnetName": "[concat(parameters('virtualNetworkName'), '/subnets/', parameters('subnetname'))]",
         "localMySqlEnabled": false,
-        "ipSecurityRestrictions": [],
+        "ipSecurityRestrictions": [
+          {
+            "vnetSubnetResourceId": "[concat('/subscriptions/', parameters('AMN_HUB_subscriptionId'),'/resourcegroups/', parameters('AMN_HUB_serverFarmResourceGroup'), '/providers/Microsoft.Network/virtualNetworks/', parameters('AMN_HUB_virtualNetworkName'), '/subnets/', parameters('AMN_HUB_SubnetName'))]",
+            "action": "Allow",
+            "tag": "Default",
+            "priority": 100,
+            "name": "allowAPIMSubnet"
+          },
+          {
+            "ipAddress": "Any",
+            "action": "Deny",
+            "priority": 2147483647,
+            "name": "Deny all",
+            "description": "Deny all access"
+          }
+        ],
         "scmIpSecurityRestrictionsUseMain": false,
         "http20Enabled": true,
         "minTlsVersion": "1.2",
         "ftpsState": "Disabled",
-        "reservedInstanceCount": 0
+        "PreWarmedInstanceCount": 0
       }
     },
     {
       "type": "Microsoft.Web/sites/slots/hostNameBindings",
-      "apiVersion": "2018-11-01",
+      "apiVersion": "2020-06-01",
       "name": "[concat(parameters('appservicename'), '/staging/', parameters('appservicename'), '-staging.azurewebsites.net')]",
       "location": "[parameters('location')]",
       "dependsOn": [

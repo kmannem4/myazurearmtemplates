@@ -1,0 +1,61 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "subscriptionId": {
+      "value": "8782ae00-c614-4937-9d81-7abbebb86482"
+    },
+    "func_appservicename": {
+      "value": "amn-wcus-ttm-func-p01"
+    },
+    "appinsightsname": {
+      "value": "amn-wus2-ttm-appinsights-p01"
+    },
+    "workspace_resourceid": {
+      "value": "/subscriptions/43c5a646-c00c-4c59-a332-df854c5dd08c/resourcegroups/co-wus2-enterprisemonitor-rg-s01/providers/microsoft.operationalinsights/workspaces/amn-co-wus2-enterprisemonitor-loga-p01"
+    },
+    "settingName": {
+      "value": "amn-co-wus2-enterprisemonitor-loga-p01-ttm-func-diagset-wcus-p01"
+    },
+    "location": {
+      "value": "westcentralus"
+    },
+    "tagsArray": {
+      "value": {
+        "charge-to": "800-71200-0000-0000",
+        "role": "app",
+        "environment": "prod"
+      }
+    },
+    "kind": {
+      "value": "functionapp"
+    },
+    "functionWorkerRuntime": {
+      "value": "dotnet"
+    },
+    "hostingPlanName": {
+      "value": "amn-wcus-ttm-func-aspl-p01"
+    },
+    "serverFarmResourceGroup": {
+      "value": "amn-wcus-ttm-rg-p01"
+    },
+    "AMN_TTM_managedid_serverFarmResourceGroup": {
+      "value": "amn-wus2-ttm-rg-p01"
+    },
+    "storageAccountName": {
+      "value": "amnwcusttmfuncsap01"
+    },
+    "use32BitWorkerProcess": {
+      "value": false
+    },
+    "WEBSITE_DNS_SERVER": {
+      "value": "168.63.129.16"
+    },
+    "virtualNetworkName": {
+      "value": "amn-wcus-ttm-vnet-p01"
+    },
+    "subnetname": {
+      "value": "amn-ttm-func-sn"
+    }
+  }
+}

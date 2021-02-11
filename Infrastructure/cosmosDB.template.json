@@ -8,10 +8,16 @@
     "databasename": {
       "type": "string"
     },
+    "orders_databasename": {
+      "type": "string"
+    },
     "containername": {
       "type": "string"
     },
-    "throughputvalue": {
+    "orders_containername": {
+      "type": "string"
+    },
+    "maxthroughputvalue": {
       "type": "string"
     },
     "kind": {
@@ -45,6 +51,21 @@
       "type": "String"
     },
     "ipAddressOrRange_2": {
+      "type": "String"
+    },
+    "ipAddressOrRange_3": {
+      "type": "String"
+    },
+    "ipAddressOrRange_4": {
+      "type": "String"
+    },
+    "ipAddressOrRange_5": {
+      "type": "String"
+    },
+    "ipAddressOrRange_6": {
+      "type": "String"
+    },
+    "ipAddressOrRange_7": {
       "type": "String"
     },
     "location": {
@@ -182,6 +203,21 @@
           },
           {
             "ipAddressOrRange": "[parameters('ipAddressOrRange_2')]"
+          },
+          {
+            "ipAddressOrRange": "[parameters('ipAddressOrRange_3')]"
+          },
+          {
+            "ipAddressOrRange": "[parameters('ipAddressOrRange_4')]"
+          },
+          {
+            "ipAddressOrRange": "[parameters('ipAddressOrRange_5')]"
+          },
+          {
+            "ipAddressOrRange": "[parameters('ipAddressOrRange_6')]"
+          },
+          {
+            "ipAddressOrRange": "[parameters('ipAddressOrRange_7')]"
           }
         ],
         "enableMultipleWriteLocations": "[parameters('enableMultipleWriteLocations')]",
@@ -205,6 +241,20 @@
       "properties": {
         "resource": {
           "id": "[parameters('databasename')]"
+        },
+        "options": {}
+      }
+    },
+    {
+      "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases",
+      "apiVersion": "2020-06-01-preview",
+      "name": "[concat(parameters('cosmodbname'), '/', parameters('orders_databasename'))]",
+      "dependsOn": [
+        "[resourceId('Microsoft.DocumentDB/databaseAccounts', parameters('cosmodbname'))]"
+      ],
+      "properties": {
+        "resource": {
+          "id": "[parameters('orders_databasename')]"
         },
         "options": {}
       }
@@ -248,7 +298,83 @@
             "conflictResolutionPath": "/_ts"
           }
         },
-        "options": { "throughput": "[parameters('throughputvalue')]" }
+        "options": {}
+      }
+    },
+    {
+      "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers",
+      "apiVersion": "2020-06-01-preview",
+      "name": "[concat(parameters('cosmodbname'), '/', parameters('orders_databasename'), '/', parameters('orders_containername'))]",
+      "dependsOn": [
+        "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases', parameters('cosmodbname'), parameters('orders_databasename'))]",
+        "[resourceId('Microsoft.DocumentDB/databaseAccounts', parameters('cosmodbname'))]"
+      ],
+      "properties": {
+        "resource": {
+          "id": "[parameters('orders_containername')]",
+          "indexingPolicy": {
+            "indexingMode": "consistent",
+            "automatic": true,
+            "includedPaths": [
+              {
+                "path": "/*"
+              }
+            ],
+            "excludedPaths": [
+              {
+                "path": "/\"_etag\"/?"
+              }
+            ]
+          },
+          "partitionKey": {
+            "paths": [
+              "/partitionKey"
+            ],
+            "kind": "Hash"
+          },
+          "uniqueKeyPolicy": {
+            "uniqueKeys": []
+          },
+          "conflictResolutionPolicy": {
+            "mode": "LastWriterWins",
+            "conflictResolutionPath": "/_ts"
+          }
+        },
+        "options": {}
+      }
+    },
+    {
+      "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/throughputSettings",
+      "apiVersion": "2020-06-01-preview",
+      "name": "[concat(parameters('cosmodbname'), '/', parameters('databasename'), '/', parameters('containername'), '/default')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers', parameters('cosmodbname'), parameters('databasename'), parameters('containername'))]",
+        "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases', parameters('cosmodbname'), parameters('databasename'))]",
+        "[resourceId('Microsoft.DocumentDB/databaseAccounts', parameters('cosmodbname'))]"
+      ],
+      "properties": {
+        "resource": {
+          "autoscaleSettings": {
+            "maxThroughput": "[parameters('maxthroughputvalue')]"
+          }
+        }
+      }
+    },
+    {
+      "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/throughputSettings",
+      "apiVersion": "2020-06-01-preview",
+      "name": "[concat(parameters('cosmodbname'), '/', parameters('orders_databasename'), '/', parameters('orders_containername'), '/default')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers', parameters('cosmodbname'), parameters('orders_databasename'), parameters('orders_containername'))]",
+        "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases', parameters('cosmodbname'), parameters('orders_databasename'))]",
+        "[resourceId('Microsoft.DocumentDB/databaseAccounts', parameters('cosmodbname'))]"
+      ],
+      "properties": {
+        "resource": {
+          "autoscaleSettings": {
+            "maxThroughput": "[parameters('maxthroughputvalue')]"
+          }
+        }
       }
     }
   ]

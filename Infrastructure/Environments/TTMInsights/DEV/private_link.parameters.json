@@ -15,7 +15,7 @@
             "value": "privatelink.documents.azure.com"
         },
         "privateLinkResource": {
-            "value": "amn-wus2-ttm-cosmo-q01"
+            "value": "amn-wus2-ttm-cosmo-d01"
         },
         "targetSubResource": {
             "value": [

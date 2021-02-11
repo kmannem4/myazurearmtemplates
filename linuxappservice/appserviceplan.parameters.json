@@ -1,0 +1,37 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "appserviceplanname": {
+            "value": "co-wus2-matchapi-aspl-d01"
+        },
+        "location": {
+            "value": "West US 2"
+        },
+        "kindtype": {
+            "value": "linux"
+        },
+        "numberOfWorkers": {
+            "value": "1"
+        },
+        "sku": {
+            "value": "PremiumV2"
+        },
+        "skuCode": {
+            "value": "P1v2"
+        },
+        "workerSize": {
+            "value": "3"
+        },
+        "workerSizeId": {
+            "value": "3"
+        },
+        "tagsArray": {
+            "value": {
+              "charge-to": "101-71200-5000-9500",
+              "role": "app",
+              "environment": "dev"
+            }
+        }
+    }
+}

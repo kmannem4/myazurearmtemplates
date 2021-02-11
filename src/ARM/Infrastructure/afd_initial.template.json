@@ -41,6 +41,18 @@
                             "enabledState": "Enabled"
                         },
                         "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettings1')]"
+                    },
+                    {
+                        "name": "healthProbeSettings2",
+                        "properties": {
+                            "path": "/status-0123456789abcdef",
+                            "protocol": "Http",
+                            "intervalInSeconds": 30,
+                            "healthProbeMethod": "Head",
+                            "resourceState": "Enabled",
+                            "enabledState": "Enabled"
+                        },
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettings2')]"
                     }
                 ],
                 "loadBalancingSettings": [
@@ -53,6 +65,16 @@
                             "additionalLatencyMilliseconds": 0
                         },
                         "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettings1')]"
+                    },
+                    {
+                        "name": "loadBalancingSettings2",
+                        "properties": {
+                            "sampleSize": 4,
+                            "successfulSamplesRequired": 2,
+                            "resourceState": "Enabled",
+                            "additionalLatencyMilliseconds": 0
+                        },
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettings2')]"
                     }
                 ],
                 "frontendEndpoints": [
@@ -87,11 +109,11 @@
                                 }
                             ],
                             "loadBalancingSettings": {
-                                "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettings1')]"
+                                "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/LoadBalancingSettings/loadBalancingSettings2')]"
                             },
                             "resourceState": "Enabled",
                             "healthProbeSettings": {
-                                "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettings1')]"
+                                "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/HealthProbeSettings/healthProbeSettings2')]"
                             }
                         },
                         "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName')), '/BackendPools/api-backend-pool')]"
@@ -132,6 +154,44 @@
                     "enforceCertificateNameCheck": "Enabled",
                     "sendRecvTimeoutSeconds": 30
                 }
+            }
+        },
+        {
+            "type": "Microsoft.Network/frontdoors/rulesengines",
+            "apiVersion": "2020-05-01",
+            "name": "[concat(parameters('frontDoorName'), '/HTTPSEnforcer')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/frontdoors', parameters('frontDoorName'))]"
+            ],
+            "properties": {
+                "resourceState": "Enabled",
+                "rules": [
+                    {
+                        "priority": 0,
+                        "name": "RedirectToHTTPS",
+                        "matchProcessingBehavior": "Continue",
+                        "action": {
+                            "requestHeaderActions": [],
+                            "responseHeaderActions": [],
+                            "routeConfigurationOverride": {
+                                "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorRedirectConfiguration",
+                                "redirectProtocol": "HttpsOnly",
+                                "redirectType": "Found"
+                            }
+                        },
+                        "matchConditions": [
+                            {
+                                "rulesEngineMatchValue": [
+                                    "HTTP"
+                                ],
+                                "rulesEngineMatchVariable": "RequestScheme",
+                                "rulesEngineOperator": "Equal",
+                                "transforms": [],
+                                "negateCondition": false
+                            }
+                        ]
+                    }
+                ]
             }
         }
     ]

@@ -1,0 +1,104 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": {
+      "value": "westus2"
+    },
+    "applicationGatewayName": {
+      "value": "amn-wus2-hub-agw-d01"
+    },
+    "tier": {
+      "value": "Standard_v2"
+    },
+    "skuSize": {
+      "value": "Standard_v2"
+    },
+    "capacity": {
+      "value": 1
+    },
+    "tagsArray": {
+      "value": {
+        "charge-to": "101-71200-5000-9500",
+        "role": "infrastructure",
+        "environment": "dev"
+      }
+    },
+    "virtualnetworkname": {
+      "value": "amn-wus2-hub-vnet-d01"
+    },
+    "subnetName": {
+      "value": "amn-hub-agw-sn"
+    },
+    "fqdnname": {
+      "value": "amn-wus2-hub-apim-d01.azure-api.net"
+    },
+    "apigatewayhostname": {
+      "value": "apigateway.dev.ttm.amnhealthcare.com"
+    },
+    "apigatewayhostname-io": {
+      "value": "apigateway-ttm.dev.amnhealthcare.io"
+    },
+    "amnoneapigatewayhostname": {
+      "value": "apigateway-dev-amnone.amnhealthcare.com"
+    },
+    "amnoneapigatewayhostnameio": {
+      "value": "apigateway-amnone.dev.amnhealthcare.io"
+    },
+    "matchapigatewayhostname": {
+      "value": "apigateway-match.dev.amnhealthcare.io"
+    },
+    "amnone-ats-apigatewayhostname": {
+      "value": "apigateway-ats.dev.amnhealthcare.io"
+    },
+    "medefis-apigatewayhostname": {
+      "value": "apigateway.dev.medefis5.com"
+    },
+    "requesttimeout": {
+      "value": "300"
+    },
+    "publicIPAddressesName": {
+      "value": "amn-wus2-hub-pip-d01"
+    },
+    "zones": {
+      "value": [
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    "privateIpAddress": {
+      "value": "10.98.0.68"
+    },
+    "managedIdentity": {
+      "value": "amn-wus2-hub-agw-mgid-d01"
+    },
+    "vaultResourceGroupName": {
+      "value": "amn-wus2-hub-rg-d01"
+    },
+    "keyVaultName": {
+      "value": "amn-wus2-hub-kv-d01"
+    },
+    "ttm_sslCertName": {
+      "value": "wildcard-dev-ttm-amnhealthcare-com"
+    },
+    "amnonesslCertName": {
+      "value": "wildcard-amnhealthcare-com"
+    },
+    "amnonesslCertNameio": {
+      "value": "wildcard-dev-amnhealthcare-io"
+    },
+    "medefissslCertNameio": {
+      "value": "wildcard-dev-medefis5-com"
+    },
+    "resourceid": {
+      "value": "/subscriptions/43c5a646-c00c-4c59-a332-df854c5dd08c/resourcegroups/co-wus2-enterprisemonitor-rg-s01/providers/microsoft.operationalinsights/workspaces/amn-co-wus2-enterprisemonitor-loga-d01"
+    },
+    "settingName": {
+      "value": "amn-co-wus2-enterprisemonitor-loga-d01-hub-agw-diagset-d01"
+    },
+    "autoScaleMaxCapacity": {
+      "value": 10
+    }
+  }
+}

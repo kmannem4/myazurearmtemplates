@@ -8,13 +8,64 @@
         "apimname": {
             "type": "String"
         },
-        "vnet_link": {
-            "type": "String"
-        },
         "apimprivateIpAddress": {
             "type": "String"
         },
-        "virtualnetworkname": {
+        "AMN_HUB_subscriptionId": {
+            "type": "String"
+        },
+        "AMN_HUB_serverFarmResourceGroup": {
+            "type": "String"
+        },
+        "AMN_HUB_virtualNetworkName": {
+            "type": "String"
+        },
+        "AMN_HUB_virtualNetworkName_link": {
+            "type": "String"
+        },
+        "AMN_TTM_subscriptionId": {
+            "type": "String"
+        },
+        "AMN_TTM_serverFarmResourceGroup": {
+            "type": "String"
+        },
+        "AMN_TTM_virtualNetworkName": {
+            "type": "String"
+        },
+        "AMN_TTM_virtualNetworkName_link": {
+            "type": "String"
+        },
+        "AMN_amnonestaffing_subscriptionId": {
+            "type": "String"
+        },
+        "AMN_amnonestaffing_match_subscriptionId": {
+            "type": "String"
+        },
+        "AMN_amnonekub_serverFarmResourceGroup": {
+            "type": "String"
+        },
+        "AMN_amnonekub_virtualNetworkName": {
+            "type": "String"
+        },
+        "AMN_amnonekub_virtualNetworkName_link": {
+            "type": "String"
+        },
+        "AMN_amnonematch_serverFarmResourceGroup": {
+            "type": "String"
+        },
+        "AMN_amnonematch_virtualNetworkName": {
+            "type": "String"
+        },
+        "AMN_amnonematch_virtualNetworkName_link": {
+            "type": "String"
+        },
+        "AMN_amnoneshared_serverFarmResourceGroup": {
+            "type": "String"
+        },
+        "AMN_amnoneshared_virtualNetworkName": {
+            "type": "String"
+        },
+        "AMN_amnoneshared_virtualNetworkName_link": {
             "type": "String"
         }
     },
@@ -46,7 +97,7 @@
         {
             "type": "Microsoft.Network/privateDnsZones/virtualNetworkLinks",
             "apiVersion": "2020-01-01",
-            "name": "[concat(parameters('privateDnsZones_name'), '/', parameters('vnet_link'))]",
+            "name": "[concat(parameters('privateDnsZones_name'), '/', parameters('AMN_HUB_virtualNetworkName_link'))]",
             "location": "global",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/privateDnsZones', parameters('privateDnsZones_name'))]"
@@ -54,7 +105,71 @@
             "properties": {
                 "registrationEnabled": true,
                 "virtualNetwork": {
-                    "id": "[concat(resourceGroup().id, '/providers/Microsoft.Network/virtualNetworks/', parameters('virtualnetworkname'))]"
+                    "id": "[concat('/subscriptions/', parameters('AMN_HUB_subscriptionId'),'/resourcegroups/', parameters('AMN_HUB_serverFarmResourceGroup'), '/providers/Microsoft.Network/virtualNetworks/', parameters('AMN_HUB_virtualNetworkName'))]"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Network/privateDnsZones/virtualNetworkLinks",
+            "apiVersion": "2020-01-01",
+            "name": "[concat(parameters('privateDnsZones_name'), '/', parameters('AMN_TTM_virtualNetworkName_link'))]",
+            "location": "global",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/privateDnsZones', parameters('privateDnsZones_name'))]"
+            ],
+            "properties": {
+                "registrationEnabled": false,
+                "virtualNetwork": {
+                    "id": "[concat('/subscriptions/', parameters('AMN_TTM_subscriptionId'),'/resourcegroups/', parameters('AMN_TTM_serverFarmResourceGroup'), '/providers/Microsoft.Network/virtualNetworks/', parameters('AMN_TTM_virtualNetworkName'))]"
+
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Network/privateDnsZones/virtualNetworkLinks",
+            "apiVersion": "2020-01-01",
+            "name": "[concat(parameters('privateDnsZones_name'), '/', parameters('AMN_amnonekub_virtualNetworkName_link'))]",
+            "location": "global",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/privateDnsZones', parameters('privateDnsZones_name'))]"
+            ],
+            "properties": {
+                "registrationEnabled": false,
+                "virtualNetwork": {
+                    "id": "[concat('/subscriptions/', parameters('AMN_amnonestaffing_subscriptionId'),'/resourcegroups/', parameters('AMN_amnonekub_serverFarmResourceGroup'), '/providers/Microsoft.Network/virtualNetworks/', parameters('AMN_amnonekub_virtualNetworkName'))]"
+
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Network/privateDnsZones/virtualNetworkLinks",
+            "apiVersion": "2020-01-01",
+            "name": "[concat(parameters('privateDnsZones_name'), '/', parameters('AMN_amnonematch_virtualNetworkName_link'))]",
+            "location": "global",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/privateDnsZones', parameters('privateDnsZones_name'))]"
+            ],
+            "properties": {
+                "registrationEnabled": false,
+                "virtualNetwork": {
+                    "id": "[concat('/subscriptions/', parameters('AMN_amnonestaffing_match_subscriptionId'),'/resourcegroups/', parameters('AMN_amnonematch_serverFarmResourceGroup'), '/providers/Microsoft.Network/virtualNetworks/', parameters('AMN_amnonematch_virtualNetworkName'))]"
+
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Network/privateDnsZones/virtualNetworkLinks",
+            "apiVersion": "2020-01-01",
+            "name": "[concat(parameters('privateDnsZones_name'), '/', parameters('AMN_amnoneshared_virtualNetworkName_link'))]",
+            "location": "global",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/privateDnsZones', parameters('privateDnsZones_name'))]"
+            ],
+            "properties": {
+                "registrationEnabled": false,
+                "virtualNetwork": {
+                    "id": "[concat('/subscriptions/', parameters('AMN_amnonestaffing_subscriptionId'),'/resourcegroups/', parameters('AMN_amnoneshared_serverFarmResourceGroup'), '/providers/Microsoft.Network/virtualNetworks/', parameters('AMN_amnoneshared_virtualNetworkName'))]"
+
                 }
             }
         }

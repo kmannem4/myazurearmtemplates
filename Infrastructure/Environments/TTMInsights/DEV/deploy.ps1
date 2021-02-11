@@ -25,13 +25,13 @@ New-AzResourceGroup -Name $ResourceGroupName -Location $ResourceGroupLocation -V
 $TemplatePath = Get-Location | Split-Path | Split-Path | Split-Path
 
 #Deploy application insights
-$TemplateFile = "$TemplatePath\appinsights.template.json"
-$TemplateParametersFile = "appinsights.parameters.json"
-$DeploymentName = ((Get-ChildItem $TemplateFile).BaseName + '-' + ((Get-Date).ToUniversalTime()).ToString('MMdd-HHmm'))
-New-AzResourceGroupDeployment -Name $DeploymentName `
-    -ResourceGroupName $ResourceGroupName `
-    -TemplateFile $TemplateFile `
-    -TemplateParameterFile $TemplateParametersFile
+#$TemplateFile = "$TemplatePath\appinsights.template.json"
+#$TemplateParametersFile = "appinsights.parameters.json"
+#$DeploymentName = ((Get-ChildItem $TemplateFile).BaseName + '-' + ((Get-Date).ToUniversalTime()).ToString('MMdd-HHmm'))
+#New-AzResourceGroupDeployment -Name $DeploymentName `
+#    -ResourceGroupName $ResourceGroupName `
+#    -TemplateFile $TemplateFile `
+#    -TemplateParameterFile $TemplateParametersFile
 
 
 # Deploy network 
@@ -47,102 +47,102 @@ New-AzResourceGroupDeployment -Name $DeploymentName `
 
 
 #Deploy app service managed identity
-$TemplateFile = "$TemplatePath\asmanagedID.template.json"
-$TemplateParametersFile = "asmanagedID.parameters.json"
-$DeploymentName = ((Get-ChildItem $TemplateFile).BaseName + '-' + ((Get-Date).ToUniversalTime()).ToString('MMdd-HHmm'))
-New-AzResourceGroupDeployment -Name $DeploymentName `
-    -ResourceGroupName $ResourceGroupName `
-    -TemplateFile $TemplateFile `
-    -TemplateParameterFile $TemplateParametersFile
+#$TemplateFile = "$TemplatePath\asmanagedID.template.json"
+#$TemplateParametersFile = "asmanagedID.parameters.json"
+#$DeploymentName = ((Get-ChildItem $TemplateFile).BaseName + '-' + ((Get-Date).ToUniversalTime()).ToString('MMdd-HHmm'))
+#New-AzResourceGroupDeployment -Name $DeploymentName `
+#    -ResourceGroupName $ResourceGroupName `
+#    -TemplateFile $TemplateFile `
+#    -TemplateParameterFile $TemplateParametersFile
 
 #Deploy initial app service plan
-$TemplateFile = "$TemplatePath\appserviceplan.template.json"
-$TemplateParametersFile = "appserviceplan.parameters.json"
-$DeploymentName = ((Get-ChildItem $TemplateFile).BaseName + '-' + ((Get-Date).ToUniversalTime()).ToString('MMdd-HHmm'))
-New-AzResourceGroupDeployment -Name $DeploymentName `
-    -ResourceGroupName $ResourceGroupName `
-    -TemplateFile $TemplateFile `
-    -TemplateParameterFile $TemplateParametersFile
+#$TemplateFile = "$TemplatePath\appserviceplan.template.json"
+#$TemplateParametersFile = "appserviceplan.parameters.json"
+#$DeploymentName = ((Get-ChildItem $TemplateFile).BaseName + '-' + ((Get-Date).ToUniversalTime()).ToString('MMdd-HHmm'))
+#New-AzResourceGroupDeployment -Name $DeploymentName `
+#    -ResourceGroupName $ResourceGroupName `
+#    -TemplateFile $TemplateFile `
+#    -TemplateParameterFile $TemplateParametersFile
 
 #Deploy initial app service
-$TemplateFile = "$TemplatePath\appservice.template.json"
-$TemplateParametersFile = "appservice.parameters.json"
-$DeploymentName = ((Get-ChildItem $TemplateFile).BaseName + '-' + ((Get-Date).ToUniversalTime()).ToString('MMdd-HHmm'))
-New-AzResourceGroupDeployment -Name $DeploymentName `
-    -ResourceGroupName $ResourceGroupName `
-    -TemplateFile $TemplateFile `
-    -TemplateParameterFile $TemplateParametersFile
+#$TemplateFile = "$TemplatePath\appservice.template.json"
+#$TemplateParametersFile = "appservice.parameters.json"
+#$DeploymentName = ((Get-ChildItem $TemplateFile).BaseName + '-' + ((Get-Date).ToUniversalTime()).ToString('MMdd-HHmm'))
+#New-AzResourceGroupDeployment -Name $DeploymentName `
+#    -ResourceGroupName $ResourceGroupName `
+#    -TemplateFile $TemplateFile `
+#    -TemplateParameterFile $TemplateParametersFile
 
 #Configuring  app service
-$TemplateFile = "$TemplatePath\appservice-2.template.json"
-$TemplateParametersFile = "appservice-2.parameters.json"
-$DeploymentName = ((Get-ChildItem $TemplateFile).BaseName + '-' + ((Get-Date).ToUniversalTime()).ToString('MMdd-HHmm'))
-New-AzResourceGroupDeployment -Name $DeploymentName `
-    -ResourceGroupName $ResourceGroupName `
-    -TemplateFile $TemplateFile `
-    -TemplateParameterFile $TemplateParametersFile
+#$TemplateFile = "$TemplatePath\appservice-2.template.json"
+#$TemplateParametersFile = "appservice-2.parameters.json"
+#$DeploymentName = ((Get-ChildItem $TemplateFile).BaseName + '-' + ((Get-Date).ToUniversalTime()).ToString('MMdd-HHmm'))
+#New-AzResourceGroupDeployment -Name $DeploymentName `
+#    -ResourceGroupName $ResourceGroupName `
+#    -TemplateFile $TemplateFile `
+#    -TemplateParameterFile $TemplateParametersFile
 
 #Deploy app service plan autoscale
-$TemplateFile = "$TemplatePath\appserviceplanautoscale.template.json"
-$TemplateParametersFile = "appserviceplanautoscale.parameters.json"
-$DeploymentName = ((Get-ChildItem $TemplateFile).BaseName + '-' + ((Get-Date).ToUniversalTime()).ToString('MMdd-HHmm'))
-New-AzResourceGroupDeployment -Name $DeploymentName `
-    -ResourceGroupName $ResourceGroupName `
-    -TemplateFile $TemplateFile `
-    -TemplateParameterFile $TemplateParametersFile
+#$TemplateFile = "$TemplatePath\appserviceplanautoscale.template.json"
+#$TemplateParametersFile = "appserviceplanautoscale.parameters.json"
+#$DeploymentName = ((Get-ChildItem $TemplateFile).BaseName + '-' + ((Get-Date).ToUniversalTime()).ToString('MMdd-HHmm'))
+#New-AzResourceGroupDeployment -Name $DeploymentName `
+#    -ResourceGroupName $ResourceGroupName `
+#    -TemplateFile $TemplateFile `
+#    -TemplateParameterFile $TemplateParametersFile
 
 #Deploy Functions App service Plan
-$TemplateFile = "$TemplatePath\func_appserviceplan.template.json"
-$TemplateParametersFile = "func_appserviceplan.parameters.json"
-$DeploymentName = ((Get-ChildItem $TemplateFile).BaseName + '-' + ((Get-Date).ToUniversalTime()).ToString('MMdd-HHmm'))
-New-AzResourceGroupDeployment -Name $DeploymentName `
-    -ResourceGroupName $ResourceGroupName `
-    -TemplateFile $TemplateFile `
-    -TemplateParameterFile $TemplateParametersFile
+#$TemplateFile = "$TemplatePath\func_appserviceplan.template.json"
+#$TemplateParametersFile = "func_appserviceplan.parameters.json"
+#$DeploymentName = ((Get-ChildItem $TemplateFile).BaseName + '-' + ((Get-Date).ToUniversalTime()).ToString('MMdd-HHmm'))
+#New-AzResourceGroupDeployment -Name $DeploymentName `
+#    -ResourceGroupName $ResourceGroupName `
+#    -TemplateFile $TemplateFile `
+#    -TemplateParameterFile $TemplateParametersFile
 
 #Deploy Functions App
-$TemplateFile = "$TemplatePath\functions_app.template.json"
-$TemplateParametersFile = "functions_app.parameters.json"
-$DeploymentName = ((Get-ChildItem $TemplateFile).BaseName + '-' + ((Get-Date).ToUniversalTime()).ToString('MMdd-HHmm'))
-New-AzResourceGroupDeployment -Name $DeploymentName `
-    -ResourceGroupName $ResourceGroupName `
-    -TemplateFile $TemplateFile `
-    -TemplateParameterFile $TemplateParametersFile
+#$TemplateFile = "$TemplatePath\functions_app.template.json"
+#$TemplateParametersFile = "functions_app.parameters.json"
+#$DeploymentName = ((Get-ChildItem $TemplateFile).BaseName + '-' + ((Get-Date).ToUniversalTime()).ToString('MMdd-HHmm'))
+#New-AzResourceGroupDeployment -Name $DeploymentName `
+#    -ResourceGroupName $ResourceGroupName `
+#    -TemplateFile $TemplateFile `
+#    -TemplateParameterFile $TemplateParametersFile
 
 # Deploy post NSG (all the routing rules for NSG can be specified at this point)
-$TemplateFile = "$TemplatePath\post_nsg.template.json"
-$TemplateParametersFile = "post_nsg.parameters.json"
-$DeploymentName = ((Get-ChildItem $TemplateFile).BaseName + '-' + ((Get-Date).ToUniversalTime()).ToString('MMdd-HHmm'))
-New-AzResourceGroupDeployment -Name $DeploymentName `
-    -ResourceGroupName $ResourceGroupName `
-    -TemplateFile $TemplateFile `
-    -TemplateParameterFile $TemplateParametersFile
+#$TemplateFile = "$TemplatePath\post_nsg.template.json"
+#$TemplateParametersFile = "post_nsg.parameters.json"
+#$DeploymentName = ((Get-ChildItem $TemplateFile).BaseName + '-' + ((Get-Date).ToUniversalTime()).ToString('MMdd-HHmm'))
+#New-AzResourceGroupDeployment -Name $DeploymentName `
+#    -ResourceGroupName $ResourceGroupName `
+#    -TemplateFile $TemplateFile `
+#    -TemplateParameterFile $TemplateParametersFile
 
 
 #Deploy Private DNS
-$TemplateFile = "$TemplatePath\private_dns.template.json"
-$TemplateParametersFile = "private_dns.parameters.json"
-$DeploymentName = ((Get-ChildItem $TemplateFile).BaseName + '-' + ((Get-Date).ToUniversalTime()).ToString('MMdd-HHmm'))
-New-AzResourceGroupDeployment -Name $DeploymentName `
-    -ResourceGroupName $ResourceGroupName `
-    -TemplateFile $TemplateFile `
-    -TemplateParameterFile $TemplateParametersFile
+#$TemplateFile = "$TemplatePath\private_dns.template.json"
+#$TemplateParametersFile = "private_dns.parameters.json"
+#$DeploymentName = ((Get-ChildItem $TemplateFile).BaseName + '-' + ((Get-Date).ToUniversalTime()).ToString('MMdd-HHmm'))
+#New-AzResourceGroupDeployment -Name $DeploymentName `
+#    -ResourceGroupName $ResourceGroupName `
+#    -TemplateFile $TemplateFile `
+#    -TemplateParameterFile $TemplateParametersFile
 
 #Deploy CosmosDB
-$TemplateFile = "$TemplatePath\cosmosDB.template.json"
-$TemplateParametersFile = "cosmosDB.parameters.json"
-$DeploymentName = ((Get-ChildItem $TemplateFile).BaseName + '-' + ((Get-Date).ToUniversalTime()).ToString('MMdd-HHmm'))
-New-AzResourceGroupDeployment -Name $DeploymentName `
-    -ResourceGroupName $ResourceGroupName `
-    -TemplateFile $TemplateFile `
-    -TemplateParameterFile $TemplateParametersFile
+#$TemplateFile = "$TemplatePath\cosmosDB.template.json"
+#$TemplateParametersFile = "cosmosDB.parameters.json"
+#$DeploymentName = ((Get-ChildItem $TemplateFile).BaseName + '-' + ((Get-Date).ToUniversalTime()).ToString('MMdd-HHmm'))
+#New-AzResourceGroupDeployment -Name $DeploymentName `
+#    -ResourceGroupName $ResourceGroupName `
+#    -TemplateFile $TemplateFile `
+#    -TemplateParameterFile $TemplateParametersFile
 
 #Deploy Private link (this will create a private endpoint for cosmosDB and also adds DNS entries under Private DNS)
-$TemplateFile = "$TemplatePath\private_link.template.json"
-$TemplateParametersFile = "private_link.parameters.json"
-$DeploymentName = ((Get-ChildItem $TemplateFile).BaseName + '-' + ((Get-Date).ToUniversalTime()).ToString('MMdd-HHmm'))
-New-AzResourceGroupDeployment -Name $DeploymentName `
-    -ResourceGroupName $ResourceGroupName `
-    -TemplateFile $TemplateFile `
-    -TemplateParameterFile $TemplateParametersFile
+#$TemplateFile = "$TemplatePath\private_link.template.json"
+#$TemplateParametersFile = "private_link.parameters.json"
+#$DeploymentName = ((Get-ChildItem $TemplateFile).BaseName + '-' + ((Get-Date).ToUniversalTime()).ToString('MMdd-HHmm'))
+#New-AzResourceGroupDeployment -Name $DeploymentName `
+#    -ResourceGroupName $ResourceGroupName `
+#    -TemplateFile $TemplateFile `
+#    -TemplateParameterFile $TemplateParametersFile
 

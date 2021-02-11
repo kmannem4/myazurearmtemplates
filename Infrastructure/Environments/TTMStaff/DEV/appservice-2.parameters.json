@@ -1,0 +1,52 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "appservicename": {
+      "value": "amn-wus2-ttmstaff-as-d01"
+    },
+    "resourceid": {
+      "value": "/subscriptions/43c5a646-c00c-4c59-a332-df854c5dd08c/resourcegroups/co-wus2-enterprisemonitor-rg-s01/providers/microsoft.operationalinsights/workspaces/amn-co-wus2-enterprisemonitor-loga-d01"
+    },
+    "settingName": {
+      "value": "ttmstaff-as-diagset-d01"
+    },
+    "appinsightsname": {
+      "value": "amn-wus2-ttm-appinsights-d01"
+    },
+    "location": {
+      "value": "West US 2"
+    },
+    "tagsArray": {
+      "value": {
+        "charge-to": "800-71200-0000-0000",
+        "role": "app",
+        "environment": "dev"
+      }
+    },
+    "hostingEnvironment": {
+      "value": ""
+    },
+    "virtualNetworkName": {
+      "value": "amn-wus2-ttm-vnet-d01"
+    },
+    "subnetname": {
+      "value": "amn-ttmstaff-as-sn"
+    },
+    "alwaysOn": {
+      "value": false
+    },
+    "currentStack": {
+      "value": "dotnetcore"
+    },
+    "AMN_TTM_managedid_subscriptionId": {
+      "value": "95181a59-30e2-4faf-b8c7-993d85a7e640"
+    },
+    "AMN_TTM_managedid_serverFarmResourceGroup": {
+      "value": "amn-wus2-ttm-rg-d01"
+    },
+    "AMN_TTM_managedidentityName": {
+      "value": "amn-wus2-ttm-as-mgid-d01"
+    }
+  }
+}

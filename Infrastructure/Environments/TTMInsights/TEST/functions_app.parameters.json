@@ -1,0 +1,58 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "subscriptionId": {
+      "value": "95181a59-30e2-4faf-b8c7-993d85a7e640"
+    },
+    "func_appservicename": {
+      "value": "amn-wus2-ttm-func-t01"
+    },
+    "appinsightsname": {
+      "value": "amn-wus2-ttm-appinsights-t01"
+    },
+    "workspace_resourceid": {
+      "value": "/subscriptions/43c5a646-c00c-4c59-a332-df854c5dd08c/resourcegroups/co-wus2-enterprisemonitor-rg-s01/providers/microsoft.operationalinsights/workspaces/amn-co-wus2-enterprisemonitor-loga-d01"
+    },
+    "settingName": {
+      "value": "amn-co-wus2-enterprisemonitor-loga-d01-ttm-func-diagset-t01"
+    },
+    "location": {
+      "value": "West US 2"
+    },
+    "tagsArray": {
+      "value": {
+        "charge-to": "800-71200-0000-0000",
+        "role": "app",
+        "environment": "test"
+      }
+    },
+    "kind": {
+      "value": "functionapp"
+    },
+    "functionWorkerRuntime": {
+      "value": "dotnet"
+    },
+    "hostingPlanName": {
+      "value": "amn-wus2-ttm-func-aspl-t01"
+    },
+    "serverFarmResourceGroup": {
+      "value": "amn-wus2-ttm-rg-t01"
+    },
+    "storageAccountName": {
+      "value": "amnwus2ttmfuncsat01"
+    },
+    "use32BitWorkerProcess": {
+      "value": false
+    },
+    "WEBSITE_DNS_SERVER": {
+      "value": "168.63.129.16"
+    },
+    "virtualNetworkName": {
+      "value": "amn-wus2-ttm-vnet-t01"
+    },
+    "subnetname": {
+      "value": "amn-ttm-func-sn"
+    }
+  }
+}

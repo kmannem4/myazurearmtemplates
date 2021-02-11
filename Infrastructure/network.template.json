@@ -132,111 +132,275 @@
             "168.63.129.16"
           ]
         },
+        "subnets": [
+          {
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "name": "[parameters('vnetSettings').amntmminsightscosmoSubnetName]",
+            "properties": {
+              "addressPrefix": "[parameters('vnetSettings').amntmminsightscosmosn]",
+              "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+              },
+              "delegations": [],
+              "privateEndpointNetworkPolicies": "Disabled",
+              "privateLinkServiceNetworkPolicies": "Enabled"
+            }
+          },
+          {
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "name": "[parameters('vnetSettings').appTierSubnetName]",
+            "properties": {
+              "addressPrefix": "[parameters('vnetSettings').appTierSubnetAddessPrefix]",
+              "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+              },
+              "serviceEndpoints": [
+                {
+                  "service": "Microsoft.Web",
+                  "locations": [
+                    "*"
+                  ]
+                },
+                {
+                  "service": "Microsoft.AzureCosmosDB",
+                  "locations": [
+                    "*"
+                  ]
+                },
+                {
+                  "service": "Microsoft.Storage",
+                  "locations": [
+                    "westus2",
+                    "westcentralus"
+                  ]
+                }
+              ],
+              "delegations": [
+                {
+                  "name": "[parameters('delegationsname')]",
+                  "properties": {
+                    "serviceName": "Microsoft.Web/serverFarms"
+                  }
+                }
+              ],
+              "privateEndpointNetworkPolicies": "Disabled",
+              "privateLinkServiceNetworkPolicies": "Enabled"
+            }
+          },
+          {
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "name": "[parameters('vnetSettings').sitemapAPISubnetName]",
+            "properties": {
+              "addressPrefix": "[parameters('vnetSettings').sitemapAPISubnetAddessPrefix]",
+              "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+              },
+              "serviceEndpoints": [
+                {
+                  "service": "Microsoft.Web",
+                  "locations": [
+                    "*"
+                  ]
+                },
+                {
+                  "service": "Microsoft.Storage",
+                  "locations": [
+                    "westus2",
+                    "westcentralus"
+                  ]
+                }
+              ],
+              "delegations": [
+                {
+                  "name": "[parameters('delegationsname')]",
+                  "properties": {
+                    "serviceName": "Microsoft.Web/serverFarms"
+                  }
+                }
+              ],
+              "privateEndpointNetworkPolicies": "Disabled",
+              "privateLinkServiceNetworkPolicies": "Enabled"
+            }
+          },
+          {
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "name": "[parameters('vnetSettings').ordermanagementSubnetName]",
+            "properties": {
+              "addressPrefix": "[parameters('vnetSettings').ordermanagementSubnetAddessPrefix]",
+              "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+              },
+              "serviceEndpoints": [
+                {
+                  "service": "Microsoft.Web",
+                  "locations": [
+                    "*"
+                  ]
+                },
+                {
+                  "service": "Microsoft.Storage",
+                  "locations": [
+                    "westus2",
+                    "westcentralus"
+                  ]
+                }
+              ],
+              "delegations": [
+                {
+                  "name": "[parameters('delegationsname')]",
+                  "properties": {
+                    "serviceName": "Microsoft.Web/serverFarms"
+                  }
+                }
+              ],
+              "privateEndpointNetworkPolicies": "Disabled",
+              "privateLinkServiceNetworkPolicies": "Enabled"
+            }
+          },
+          {
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "name": "[parameters('vnetSettings').staffSubnetName]",
+            "properties": {
+              "addressPrefix": "[parameters('vnetSettings').staffSubnetAddessPrefix]",
+              "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+              },
+              "serviceEndpoints": [
+                {
+                  "service": "Microsoft.Web",
+                  "locations": [
+                    "*"
+                  ]
+                },
+                {
+                  "service": "Microsoft.Storage",
+                  "locations": [
+                    "westus2",
+                    "westcentralus"
+                  ]
+                }
+              ],
+              "delegations": [
+                {
+                  "name": "[parameters('delegationsname')]",
+                  "properties": {
+                    "serviceName": "Microsoft.Web/serverFarms"
+                  }
+                }
+              ],
+              "privateEndpointNetworkPolicies": "Disabled",
+              "privateLinkServiceNetworkPolicies": "Enabled"
+            }
+          },
+          {
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "name": "[parameters('vnetSettings').clientdataSubnetName]",
+            "properties": {
+              "addressPrefix": "[parameters('vnetSettings').clientdataSubnetAddessPrefix]",
+              "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+              },
+              "serviceEndpoints": [
+                {
+                  "service": "Microsoft.Web",
+                  "locations": [
+                    "*"
+                  ]
+                },
+                {
+                  "service": "Microsoft.Storage",
+                  "locations": [
+                    "westus2",
+                    "westcentralus"
+                  ]
+                }
+              ],
+              "delegations": [
+                {
+                  "name": "[parameters('delegationsname')]",
+                  "properties": {
+                    "serviceName": "Microsoft.Web/serverFarms"
+                  }
+                }
+              ],
+              "privateEndpointNetworkPolicies": "Disabled",
+              "privateLinkServiceNetworkPolicies": "Enabled"
+            }
+          },
+          {
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "name": "[parameters('vnetSettings').referencedataSubnetName]",
+            "properties": {
+              "addressPrefix": "[parameters('vnetSettings').referencedataSubnetAddessPrefix]",
+              "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+              },
+              "serviceEndpoints": [
+                {
+                  "service": "Microsoft.Web",
+                  "locations": [
+                    "*"
+                  ]
+                },
+                {
+                  "service": "Microsoft.Storage",
+                  "locations": [
+                    "westus2",
+                    "westcentralus"
+                  ]
+                }
+              ],
+              "delegations": [
+                {
+                  "name": "[parameters('delegationsname')]",
+                  "properties": {
+                    "serviceName": "Microsoft.Web/serverFarms"
+                  }
+                }
+              ],
+              "privateEndpointNetworkPolicies": "Disabled",
+              "privateLinkServiceNetworkPolicies": "Enabled"
+            }
+          },
+          {
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "name": "[parameters('vnetSettings').amntmmfuncSubnetName]",
+            "properties": {
+              "addressPrefix": "[parameters('vnetSettings').amntmmfuncsn]",
+              "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+              },
+              "serviceEndpoints": [
+                {
+                  "service": "Microsoft.Storage",
+                  "locations": [
+                    "westus2",
+                    "westcentralus"
+                  ]
+                },
+                {
+                  "service": "Microsoft.AzureCosmosDB",
+                  "locations": [
+                    "*"
+                  ]
+                }
+              ],
+              "delegations": [
+                {
+                  "name": "delegation",
+                  "properties": {
+                    "serviceName": "Microsoft.Web/serverFarms"
+                  }
+                }
+              ],
+              "privateEndpointNetworkPolicies": "Enabled",
+              "privateLinkServiceNetworkPolicies": "Enabled"
+            }
+          }
+
+        ],
         "enableDdosProtection": false,
         "enableVmProtection": false
-      }
-    },
-    {
-      "type": "Microsoft.Network/virtualNetworks/subnets",
-      "name": "[concat(parameters('vnetSettings').name, '/', parameters('vnetSettings').amntmminsightscosmoSubnetName)]",
-      "apiVersion": "2020-05-01",
-      "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetSettings').name)]"
-      ],
-      "properties": {
-        "addressPrefix": "[parameters('vnetSettings').amntmminsightscosmosn]",
-        "networkSecurityGroup": {
-          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
-        },
-        "delegations": [],
-        "privateEndpointNetworkPolicies": "Disabled",
-        "privateLinkServiceNetworkPolicies": "Enabled"
-      }
-    },
-    {
-      "type": "Microsoft.Network/virtualNetworks/subnets",
-      "name": "[concat(parameters('vnetSettings').name, '/', parameters('vnetSettings').appTierSubnetName)]",
-      "apiVersion": "2020-05-01",
-      "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetSettings').name)]",
-        "[resourceId('Microsoft.Network/virtualnetworks/subnets', parameters('vnetSettings').name, parameters('vnetSettings').amntmminsightscosmoSubnetName)]"
-      ],
-      "properties": {
-        "addressPrefix": "[parameters('vnetSettings').appTierSubnetAddessPrefix]",
-        "networkSecurityGroup": {
-          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
-        },
-        "serviceEndpoints": [
-          {
-            "service": "Microsoft.Web",
-            "locations": [
-              "*"
-            ]
-          },
-          {
-            "service": "Microsoft.AzureCosmosDB",
-            "locations": [
-              "*"
-            ]
-          },
-          {
-            "service": "Microsoft.Storage",
-            "locations": [
-              "westus2",
-              "westcentralus"
-            ]
-          }
-        ],
-        "delegations": [
-          {
-            "name": "[parameters('delegationsname')]",
-            "properties": {
-              "serviceName": "Microsoft.Web/serverFarms"
-            }
-          }
-        ],
-        "privateEndpointNetworkPolicies": "Disabled",
-        "privateLinkServiceNetworkPolicies": "Enabled"
-      }
-    },
-    {
-      "type": "Microsoft.Network/virtualNetworks/subnets",
-      "name": "[concat(parameters('vnetSettings').name, '/', parameters('vnetSettings').amntmmfuncSubnetName)]",
-      "apiVersion": "2020-05-01",
-      "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetSettings').name)]",
-        "[resourceId('Microsoft.Network/virtualnetworks/subnets', parameters('vnetSettings').name, parameters('vnetSettings').appTierSubnetName)]"
-      ],
-      "properties": {
-        "addressPrefix": "[parameters('vnetSettings').amntmmfuncsn]",
-        "networkSecurityGroup": {
-          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
-        },
-        "serviceEndpoints": [
-          {
-            "service": "Microsoft.Storage",
-            "locations": [
-              "westus2",
-              "westcentralus"
-            ]
-          },
-          {
-            "service": "Microsoft.AzureCosmosDB",
-            "locations": [
-              "*"
-            ]
-          }
-        ],
-        "delegations": [
-          {
-            "name": "delegation",
-            "properties": {
-              "serviceName": "Microsoft.Web/serverFarms"
-            }
-          }
-        ],
-        "privateEndpointNetworkPolicies": "Enabled",
-        "privateLinkServiceNetworkPolicies": "Enabled"
       }
     }
   ]

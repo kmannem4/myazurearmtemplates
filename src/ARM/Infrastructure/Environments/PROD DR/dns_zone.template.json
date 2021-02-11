@@ -1,0 +1,93 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "dnszonesname": {
+            "type": "String"
+        },
+        "publicIPAddresses_amn_wus2_hub_pip_externalid": {
+            "type": "String"
+        },
+        "DR_publicIPAddresses_amn_wus2_hub_pip_externalid": {
+            "type": "String"
+        },
+        "frontdoors_amn_wus2_hub_afd_externalid": {
+            "type": "String"
+        },
+        "tagsArray": {
+            "type": "object"
+        },
+        "frontdoors_vmsidp_externalid": {
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Network/dnszones",
+            "apiVersion": "2018-05-01",
+            "name": "[parameters('dnszonesname')]",
+            "location": "global",
+            "tags": "[parameters('tagsArray')]",
+            "properties": {
+                "zoneType": "Public"
+            }
+        },
+        {
+            "type": "Microsoft.Network/dnszones/A",
+            "apiVersion": "2018-05-01",
+            "name": "[concat(parameters('dnszonesname'), '/apigateway')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/dnszones', parameters('dnszonesname'))]"
+            ],
+            "properties": {
+                "TTL": 3600,
+                "targetResource": {
+                    "id": "[parameters('publicIPAddresses_amn_wus2_hub_pip_externalid')]"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Network/dnszones/A",
+            "apiVersion": "2018-05-01",
+            "name": "[concat(parameters('dnszonesname'), '/apigateway-wcus')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/dnszones', parameters('dnszonesname'))]"
+            ],
+            "properties": {
+                "TTL": 3600,
+                "targetResource": {
+                    "id": "[parameters('DR_publicIPAddresses_amn_wus2_hub_pip_externalid')]"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Network/dnszones/CNAME",
+            "apiVersion": "2018-05-01",
+            "name": "[concat(parameters('dnszonesname'), '/api')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/dnszones', parameters('dnszonesname'))]"
+            ],
+            "properties": {
+                "TTL": 60,
+                "targetResource": {
+                    "id": "[parameters('frontdoors_amn_wus2_hub_afd_externalid')]"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Network/dnszones/CNAME",
+            "apiVersion": "2018-05-01",
+            "name": "[concat(parameters('dnszonesname'), '/login')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/dnszones', parameters('dnszonesname'))]"
+            ],
+            "properties": {
+                "TTL": 60,
+                "targetResource": {
+                    "id": "[parameters('frontdoors_vmsidp_externalid')]"
+                }
+            }
+        }
+    ]
+}

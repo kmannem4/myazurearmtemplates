@@ -1,6 +1,6 @@
 # To run: open PowerShell, cd to the directory where this script is located, type .\deploy.ps1 and hit enter
 # If using VS Code: right-click on the folder where this script is located, select Open in Terminal, in the terminal type .\deploy.ps1 and hit enter
-cd 'BuildOutput\Artifacts\src\ARM\Infrastructure\Environments\TTMInsightsUI\DEV'
+cd 'BuildOutput\Artifacts\src\ARM\Infrastructure\Environments\TTMInsightsUI\QA'
 
 #Connect-AzAccount
 Set-AzContext -Subscription 'AMN Shiftwise Dev'

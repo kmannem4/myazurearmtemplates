@@ -1,0 +1,42 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "apimname": {
+            "value": "amn-wus2-hub-apim-i01"
+        },
+        "location": {
+            "value": "westus2"
+        },
+        "virtualNetworkName": {
+            "value": "amn-wus2-hub-vnet-i01"
+        },
+        "subnetname": {
+            "value": "amn-hub-apim-sn"
+        },
+        "adminEmail": {
+            "value": "Karthik.Mannem@shiftwise.com"
+        },
+        "orgName": {
+            "value": "amnhealthcare"
+        },
+        "tier": {
+            "value": "Developer"
+        },
+        "loggerName": {
+            "value": "amn-wus2-hub-appinsights-i01"
+        },
+        "appinsightsname": {
+            "value": "amn-wus2-hub-appinsights-i01"
+        },
+        "resourceid": {
+        "value": "/subscriptions/43c5a646-c00c-4c59-a332-df854c5dd08c/resourcegroups/co-wus2-enterprisemonitor-rg-s01/providers/microsoft.operationalinsights/workspaces/amn-co-wus2-enterprisemonitor-loga-p01"
+        },
+          "settingName": {
+            "value": "amn-co-wus2-enterprisemonitor-loga-i01-hub-apim-diagset-i01"
+        },
+        "capacity": {
+            "value": 1
+        }
+    }
+}

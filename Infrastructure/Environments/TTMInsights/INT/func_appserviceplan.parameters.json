@@ -1,0 +1,38 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "func_appserviceplanname": {
+      "value": "amn-wus2-ttm-func-aspl-i01"
+    },
+    "location": {
+      "value": "West US 2"
+    },
+    "kind": {
+      "value": "elastic"
+    },
+    "skuName": {
+      "value": "EP1"
+    },
+    "skuTier": {
+      "value": "ElasticPremium"
+    },
+    "skusize": {
+      "value": "EP1"
+    },
+    "skufamily": {
+      "value": "EP"
+    },
+    "skucapacity": {
+      "value": "1"
+    },
+    "tagsArray": {
+      "value": {
+        "charge-to": "800-71200-0000-0000",
+        "role": "app",
+        "environment": "int",
+        "application": "ttm"
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "appserviceplanname": {
+            "value": "co-wus2-matchapi-aspl-d01"
+        },
+        "appserviceplanautoscalename": {
+            "value": "co-wus2-matchapi-aspl-d01-autoscale"
+        },
+        "subscriptionId": {
+            "value": "de714383-62fd-47f3-a8d5-440d93cd87db"
+        },
+        "serverFarmResourceGroup": {
+            "value": "co-wus2-imatch-rg-d01"
+        },
+        "location": {
+            "value": "westus2"
+        },
+        "minCapacity": {
+            "value": "1"
+        },
+        "maxCapacity": {
+            "value": "2"
+        },
+        "tagsArray": {
+            "value": {
+                "charge-to": "101-71200-5000-9500",
+                "role": "app",
+                "environment": "dev"
+            }
+        }
+    }
+}

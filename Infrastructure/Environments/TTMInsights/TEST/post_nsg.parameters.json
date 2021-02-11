@@ -1,0 +1,64 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "networkSecurityGroupName": {
+      "value": "amn-wus2-ttm-nsg-t01"
+    },
+    "location": {
+      "value": "West US 2"
+    },
+    "functtionsAppName": {
+      "value": "amn-wus2-ttm-func-t01"
+    },
+    "vnetSettings": {
+      "value": {
+        "name": "amn-wus2-ttm-vnet-t01",
+        "addressSpace": "10.98.96.0/21",
+        "appTierSubnetAddessPrefix": "10.98.96.0/26",
+        "appTierSubnetName": "amn-ttm-as-sn",
+        "amntmminsightscosmosn": "10.98.97.0/29",
+        "amntmminsightscosmoSubnetName": "amn-ttm-insights-cosmo-sn",
+        "amntmmfuncsn": "10.98.98.0/27",
+        "amntmmfuncSubnetName": "amn-ttm-func-sn",
+        "sitemapAPISubnetAddessPrefix": "10.98.99.0/27",
+        "sitemapAPISubnetName": "amn-ttmsitemap-as-sn",
+        "ordermanagementSubnetAddessPrefix": "10.98.100.0/27",
+        "ordermanagementSubnetName": "amn-ttmordermanagement-as-sn",
+        "clientdataSubnetAddessPrefix": "10.98.101.0/27",
+        "clientdataSubnetName": "amn-ttmclientdata-as-sn",
+        "referencedataSubnetAddessPrefix": "10.98.102.0/27",
+        "referencedataSubnetName": "amn-ttmreferencedata-as-sn",
+        "staffSubnetAddessPrefix": "10.98.102.0/27",
+        "staffSubnetName": "amn-ttmstaff-as-sn"            
+      }
+    },
+    "DenyAllVNetOutBoundToLasVegassettings": {
+      "value": {
+        "LasVegasip_1": "10.244.0.0/16",
+        "LasVegasip_2": "10.241.0.0/16"
+      }
+    },
+    "onpremESPDB": {
+      "value": {
+        "onpremESPDBIP": "10.244.144.124",
+        "port_1": "1433",
+        "port_2": "1434"
+      }
+    },
+    "outbounddestinations": {
+      "value": {
+        "storageregion": "Storage.WestUS2",
+        "sqlregion": "Sql.WestUS2",
+        "cosmosDBregion": "AzureCosmosDB.WestUS2"
+      }
+    },
+    "tagsArray": {
+      "value": {
+        "charge-to": "800-71200-0000-0000",
+        "role": "infrastructure",
+        "environment": "test"
+      }
+    }
+  }
+}

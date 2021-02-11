@@ -74,10 +74,10 @@
         "accessPolicies": [
           {
             "metadata": {
-              "description": "Access for AZ_SW_KeyVault_Dev_Full (group in AHS AD)"
+              "description": "Access for AZ_SW_KeyVault_(ENV)_Full (group in AHS AD)"
             },
             "tenantId": "[subscription().tenantId]",
-            "objectId": "[parameters('objectID').AZ_SW_KeyVault_Dev_Full]",
+            "objectId": "[parameters('objectID').AZ_SW_KeyVault_Full]",
             "permissions": {
               "keys": [
                 "get",
@@ -95,10 +95,10 @@
           },
           {
             "metadata": {
-              "description": "Access for AZ_AMN_KeyVault_Dev_Full (group in AHS AD)"
+              "description": "Access for AZ_AMN_KeyVault_(ENV)_Full (group in AHS AD)"
             },
             "tenantId": "[subscription().tenantId]",
-            "objectId": "[parameters('objectID').AZ_AMN_KeyVault_Dev_Full]",
+            "objectId": "[parameters('objectID').AZ_AMN_KeyVault_Full]",
             "permissions": {
               "keys": [
                 "get",
@@ -111,6 +111,38 @@
               "certificates": [
                 "get",
                 "list"
+              ]
+            }
+          },
+          {
+            "metadata": {
+              "description": "Access for AMN_IPS(ENV) (group in AHS AD)"
+            },
+            "tenantId": "[subscription().tenantId]",
+            "objectId": "[parameters('objectID').AMN_IPS]",
+            "permissions": {
+              "keys": [
+                "Get",
+                "List",
+                "Import",
+                "Update",
+                "Create",
+                "Decrypt",
+                "Encrypt",
+                "Verify"
+              ],
+              "secrets": [
+                "Get",
+                "List",
+                "Set"
+              ],
+              "certificates": [
+                "Get",
+                "List",
+                "Update",
+                "Create",
+                "Import",
+                "Delete"
               ]
             }
           },

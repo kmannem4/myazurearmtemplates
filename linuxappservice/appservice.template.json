@@ -1,0 +1,419 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "appservicename": {
+      "type": "String"
+    },
+    "resourceid": {
+      "type": "String"
+    },
+    "settingName": {
+      "type": "String"
+    },
+    "hostingPlanName": {
+      "type": "String"
+    },
+    "stagingsitename": {
+      "type": "String"
+    },
+    "subscriptionId": {
+      "type": "string"
+    },
+    "AMN_HUB_subscriptionId": {
+      "type": "string"
+    },
+    "AMN_HUB_serverFarmResourceGroup": {
+      "type": "string"
+    },
+    "AMN_HUB_virtualNetworkName": {
+      "type": "String"
+    },
+    "AMN_HUB_subnetname": {
+      "type": "String"
+    },
+    "AMNoneshared_subscriptionId": {
+      "type": "string"
+    },
+    "AMNoneshared_serverFarmResourceGroup": {
+      "type": "string"
+    },
+    "AMNoneshared_virtualNetworkName": {
+      "type": "String"
+    },
+    "AMNoneshared_subnetname": {
+      "type": "String"
+    },
+    "location": {
+      "type": "string"
+    },
+    "kindtype": {
+      "type": "string"
+    },
+    "linuxFxVersion": {
+      "type": "string"
+    },
+    "publishingUsername": {
+      "type": "String"
+    },
+    "publishingUsername_staging": {
+      "type": "String"
+    },
+    "serverFarmResourceGroup": {
+      "type": "string"
+    },
+    "identityName": {
+      "type": "string"
+    },
+    "alwaysOn": {
+      "type": "string"
+    },
+    "use32BitWorkerProcess": {
+      "type": "string"
+    },
+    "tagsArray": {
+      "type": "object"
+    },
+    "AMN_match_managedid_subscriptionId": {
+      "type": "string"
+    },
+    "AMN_match_managedid_serverFarmResourceGroup": {
+      "type": "string"
+    },
+    "AMN_match_managedidentityName": {
+      "type": "string"
+    }
+  },
+  "variables": {},
+  "resources": [
+    {
+      "type": "Microsoft.Web/sites",
+      "apiVersion": "2020-06-01",
+      "name": "[parameters('appservicename')]",
+      "location": "[parameters('location')]",
+      "tags": "[parameters('tagsArray')]",
+      "kind": "[parameters('kindtype')]",
+      "identity": {
+        "type": "SystemAssigned, UserAssigned",
+        "userAssignedIdentities": {
+          "[concat('/subscriptions/', parameters('AMN_match_managedid_subscriptionId'),'/resourcegroups/', parameters('AMN_match_managedid_serverFarmResourceGroup'), '/providers/Microsoft.ManagedIdentity/userAssignedIdentities/', parameters('AMN_match_managedidentityName'))]": {}
+        }
+      },
+      "properties": {
+        "enabled": true,
+        "hostNameSslStates": [
+          {
+            "name": "[concat(parameters('appservicename'), '.azurewebsites.net')]",
+            "sslState": "Disabled",
+            "hostType": "Standard"
+          },
+          {
+            "name": "[concat(parameters('appservicename'), '.scm.azurewebsites.net')]",
+            "sslState": "Disabled",
+            "hostType": "Repository"
+          }
+        ],
+        "serverFarmId": "[concat('/subscriptions/', parameters('subscriptionId'),'/resourcegroups/', parameters('serverFarmResourceGroup'), '/providers/Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]",
+        "reserved": true,
+        "isXenon": false,
+        "hyperV": false,
+        "siteConfig": {},
+        "scmSiteAlsoStopped": false,
+        "clientAffinityEnabled": false,
+        "clientCertEnabled": false,
+        "hostNamesDisabled": false,
+        "containerSize": 0,
+        "dailyMemoryTimeQuota": 0,
+        "httpsOnly": true,
+        "redundancyMode": "None"
+      },
+      "resources": [
+        {
+          "type": "config",
+          "apiVersion": "2020-06-01",
+          "name": "virtualNetwork",
+          "location": "[parameters('location')]",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('appservicename'))]"
+          ],
+          "properties": {
+            "subnetResourceId": "[concat('/subscriptions/', parameters('AMNoneshared_subscriptionId'),'/resourcegroups/', parameters('AMNoneshared_serverFarmResourceGroup'), '/providers/Microsoft.Network/virtualNetworks/', parameters('AMNoneshared_virtualNetworkName'), '/subnets/', parameters('AMNoneshared_SubnetName'))]",
+            "swiftSupported": true
+          }
+        },
+        {
+          "type": "Microsoft.Web/sites/providers/diagnosticSettings",
+          "apiVersion": "2017-05-01-preview",
+          "name": "[concat(parameters('appservicename'),'/microsoft.insights/', parameters('settingName'))]",
+          "location": "[parameters('location')]",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites/', parameters('appservicename'))]"
+          ],
+          "properties": {
+            "name": "[parameters('settingName')]",
+            "workspaceId": "[parameters('resourceid')]",
+            "logs": [
+              {
+                "category": "AppServiceAntivirusScanAuditLogs",
+                "enabled": true
+              },
+              {
+                "category": "AppServiceHTTPLogs",
+                "enabled": true
+              },
+              {
+                "category": "AppServiceConsoleLogs",
+                "enabled": true
+              },
+              {
+                "category": "AppServiceAppLogs",
+                "enabled": true
+              },
+              {
+                "category": "AppServiceFileAuditLogs",
+                "enabled": true
+              },
+              {
+                "category": "AppServiceAuditLogs",
+                "enabled": true
+              },
+              {
+                "category": "AppServiceIPSecAuditLogs",
+                "enabled": true
+              },
+              {
+                "category": "AppServicePlatformLogs",
+                "enabled": true
+              }
+            ],
+            "metrics": [
+              {
+                "category": "AllMetrics",
+                "enabled": true
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "type": "Microsoft.Web/sites/config",
+      "apiVersion": "2020-06-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites', parameters('appservicename'))]"
+      ],
+      "location": "[parameters('location')]",
+      "name": "[concat(parameters('appservicename'), '/web')]",
+      "properties": {
+        "numberOfWorkers": 1,
+        "defaultDocuments": [
+          "Default.htm",
+          "Default.html",
+          "Default.asp",
+          "index.htm",
+          "index.html",
+          "iisstart.htm",
+          "default.aspx",
+          "index.php",
+          "hostingstart.html"
+        ],
+        "netFrameworkVersion": "v4.0",
+        "linuxFxVersion": "[parameters('linuxFxVersion')]",
+        "requestTracingEnabled": false,
+        "remoteDebuggingEnabled": false,
+        "httpLoggingEnabled": false,
+        "logsDirectorySizeLimit": 35,
+        "detailedErrorLoggingEnabled": false,
+        "publishingUsername": "[parameters('publishingUsername')]",
+        "azureStorageAccounts": {},
+        "scmType": "None",
+        "use32BitWorkerProcess": "[parameters('use32BitWorkerProcess')]",
+        "webSocketsEnabled": false,
+        "alwaysOn": "[parameters('alwaysOn')]",
+        "managedPipelineMode": "Integrated",
+        "virtualApplications": [
+          {
+            "virtualPath": "/",
+            "physicalPath": "site\\wwwroot",
+            "preloadEnabled": true
+          }
+        ],
+        "loadBalancing": "LeastRequests",
+        "experiments": {
+          "rampUpRules": []
+        },
+        "autoHealEnabled": false,
+        "localMySqlEnabled": false,
+        "managedServiceIdentityId": "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', parameters('identityName'))]",
+        "ipSecurityRestrictions": [
+          {
+            "vnetSubnetResourceId": "[concat('/subscriptions/', parameters('AMN_HUB_subscriptionId'),'/resourcegroups/', parameters('AMN_HUB_serverFarmResourceGroup'), '/providers/Microsoft.Network/virtualNetworks/', parameters('AMN_HUB_virtualNetworkName'), '/subnets/', parameters('AMN_HUB_SubnetName'))]",
+            "action": "Allow",
+            "tag": "Default",
+            "priority": 100,
+            "name": "allowAPIMSubnet"
+          },
+          {
+            "ipAddress": "Any",
+            "action": "Deny",
+            "priority": 2147483647,
+            "name": "Deny all",
+            "description": "Deny all access"
+          }
+        ],
+        "scmIpSecurityRestrictionsUseMain": false,
+        "http20Enabled": false,
+        "minTlsVersion": "1.2",
+        "ftpsState": "Disabled",
+        "PreWarmedInstanceCount": 0
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/hostNameBindings",
+      "apiVersion": "2020-06-01",
+      "name": "[concat(parameters('appservicename'), '/', parameters('appservicename'), '.azurewebsites.net')]",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites', parameters('appservicename'))]"
+      ],
+      "properties": {
+        "siteName": "[parameters('appservicename')]",
+        "hostNameType": "Verified"
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/slots",
+      "apiVersion": "2020-06-01",
+      "name": "[concat(parameters('appservicename'), '/staging')]",
+      "location": "[parameters('location')]",
+      "tags": "[parameters('tagsArray')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites', parameters('appservicename'))]"
+      ],
+      "kind": "app",
+      "properties": {
+        "enabled": true,
+        "hostNameSslStates": [
+          {
+            "name": "[concat(parameters('appservicename'), '/staging/', parameters('appservicename'), '-staging.azurewebsites.net')]",
+            "sslState": "Disabled",
+            "hostType": "Standard"
+          },
+          {
+            "name": "[concat(parameters('appservicename'), '/staging/', parameters('appservicename'), '-staging.azurewebsites.net')]",
+            "sslState": "Disabled",
+            "hostType": "Repository"
+          }
+        ],
+        "serverFarmId": "[concat('/subscriptions/', parameters('subscriptionId'),'/resourcegroups/', parameters('serverFarmResourceGroup'), '/providers/Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]",
+        "reserved": true,
+        "isXenon": false,
+        "hyperV": false,
+        "siteConfig": {},
+        "scmSiteAlsoStopped": false,
+        "clientAffinityEnabled": false,
+        "clientCertEnabled": false,
+        "hostNamesDisabled": false,
+        "containerSize": 0,
+        "dailyMemoryTimeQuota": 0,
+        "httpsOnly": true,
+        "redundancyMode": "None"
+      },
+      "resources": [
+        {
+          "type": "config",
+          "apiVersion": "2020-06-01",
+          "name": "virtualNetwork",
+          "location": "[parameters('location')]",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites/slots', parameters('appservicename'), 'staging')]"
+          ],
+          "properties": {
+            "subnetResourceId": "[concat('/subscriptions/', parameters('AMNoneshared_subscriptionId'),'/resourcegroups/', parameters('AMNoneshared_serverFarmResourceGroup'), '/providers/Microsoft.Network/virtualNetworks/', parameters('AMNoneshared_virtualNetworkName'), '/subnets/', parameters('AMNoneshared_SubnetName'))]",
+            "swiftSupported": true
+          }
+        }
+      ]
+    },
+    {
+      "type": "Microsoft.Web/sites/slots/config",
+      "apiVersion": "2020-06-01",
+      "name": "[concat(parameters('appservicename'), '/staging/web')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites/slots', parameters('appservicename'), 'staging')]",
+        "[resourceId('Microsoft.Web/sites', parameters('appservicename'))]"
+      ],
+      "location": "[parameters('location')]",
+      "tags": "[parameters('tagsArray')]",
+      "properties": {
+        "numberOfWorkers": 1,
+        "defaultDocuments": [
+          "hostingstart.html"
+        ],
+        "netFrameworkVersion": "v4.0",
+        "linuxFxVersion": "[parameters('linuxFxVersion')]",
+        "requestTracingEnabled": false,
+        "remoteDebuggingEnabled": false,
+        "httpLoggingEnabled": false,
+        "logsDirectorySizeLimit": 35,
+        "detailedErrorLoggingEnabled": false,
+        "publishingUsername": "[parameters('publishingUsername_staging')]",
+        "azureStorageAccounts": {},
+        "scmType": "None",
+        "use32BitWorkerProcess": "[parameters('use32BitWorkerProcess')]",
+        "webSocketsEnabled": false,
+        "alwaysOn": false,
+        "managedPipelineMode": "Integrated",
+        "virtualApplications": [
+          {
+            "virtualPath": "/",
+            "physicalPath": "site\\wwwroot",
+            "preloadEnabled": false
+          }
+        ],
+        "loadBalancing": "LeastRequests",
+        "experiments": {
+          "rampUpRules": []
+        },
+        "autoHealEnabled": false,
+        "vnetName": "[concat('/subscriptions/', parameters('AMNoneshared_subscriptionId'),'/resourcegroups/', parameters('AMNoneshared_serverFarmResourceGroup'), '/providers/Microsoft.Network/virtualNetworks/', parameters('AMNoneshared_virtualNetworkName'), '/subnets/', parameters('AMNoneshared_SubnetName'))]",
+        "localMySqlEnabled": false,
+        "ipSecurityRestrictions": [
+          {
+            "vnetSubnetResourceId": "[concat('/subscriptions/', parameters('AMN_HUB_subscriptionId'),'/resourcegroups/', parameters('AMN_HUB_serverFarmResourceGroup'), '/providers/Microsoft.Network/virtualNetworks/', parameters('AMN_HUB_virtualNetworkName'), '/subnets/', parameters('AMN_HUB_SubnetName'))]",
+            "action": "Allow",
+            "tag": "Default",
+            "priority": 100,
+            "name": "allowAPIMSubnet"
+          },
+          {
+            "ipAddress": "Any",
+            "action": "Deny",
+            "priority": 2147483647,
+            "name": "Deny all",
+            "description": "Deny all access"
+          }
+        ],
+        "scmIpSecurityRestrictionsUseMain": false,
+        "http20Enabled": false,
+        "minTlsVersion": "1.2",
+        "ftpsState": "Disabled",
+        "PreWarmedInstanceCount": 0
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/slots/hostNameBindings",
+      "apiVersion": "2020-06-01",
+      "name": "[concat(parameters('appservicename'), '/staging/', parameters('appservicename'), '-staging.azurewebsites.net')]",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites/slots', parameters('appservicename'), 'staging')]",
+        "[resourceId('Microsoft.Web/sites', parameters('appservicename'))]"
+      ],
+      "properties": {
+        "siteName": "[parameters('stagingsitename')]",
+        "hostNameType": "Verified"
+      }
+    }
+  ]
+}

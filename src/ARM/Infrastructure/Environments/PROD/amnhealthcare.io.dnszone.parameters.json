@@ -1,0 +1,54 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "dnszones_amnhealthcare_io_name": {
+      "value": "amnhealthcare.io"
+    },
+    "publicIPAddresses_amn_wus2_hub_pip_externalid": {
+      "value": "/subscriptions/06ab2c80-382c-478f-bcd5-5e1afe984092/resourceGroups/amn-wus2-hub-rg-p01/providers/Microsoft.Network/publicIPAddresses/amn-wus2-hub-pip-p01"
+    },
+    "frontdoors_amn_wus2_hub_afd_externalid": {
+      "value": "/subscriptions/06ab2c80-382c-478f-bcd5-5e1afe984092/resourceGroups/amn-wus2-hub-rg-p01/providers/Microsoft.Network/frontdoors/amn-wus2-hub-afd-p01"
+    },
+    "amnone_apigateway_DNS": {
+      "value": "apigateway-amnone"
+    },
+    "ttm_apigateway_DNS": {
+      "value": "apigateway-ttm"
+    },
+    "match_apigateway_DNS": {
+      "value": "apigateway-match"
+    },
+    "amnone_ats_apigateway_DNS": {
+      "value": "apigateway-ats"
+    },
+    "amnone_ats_UI_DNS": {
+      "value": "ats"
+    },
+    "amnone_ats_api_DNS": {
+      "value": "ats-api"
+    },
+    "amnone_UI_DNS": {
+      "value": "amnone"
+    },
+    "match_UI_DNS": {
+      "value": "match"
+    },
+    "recruiterdashboard_UI_DNS": {
+      "value": "rd"
+    },
+    "amnone_api_DNS": {
+      "value": "amnone-api"
+    },
+    "ttm_api_DNS": {
+      "value": "ttm-api"
+    },
+    "match_api_DNS": {
+      "value": "match-api"
+    },
+    "recruiterdashboard_api_DNS": {
+      "value": "rd-api"
+    }
+  }
+}

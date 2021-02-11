@@ -1,0 +1,91 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "appservicename": {
+        "value": "co-wus2-matchapi-as-d01"
+      },
+      "resourceid": {
+        "value": "/subscriptions/43c5a646-c00c-4c59-a332-df854c5dd08c/resourcegroups/co-wus2-enterprisemonitor-rg-s01/providers/microsoft.operationalinsights/workspaces/amn-co-wus2-enterprisemonitor-loga-d01"
+      },
+      "settingName": {
+        "value": "match-as-diagset-d01"
+      },
+      "subscriptionId": {
+        "value": "de714383-62fd-47f3-a8d5-440d93cd87db"
+      },
+      "AMN_HUB_subscriptionId": {
+        "value": "e764d23e-759d-4cd4-8b5f-27e4c703f6a8"
+      },
+      "AMN_HUB_serverFarmResourceGroup": {
+        "value": "amn-wus2-hub-rg-d01"
+      },
+      "AMN_HUB_virtualNetworkName": {
+        "value": "amn-wus2-hub-vnet-d01"
+      },
+      "AMN_HUB_subnetname": {
+        "value": "amn-hub-apim-sn"
+      },
+      "AMNoneshared_subscriptionId": {
+        "value": "de714383-62fd-47f3-a8d5-440d93cd87db"
+      },
+      "AMNoneshared_serverFarmResourceGroup": {
+        "value": "co-wus2-imatch-rg-d01"
+      },
+      "AMNoneshared_virtualNetworkName": {
+        "value": "co-wus2-imatch-vnet-d01"
+      },
+      "AMNoneshared_subnetname": {
+        "value": "co-wus2-matchapi-as-sn"
+      },
+      "location": {
+        "value": "West US 2"
+      },
+      "kindtype": {
+        "value": "app,linux"
+      },
+      "linuxFxVersion": {
+        "value": "PYTHON|3.8"
+      },
+      "stagingsitename": {
+        "value": "co-wus2-matchapi-as-d01(staging)"
+      },
+      "hostingPlanName": {
+        "value": "co-wus2-matchapi-aspl-d01"
+      },
+      "publishingUsername": {
+        "value": "$co-wus2-matchapi-as-d01"
+      },
+      "publishingUsername_staging": {
+        "value": "$co-wus2-matchapi-as-d01__staging"
+      },
+      "serverFarmResourceGroup": {
+        "value": "co-wus2-imatch-rg-d01"
+      },
+      "identityName": {
+        "value": "co-wus2-imatch-as-mgid-d01"
+      },
+      "AMN_match_managedid_subscriptionId": {
+        "value": "de714383-62fd-47f3-a8d5-440d93cd87db"
+      },
+      "AMN_match_managedid_serverFarmResourceGroup": {
+        "value": "co-wus2-imatch-rg-d01"
+      },
+      "AMN_match_managedidentityName": {
+        "value": "co-wus2-imatch-as-mgid-d01"
+      },
+      "use32BitWorkerProcess": {
+        "value": "true"
+      },
+      "alwaysOn": {
+        "value": "true"
+      },
+      "tagsArray": {
+        "value": {
+          "charge-to": "101-71200-5000-9500",
+          "role": "app",
+          "environment": "dev"
+        }
+      }
+    }
+  }

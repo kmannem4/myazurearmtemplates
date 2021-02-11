@@ -1,0 +1,70 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "appservicename": {
+      "value": "amn-wus2-ttmreferencedata-as-q01"
+    },
+    "subscriptionId": {
+      "value": "95181a59-30e2-4faf-b8c7-993d85a7e640"
+    },
+    "AMN_HUB_subscriptionId": {
+      "value": "e764d23e-759d-4cd4-8b5f-27e4c703f6a8"
+    },
+    "AMN_HUB_serverFarmResourceGroup": {
+      "value": "amn-wus2-hub-rg-q01"
+    },
+    "AMN_HUB_virtualNetworkName": {
+      "value": "amn-wus2-hub-vnet-q01"
+    },
+    "AMN_HUB_subnetname": {
+      "value": "amn-hub-apim-sn"
+    },
+    "AMN_TTM_managedid_subscriptionId": {
+      "value": "95181a59-30e2-4faf-b8c7-993d85a7e640"
+    },
+    "AMN_TTM_managedid_serverFarmResourceGroup": {
+      "value": "amn-wus2-ttm-rg-d01"
+    },
+    "AMN_TTM_managedidentityName": {
+      "value": "amn-wus2-ttm-as-mgid-d01"
+    },
+    "location": {
+      "value": "West US 2"
+    },
+    "hostingPlanName": {
+      "value": "amn-wus2-ttmreferencedata-aspl-q01"
+    },
+    "stagingsitename": {
+      "value": "amn-wus2-ttmreferencedata-as-q01(staging)"
+    },
+    "subnetname": {
+      "value": "amn-ttmreferencedata-as-sn"
+    },
+    "publishingUsername": {
+      "value": "$amn-wus2-ttmreferencedata-as-q01"
+    },
+    "publishingUsername_staging": {
+      "value": "$amn-wus2-ttmreferencedata-as-q01__staging"
+    },
+    "serverFarmResourceGroup": {
+      "value": "amn-wus2-ttm-rg-q01"
+    },
+    "virtualNetworkName": {
+      "value": "amn-wus2-ttm-vnet-q01"
+    },
+    "use32BitWorkerProcess": {
+      "value": "false"
+    },
+    "alwaysOn": {
+      "value": "false"
+    },
+    "tagsArray": {
+      "value": {
+        "charge-to": "800-71200-0000-0000",
+        "role": "app",
+        "environment": "qa"
+      }
+    }
+  }
+}

@@ -43,7 +43,7 @@
       "value": "amnwus2ttmfuncsad01"
     },
     "use32BitWorkerProcess": {
-      "value": true
+      "value": false
     },
     "WEBSITE_DNS_SERVER": {
       "value": "168.63.129.16"

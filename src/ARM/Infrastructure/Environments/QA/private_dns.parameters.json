@@ -8,14 +8,65 @@
         "apimname": {
             "value": "amn-wus2-hub-apim-q01"
         },
-        "vnet_link": {
-            "value": "amn-wus2-hub-vnet-q01-link"
-        },
         "apimprivateIpAddress": {
             "value": "10.98.8.5"
         },
-        "virtualnetworkname": {
+        "AMN_HUB_subscriptionId": {
+            "value": "e764d23e-759d-4cd4-8b5f-27e4c703f6a8"
+        },
+        "AMN_HUB_serverFarmResourceGroup": {
+            "value": "amn-wus2-hub-rg-q01"
+        },
+        "AMN_HUB_virtualNetworkName": {
             "value": "amn-wus2-hub-vnet-q01"
+        },
+        "AMN_HUB_virtualNetworkName_link": {
+            "value": "amn-wus2-hub-vnet-q01-link"
+        },
+        "AMN_TTM_subscriptionId": {
+            "value": "95181a59-30e2-4faf-b8c7-993d85a7e640"
+        },
+        "AMN_TTM_serverFarmResourceGroup": {
+            "value": "amn-wus2-ttm-rg-q01"
+        },
+        "AMN_TTM_virtualNetworkName": {
+            "value": "amn-wus2-ttm-vnet-q01"
+        },
+        "AMN_TTM_virtualNetworkName_link": {
+            "value": "amn-wus2-ttm-vnet-q01-link"
+        },
+        "AMN_amnonestaffing_subscriptionId": {
+            "value": "de714383-62fd-47f3-a8d5-440d93cd87db"
+        },
+        "AMN_amnonestaffing_match_subscriptionId": {
+            "value": "de714383-62fd-47f3-a8d5-440d93cd87db"
+        },
+        "AMN_amnonekub_serverFarmResourceGroup": {
+            "value": "co-wus2-amnonekub-rg-q01"
+        },
+        "AMN_amnonekub_virtualNetworkName": {
+            "value": "co-wus2-amnonekub-vnet-q01"
+        },
+        "AMN_amnonekub_virtualNetworkName_link": {
+            "value": "co-wus2-amnonekub-vnet-q01-link"
+        },
+        "AMN_amnonematch_serverFarmResourceGroup": {
+            "value": "co-wus2-imatch-rg-q01"
+        },
+        "AMN_amnonematch_virtualNetworkName": {
+            "value": "co-wus2-imatch-vnet-q01"
+        },
+        "AMN_amnonematch_virtualNetworkName_link": {
+            "value": "co-wus2-imatch-vnet-q01-link"
+        },
+        "AMN_amnoneshared_serverFarmResourceGroup": {
+            "value": "co-wus2-amnoneshared-rg-q01"
+        },
+        "AMN_amnoneshared_virtualNetworkName": {
+            "value": "co-wus2-amnoneshared-vnet-q01"
+        },
+        "AMN_amnoneshared_virtualNetworkName_link": {
+            "value": "co-wus2-amnoneshared-vnet-q01-link"
         }
     }
 }
